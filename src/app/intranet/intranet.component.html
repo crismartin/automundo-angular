@@ -1,0 +1,43 @@
+<mat-toolbar color="primary">
+  <span>Automundo</span>
+  <img alt="miw" src="../../assets/images/miw.png"/>
+  <!--<span class="toolbar-spacer"></span>-->
+  <span>
+    <app-date></app-date>
+    <button (click)="logout()" *ngIf="isAuthenticated()" mat-button>
+      <span>{{username}}</span>
+      <mat-icon>person</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button mat-button>
+      <mat-icon>account_box</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button [matMenuTriggerFor]="menu" mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+<mat-menu #menu="matMenu" xPosition="before">
+  <button mat-menu-item>
+    <mat-icon>person_add</mat-icon>
+    <span>Add User</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>person_search</mat-icon>
+    <span>Find User</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>drive_eta</mat-icon>
+    <span>Add Car</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>car_rental</mat-icon>
+    <span>Find Car</span>
+  </button>
+</mat-menu>
+
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>

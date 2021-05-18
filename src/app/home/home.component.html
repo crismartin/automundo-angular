@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+  <img alt="miw" src="../../assets/images/miw.png"/>
+  <button mat-button routerLink="/home/adviser">
+    <span>Automundo</span>
+  </button>
+  <div>
+    <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
+      <mat-icon>person_outline</mat-icon>
+      <span>Login</span>
+    </button>
+    <button (click)="redirect()" *ngIf="!isAuthenticated()" mat-button>
+      <mat-icon>settings_system_daydream</mat-icon>
+      <span>Intranet</span>
+    </button>
+    <button (click)="logout()" *ngIf="isAuthenticated()" mat-button>
+      <span>{{username}}</span>
+      <mat-icon>person_outline</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button *ngIf="isAuthenticated()" [matMenuTriggerFor]="profile" mat-button>
+      <mat-icon>account_box</mat-icon>
+      <span>Profile</span>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-menu #profile="matMenu" xPosition="before">
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>Settings</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>grade</mat-icon>
+    <span>Reviews</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>shopping_basket</mat-icon>
+    <span>Online Orders</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>money_off</mat-icon>
+    <span>Refunds</span>
+  </button>
+  <button mat-menu-item routerLink="/home/complaints">
+    <mat-icon>sentiment_very_dissatisfied</mat-icon>
+    <span>Complaints</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>build</mat-icon>
+    <span>Technical Support</span>
+  </button>
+</mat-menu>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
+
