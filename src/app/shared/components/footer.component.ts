@@ -11,14 +11,11 @@ export class FooterComponent {
   profile: string;
   backEndUser: string;
   backEndCore: string;
-  backEndCustomerSupport: string;
-
 
   constructor() {
     this.version = environment.VERSION;
     this.profile = environment.production ? 'Prod' : 'Dev';
     this.backEndCore = environment.REST_CORE;
-    this.backEndCustomerSupport = environment.REST_CUSTOMER_SUPPORT;
   }
 
 }
