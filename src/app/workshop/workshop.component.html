@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <img alt="miw" src="../../assets/images/miw.png"/>
+  <span>Automundo</span>
+  <div>
+    <button (click)="redirect()" mat-button>
+      <mat-icon>settings_system_daydream</mat-icon>
+      <span>Intranet</span>
+    </button>
+    <button (click)="logout()" mat-button>
+      <span>{{username}}</span>
+      <mat-icon>person_outline</mat-icon>
+      <span>Logout</span>
+    </button>
+  </div>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<app-footer></app-footer>
+
