@@ -1,1 +1,34 @@
-<p>finder-vehicles works!</p>
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filtros: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Nº placa / Matrícula</mat-label>
+      <input [(ngModel)]="vehicleSearch.plate" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>BIN</mat-label>
+      <input [(ngModel)]="vehicleSearch.bin" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre cliente</mat-label>
+      <input [(ngModel)]="vehicleSearch.name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Primer apellido</mat-label>
+      <input [(ngModel)]="vehicleSearch.surName" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Segundo apellido</mat-label>
+      <input [(ngModel)]="vehicleSearch.secondSurName" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<app-crud (read)="read($event)" [data]="vehicles"
+          [deleteAction]="false" [updateAction]="false" [createAction]="false" [title]="title"></app-crud>
