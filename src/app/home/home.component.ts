@@ -26,14 +26,8 @@ export class HomeComponent {
     this.authService.logout();
   }
 
-  cart(): void {
-  }
-
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
-  }
-
-  search(value): void {
   }
 
   redirect(): void {
