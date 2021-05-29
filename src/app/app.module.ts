@@ -5,6 +5,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from '@core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import { FinderVehiclesComponent } from './workshop/finder-vehicles/finder-vehicles.component';
+import { WorkshopComponent } from './workshop/workshop.component';
 import { CustomerComponent } from './workshop/customers/customer.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';

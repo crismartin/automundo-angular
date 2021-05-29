@@ -2,16 +2,19 @@
   <img alt="miw" src="../../assets/images/miw.png"/>
   <span>Automundo</span>
   <div>
-    <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
+    <button (click)="redirect()" mat-button>
+      <mat-icon>settings_system_daydream</mat-icon>
+      <span>Intranet</span>
+    </button>
+    <button (click)="logout()" mat-button>
+      <span>{{username}}</span>
       <mat-icon>person_outline</mat-icon>
-      <span>Login</span>
+      <span>Logout</span>
     </button>
   </div>
 </mat-toolbar>
 
-<mat-grid-list cols="1" rowHeight="4:1">
-  <mat-grid-tile>Welcome to AUTOMUNDO</mat-grid-tile>
-</mat-grid-list>
 <router-outlet></router-outlet>
+
 <app-footer></app-footer>
 
