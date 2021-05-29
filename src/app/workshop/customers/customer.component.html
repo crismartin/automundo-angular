@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      <mat-label><strong>Datos del Cliente</strong></mat-label>
+      <mat-label>Num. Identificación</mat-label>
+      <label>
+        <div>{{customerModel.identificationId}}</div>
+      </label>
+      <mat-label>Nombre Completo</mat-label>
+      <label>
+        <div>{{customerModel.completeName}}</div>
+      </label>
+      <mat-label>Num. Teléfono</mat-label>
+      <label>
+        <div>{{customerModel.contact.mobilePhone}}</div>
+      </label>
+      <mat-label>Num. Móvil</mat-label>
+      <label>
+        <div>{{customerModel.contact.mobilePhone}}</div>
+      </label>
+      <mat-label>Dirección</mat-label>
+      <label>
+        <div>{{customerModel.contact.address}}</div>
+      </label>
+      <mat-label>Fecha de registro</mat-label>
+      <label>
+        <div>{{customerModel.registrationDate}}</div>
+      </label>
+      <mat-label>Fecha de última visita</mat-label>
+      <label>
+        <div>{{customerModel.lastVisitDate}}</div>
+      </label>
+      <mat-label>Correo electrónico</mat-label>
+      <label>
+        <div>{{customerModel.contact.email}}</div>
+      </label>
+    </div>
+    <br/>
+  </mat-card-content>
+</mat-card>
