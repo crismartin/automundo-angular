@@ -5,6 +5,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from '@core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import { CustomerComponent } from './workshop/customers/customer.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import {SharedModule} from '@shared/shared.module';
 
 @NgModule({
   imports: [
@@ -12,11 +18,17 @@ import {AppComponent} from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
+    MatCardModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatIconModule,
+    SharedModule,
     // HomeModule // eager load
     // IntranetModule // eager load
   ],
   declarations: [
     AppComponent,
+    CustomerComponent,
   ],
   bootstrap: [AppComponent]
 })
