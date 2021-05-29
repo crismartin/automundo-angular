@@ -1,5 +1,3 @@
-import {Customer} from './customer.model';
-
 export interface VehicleItem {
   plate: string;
   bin: string;
