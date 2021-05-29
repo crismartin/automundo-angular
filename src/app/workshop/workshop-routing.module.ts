@@ -6,6 +6,7 @@ import {RoleGuardService} from '@core/role-guard.service';
 import {WorkshopComponent} from './workshop.component';
 import {FinderVehiclesComponent} from './finder-vehicles/finder-vehicles.component';
 import {MainMenuComponent} from './main-menu/main-menu.component';
+import {CustomerComponent} from './customers/customer.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
 //    data: {roles: [Role.ADMIN, Role.MANAGER, Role.OPERATOR]},
     children: [
       {path: 'menu', component: MainMenuComponent},
-      {path: 'buscar-vehiculos', component: FinderVehiclesComponent}
+      {path: 'buscar-vehiculos', component: FinderVehiclesComponent},
+      {path: 'cliente', component: CustomerComponent}
     ]
   }
 ];

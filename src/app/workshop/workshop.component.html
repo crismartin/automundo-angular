@@ -12,7 +12,19 @@
       <span>Logout</span>
     </button>
   </div>
+  <div>
+    <button [matMenuTriggerFor]="menu" mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
+
+<mat-menu #menu="matMenu" xPosition="before">
+  <button mat-menu-item routerLink="cliente">
+    <mat-icon>people_alt</mat-icon>
+    <span>Clientes</span>
+  </button>
+</mat-menu>
 
 <router-outlet></router-outlet>
 
