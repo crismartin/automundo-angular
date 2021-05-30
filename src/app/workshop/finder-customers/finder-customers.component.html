@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-content>
+    <mat-label><strong>Filtros: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Nº identificación</mat-label>
+      <input [(ngModel)]="customerSearch.identificationId" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre cliente</mat-label>
+      <input [(ngModel)]="customerSearch.name" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Primer apellido</mat-label>
+      <input [(ngModel)]="customerSearch.surName" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Segundo apellido</mat-label>
+      <input [(ngModel)]="customerSearch.secondSurName" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<app-crud (read)="goToDetail($event)"(update)="update($event)" (delete)="delete($event)"
+          [data]="customers" [createAction]="false" [title]="title"></app-crud>

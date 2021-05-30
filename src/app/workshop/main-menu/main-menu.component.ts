@@ -16,4 +16,8 @@ export class MainMenuComponent implements OnInit {
   findVehicles() {
     this.router.navigate(['taller', 'buscar-vehiculos']);
   }
+
+  findCustomers() {
+    this.router.navigate(['taller', 'buscar-clientes']);
+  }
 }

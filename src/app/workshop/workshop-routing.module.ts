@@ -7,6 +7,7 @@ import {WorkshopComponent} from './workshop.component';
 import {FinderVehiclesComponent} from './finder-vehicles/finder-vehicles.component';
 import {MainMenuComponent} from './main-menu/main-menu.component';
 import {CustomerComponent} from './customers/customer.component';
+import {FinderCustomersComponent} from './finder-customers/finder-customers.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
     children: [
       {path: 'menu', component: MainMenuComponent},
       {path: 'buscar-vehiculos', component: FinderVehiclesComponent},
-      {path: 'cliente', component: CustomerComponent}
+      {path: 'cliente/:id', component: CustomerComponent},
+      {path: 'buscar-clientes', component: FinderCustomersComponent},
     ]
   }
 ];
