@@ -1,10 +1,11 @@
 export interface Customer {
-  completeName?: string;
+  id?: string;
   identificationId: string;
+  completeName: string;
   registrationDate?: Date;
   lastVisitDate?: Date;
-  phone: string;
+  phone?: string;
   mobilePhone: string;
   address: string;
-  email: string;
+  email?: string;
 }

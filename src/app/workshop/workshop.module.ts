@@ -5,12 +5,14 @@ import {WorkshopComponent} from './workshop.component';
 import {WorkshopRoutingModule} from './workshop-routing.module';
 import {SharedModule} from '@shared/shared.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { FinderCustomersComponent } from './finder-customers/finder-customers.component';
 
 @NgModule({
   declarations: [
     WorkshopComponent,
     FinderVehiclesComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    FinderCustomersComponent
   ],
   imports: [
     CommonModule,
