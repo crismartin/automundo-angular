@@ -1,0 +1,75 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<form [formGroup]="customerForm" autocomplete="off" novalidate (ngSubmit)="onSubmit(customerForm)"
+      fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div>
+    <mat-form-field class="full-width">
+      <mat-label>Nº identificación</mat-label>
+      <input matInput #identificationId type="text" formControlName="identificationId" maxlength="10">
+      <mat-hint align="end">{{identificationId.value?.length || 0}}/10</mat-hint>
+      <mat-error *ngIf="hasError('identificationId', 'required')">Nº identificación es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('identificationId', 'maxlength')">Has escrito más de 10 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput #name type="text" formControlName="name" maxlength="30">
+      <mat-hint align="end">{{name.value?.length || 0}}/30</mat-hint>
+      <mat-error *ngIf="hasError('name', 'required')">Nombre es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('name', 'maxlength')">Has escrito más de 30 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Primer apellido</mat-label>
+      <input matInput #surName type="text" formControlName="surName" maxlength="50">
+      <mat-hint align="end">{{surName.value?.length || 0}}/50</mat-hint>
+      <mat-error *ngIf="hasError('surName', 'required')">Primer apellido es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('surName', 'maxlength')">Has escrito más de 50 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Segundo apellido</mat-label>
+      <input matInput #secondSurName type="text" formControlName="secondSurName" maxlength="50">
+      <mat-hint align="end">{{secondSurName.value?.length || 0}}/50</mat-hint>
+      <mat-error *ngIf="hasError('secondSurName', 'required')">Segundo apellido es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('secondSurName', 'maxlength')">Has escrito más de 50 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <br/>
+  <div>
+    <h3>Datos de contacto</h3>
+    <mat-form-field class="full-width">
+      <mat-label>Teléfono fijo</mat-label>
+      <input matInput #phone type="text" pattern="[0-9]+" formControlName="phone" maxlength="10">
+      <mat-hint align="end">{{phone.value?.length || 0}}/10</mat-hint>
+      <mat-error *ngIf="hasError('phone', 'required')">Teléfono fijo es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('phone', 'maxlength')">Has escrito más de 10 caracteres</mat-error>
+      <mat-error *ngIf="hasError('phone', 'pattern')">Formato incorrecto</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Teléfono móvil</mat-label>
+      <input matInput #mobilePhone type="text" pattern="[0-9]+" formControlName="mobilePhone" maxlength="10">
+      <mat-hint align="end">{{mobilePhone.value?.length || 0}}/10</mat-hint>
+      <mat-error *ngIf="hasError('mobilePhone', 'required')">Teléfono móvil es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('mobilePhone', 'maxlength')">Has escrito más de 10 caracteres</mat-error>
+      <mat-error *ngIf="hasError('mobilePhone', 'pattern')">Formato incorrecto</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Dirección</mat-label>
+      <input matInput #address type="text" formControlName="address" maxlength="100">
+      <mat-hint align="end">{{address.value?.length || 0}}/100</mat-hint>
+      <mat-error *ngIf="hasError('address', 'required')">Dirección es obligatoria</mat-error>
+      <mat-error *ngIf="hasError('address', 'maxlength')">Has escrito más de 100 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput #email type="email" formControlName="email">
+      <mat-error *ngIf="hasError('email', 'required')">Email es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('email', 'email')">Formato inválido</mat-error>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions>
+    <button cdkFocusInitial mat-dialog-close mat-raised-button>Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="inCreation" [disabled]="!customerForm.valid">Crear
+    </button>
+  </mat-dialog-actions>
+</form>
