@@ -6,18 +6,22 @@ import {WorkshopRoutingModule} from './workshop-routing.module';
 import {SharedModule} from '@shared/shared.module';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { FinderCustomersComponent } from './finder-customers/finder-customers.component';
+import { CustomerDialogComponent } from './customers/customer-dialog/customer-dialog.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     WorkshopComponent,
     FinderVehiclesComponent,
     MainMenuComponent,
-    FinderCustomersComponent
+    FinderCustomersComponent,
+    CustomerDialogComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
-    WorkshopRoutingModule
+    WorkshopRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class WorkshopModule { }

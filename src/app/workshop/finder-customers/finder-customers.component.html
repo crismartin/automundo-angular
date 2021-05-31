@@ -28,3 +28,9 @@
 
 <app-crud (read)="goToDetail($event)"(update)="update($event)" (delete)="delete($event)"
           [data]="customers" [createAction]="false" [title]="title"></app-crud>
+
+<div class="create-customer-button-container">
+  <button (click)="newCustomer()" mat-fab color="warn">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

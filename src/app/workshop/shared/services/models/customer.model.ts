@@ -8,4 +8,7 @@ export interface Customer {
   mobilePhone: string;
   address: string;
   email?: string;
+  name?: string;
+  surName?: string;
+  secondSurName?: string;
 }
