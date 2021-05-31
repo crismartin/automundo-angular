@@ -4,6 +4,9 @@ import {Observable, of} from 'rxjs';
 import {CustomerService} from './customer.service';
 import {Customer} from '../shared/services/models/customer.model';
 import {ActivatedRoute} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {VehicleDialogComponent} from '../vehicles/vehicle-dialog/vehicle-dialog.component';
+import {VehicleService} from '../vehicles/vehicle.service';
 
 @Component({
   selector: 'app-clients',
@@ -18,8 +21,10 @@ export class CustomerComponent implements OnInit {
   idClient: string;
   customerModel: Customer;
 
-  constructor(private customerService: CustomerService, private activatedRoute: ActivatedRoute) {
+  constructor(private dialog: MatDialog, private customerService: CustomerService, private activatedRoute: ActivatedRoute,
+              private vehicleService: VehicleService) {
     this.customers = [{
+      id: '15',
       completeName: 'Rochel Barlomento Santilla',
       identificationId: '040090989-0',
       phone: '062915431',
@@ -28,6 +33,8 @@ export class CustomerComponent implements OnInit {
       email: 'rochel@gmail.com'
     }];
 
+    this.customerModel = this.customers[0];
+
     this.resetSearch();
   }
 
@@ -35,12 +42,15 @@ export class CustomerComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       this.idClient = params.get('id');
       let clientFound = this.customers.find(customer => customer.identificationId === this.idClient);
-      this.customerModel = clientFound;
+      this.customerModel = this.customers[0];
     });
   }
 
   createVehicle(): void {
-
+    this.dialog
+      .open(VehicleDialogComponent)
+      .afterClosed()
+      .subscribe(() => this.searchVehicles());
   }
 
   printVehicle($event: any): void {
@@ -52,10 +62,11 @@ export class CustomerComponent implements OnInit {
   }
 
   resetSearch(): void {
-    this.search();
+    this.searchVehicles();
   }
 
-  search(): void {
-    this.vehicles = this.customerService.search();
+  searchVehicles(): void {
+    console.log(this.customerModel);
+    this.vehicles = this.customerService.searchVehiclesByIdCustomer(this.customerModel.id);
   }
 }
