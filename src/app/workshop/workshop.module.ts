@@ -8,6 +8,7 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { FinderCustomersComponent } from './finder-customers/finder-customers.component';
 import { CustomerDialogComponent } from './customers/customer-dialog/customer-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import { VehicleDialogComponent } from './vehicles/vehicle-dialog/vehicle-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     MainMenuComponent,
     FinderCustomersComponent,
     CustomerDialogComponent,
+    VehicleDialogComponent,
   ],
   imports: [
     CommonModule,
