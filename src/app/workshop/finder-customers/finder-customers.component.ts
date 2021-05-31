@@ -6,6 +6,7 @@ import {Customer} from '../shared/services/models/customer.model';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerDialogComponent} from '../customers/customer-dialog/customer-dialog.component';
+import {CustomerCreationUpdate} from '../customers/customer-dialog/customer-creation-update.model';
 
 @Component({
   selector: 'app-finder-customers',
@@ -26,27 +27,31 @@ export class FinderCustomersComponent implements OnInit {
 
   }
 
-  search() {
+  search(): void {
     this.customers = this.customerService.search(this.customerSearch);
   }
 
-  resetSearch() {
+  resetSearch(): void {
     this.customerSearch = {};
   }
 
-  goToDetail(customer: Customer) {
+  goToDetail(customer: Customer): void {
     this.router.navigate(['/taller/cliente', customer.identificationId]);
   }
 
-  update($event: any) {
+  update(customer: Customer): void {
+    this.customerService.read(customer.identificationId)
+      .subscribe(customerReaded => this.dialog
+        .open(CustomerDialogComponent, {data: customerReaded})
+        .afterClosed()
+        .subscribe(() => this.search()));
+  }
+
+  delete($event: any): void {
 
   }
 
-  delete($event: any) {
-
-  }
-
-  newCustomer() {
+  newCustomer(): void {
     this.dialog
       .open(CustomerDialogComponent)
       .afterClosed()
