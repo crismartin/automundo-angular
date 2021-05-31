@@ -36,13 +36,19 @@ export class CustomerService {
   constructor(private httpService: HttpService) {
   }
 
-  search(): Observable<VehicleItem[]> { //creo que esto debería ser un read porque estamos leyendo uno sólo
+  search(): Observable<VehicleItem[]> {
     return of(this.vehicles);
   }
 
   create(customer: CustomerCreationUpdate): Observable<Customer> {
     /*return this.httpService
       .post(EndPoints.CUSTOMERS, customer);*/
+    return of(this.customer);
+  }
+
+  update(customer: CustomerCreationUpdate, id: string): Observable<Customer> {
+    /*return this.httpService
+      .put(EndPoints.CUSTOMERS + "/" + id, customer);*/
     return of(this.customer);
   }
 }
