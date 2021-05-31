@@ -70,4 +70,10 @@ export class CustomerService {
       lastViewDate: vehicle.lastViewDate
     };
   }
+
+  update(customer: CustomerCreationUpdate, id: string): Observable<Customer> {
+    /*return this.httpService
+      .put(EndPoints.CUSTOMERS + "/" + id, customer);*/
+    return of(this.customer);
+  }
 }

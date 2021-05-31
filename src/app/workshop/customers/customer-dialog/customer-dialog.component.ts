@@ -16,10 +16,12 @@ export class CustomerDialogComponent implements OnInit {
   public customerForm: FormGroup;
   title = 'Crear/Actualizar Cliente';
   inCreation: boolean;
+  data: Customer;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: CustomerCreationUpdate, private dialog: MatDialog, private customerService: CustomerService, private snackBar: MatSnackBar) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: Customer, private dialog: MatDialog, private customerService: CustomerService, private snackBar: MatSnackBar) {
     this.title = data ? 'Actualizar Cliente' : 'Crear Cliente';
     this.inCreation = !data;
+    this.data = data;
 
     this.customerForm = data ? new FormGroup({
       identificationId: new FormControl({value: data.identificationId, disabled: true}, [Validators.required, Validators.maxLength(10)]),
@@ -79,6 +81,17 @@ export class CustomerDialogComponent implements OnInit {
     };
     if (this.inCreation) {
       this.create(customer);
+    } else {
+      this.update(customer);
     }
+  }
+
+  update(customer: CustomerCreationUpdate): void {
+    /*this.customerService
+      .update(customer, this.data.id)
+      .subscribe(() =>
+      Si ha ido MAL cerrar formulario y navegar al detalle del cliente editado
+      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
+      this.dialog.closeAll());*/
   }
 }

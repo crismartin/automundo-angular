@@ -1,7 +1,7 @@
 export interface CustomerCreationUpdate {
   id?: string;
   identificationId: string;
-  completeName: string;
+  completeName?: string;
   name: string;
   surName: string;
   secondSurName: string;
