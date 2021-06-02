@@ -1,0 +1,28 @@
+<mat-card class="filter-card">
+  <mat-card-content>
+    <mat-label><strong>Filtros: </strong></mat-label>
+    <mat-form-field>
+      <mat-label>Referencia</mat-label>
+      <input [(ngModel)]="replacementSearch.reference" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Nombre repuesto</mat-label>
+      <input [(ngModel)]="replacementSearch.name" matInput>
+    </mat-form-field>
+    <button (click)="search()" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+    <button (click)="resetSearch()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<app-crud (update)="update($event)" (delete)="delete($event)"
+          [data]="replacements" [createAction]="false" [readAction]="false" [title]="title"></app-crud>
+
+<div class="create-replacement-button-container">
+  <button (click)="newReplacement()" mat-fab color="warn">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

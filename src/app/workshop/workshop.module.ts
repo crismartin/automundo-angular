@@ -9,6 +9,9 @@ import { FinderCustomersComponent } from './finder-customers/finder-customers.co
 import { CustomerDialogComponent } from './customers/customer-dialog/customer-dialog.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { VehicleDialogComponent } from './vehicles/vehicle-dialog/vehicle-dialog.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { ReplacementsMaintenanceComponent } from './maintenance/replacements/replacements-maintenance.component';
+import { ReplacementDialogComponent } from './maintenance/replacements/replacement-dialog/replacement-dialog.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { VehicleDialogComponent } from './vehicles/vehicle-dialog/vehicle-dialog
     FinderCustomersComponent,
     CustomerDialogComponent,
     VehicleDialogComponent,
+    MaintenanceComponent,
+    ReplacementsMaintenanceComponent,
+    ReplacementDialogComponent,
   ],
   imports: [
     CommonModule,
