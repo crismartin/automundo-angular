@@ -1,0 +1,8 @@
+.create-replacement-button-container {
+  position: fixed !important;
+  right: 75px;
+}
+
+.filter-card {
+  margin: 1rem
+}

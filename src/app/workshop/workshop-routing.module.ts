@@ -8,6 +8,8 @@ import {FinderVehiclesComponent} from './finder-vehicles/finder-vehicles.compone
 import {MainMenuComponent} from './main-menu/main-menu.component';
 import {CustomerComponent} from './customers/customer.component';
 import {FinderCustomersComponent} from './finder-customers/finder-customers.component';
+import {MaintenanceComponent} from './maintenance/maintenance.component';
+import {ReplacementsMaintenanceComponent} from './maintenance/replacements/replacements-maintenance.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
       {path: 'buscar-vehiculos', component: FinderVehiclesComponent},
       {path: 'cliente/:id', component: CustomerComponent},
       {path: 'buscar-clientes', component: FinderCustomersComponent},
+      {path: 'mantenimiento', component: MaintenanceComponent},
+      {path: 'repuestos', component: ReplacementsMaintenanceComponent},
     ]
   }
 ];

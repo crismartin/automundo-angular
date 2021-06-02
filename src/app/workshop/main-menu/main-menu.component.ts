@@ -8,16 +8,25 @@ import {Router} from '@angular/router';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
-  findVehicles() {
+  findVehicles(): void {
     this.router.navigate(['taller', 'buscar-vehiculos']);
   }
 
-  findCustomers() {
+  findCustomers(): void {
     this.router.navigate(['taller', 'buscar-clientes']);
+  }
+
+  maintenance(): void {
+    this.router.navigate(['taller', 'mantenimiento']);
+  }
+
+  replacements(): void {
+    this.router.navigate(['taller', 'repuestos']);
   }
 }

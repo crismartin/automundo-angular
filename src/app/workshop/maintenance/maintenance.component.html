@@ -1,0 +1,38 @@
+<div>
+  <h1 class="header">MANTENIMIENTO</h1>
+  <div>
+    <mat-grid-list cols="3" rowHeight="1:1">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card card-replacements">
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              <mat-icon>home_repair_service</mat-icon>
+            </div>
+            <div>Repuestos</div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card kpi-card card-technicians">
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              <mat-icon>engineering</mat-icon>
+            </div>
+            <span>Técnicos</span>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card kpi-card card-vehicle-types">
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              <mat-icon>car_repair</mat-icon>
+            </div>
+            <span>Tipos de vehículo</span>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
+
