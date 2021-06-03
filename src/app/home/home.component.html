@@ -1,24 +1,7 @@
-<mat-toolbar color="primary">
-  <img alt="miw" src="../../assets/images/miw.png"/>
-  <span>Automundo</span>
-  <div>
-    <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
-      <mat-icon>person_outline</mat-icon>
-      <span>Login</span>
-    </button>
-    <button mat-button routerLink="/taller">
-      <mat-icon>add_business</mat-icon>
-      <span>Taller</span>
-    </button>
-  </div>
-</mat-toolbar>
-
 <mat-grid-list cols="1" rowHeight="3:1">
-  <mat-grid-tile>Welcome to AUTOMUNDO</mat-grid-tile>
+  <mat-grid-tile>Welcome to {{title}}</mat-grid-tile>
 </mat-grid-list>
-<router-outlet></router-outlet>
 
-<app-footer></app-footer>
 
 
 

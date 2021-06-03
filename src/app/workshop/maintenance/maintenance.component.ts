@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-maintenance',
@@ -8,16 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class MaintenanceComponent implements OnInit {
   username: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  redirect() {
-
-  }
-
-  logout() {
-
+  replacements(): void {
+    this.router.navigate(['taller', 'mantenimiento', 'repuestos']);
   }
 }
