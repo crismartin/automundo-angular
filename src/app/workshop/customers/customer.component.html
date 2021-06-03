@@ -28,7 +28,7 @@
     </div>
     <br/>
     <br/>
-    <app-crud (create)="createVehicle()" (read)="printVehicle($event)" (update)="updateVehicle($event)"
+    <app-crud (create)="createVehicle()" (read)="detailsVehicle($event)" (update)="updateVehicle($event)"
               [data]="vehicles" (delete)="deleteVehicle($event)" [title]="title"></app-crud>
   </mat-card-content>
 </mat-card>

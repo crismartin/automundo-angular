@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {CustomerService} from './customer.service';
 import {Customer} from '../shared/services/models/customer.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {VehicleDialogComponent} from '../vehicles/vehicle-dialog/vehicle-dialog.component';
 import {VehicleService} from '../vehicles/vehicle.service';
@@ -23,7 +23,7 @@ export class CustomerComponent implements OnInit {
   customerModel: Customer;
 
   constructor(private dialog: MatDialog, private customerService: CustomerService, private activatedRoute: ActivatedRoute,
-              private vehicleService: VehicleService) {
+              private vehicleService: VehicleService, private router: Router) {
     this.customers = [{
       id: '15',
       completeName: 'Rochel Barlomento Santilla',
@@ -58,8 +58,8 @@ export class CustomerComponent implements OnInit {
       });
   }
 
-  printVehicle($event: any): void {
-
+  detailsVehicle(vehicle: Vehicle): void {
+    this.router.navigate(['/taller/vehicle', vehicle.referenceId]);
   }
 
   updateVehicle(vehicle: Vehicle): void {

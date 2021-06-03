@@ -1,3 +1,5 @@
+import {OwnerType} from './owner-type';
+import {Revision} from './revision';
 
 export interface Vehicle {
   referenceId?: string;
@@ -8,6 +10,7 @@ export interface Vehicle {
   yearRelease?: string;
   registerDate?: Date;
   lastViewDate?: Date;
-  ownerType?: number;
+  ownerType?: OwnerType;
   customer?: string;
+  revisions?: Revision[];
 }

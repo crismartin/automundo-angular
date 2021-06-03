@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-title>Datos del Vehículo</mat-card-title>
+  <br/>
+  <mat-card-content>
+    <div>
+      <mat-grid-list cols="6" rowHeight="6:1">
+        <mat-grid-tile><strong>Num. Placa / Matrícula</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.plate}}</label></mat-grid-tile>
+        <mat-grid-tile><strong>BIN:</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.bin}}</label></mat-grid-tile>
+        <mat-grid-tile> <strong>Modelo:</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.model}}</label></mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list cols="6" rowHeight="6:1">
+        <mat-grid-tile><strong>Año Fabricación:</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.yearRelease}}</label></mat-grid-tile>
+        <mat-grid-tile><strong>Tipo de Propietario:</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.ownerType.name}}</label></mat-grid-tile>
+        <div *ngIf="vehicleModel.ownerType.referenceId === '2'" >
+          <mat-grid-tile><strong>Tipo de Propietario:</strong></mat-grid-tile>
+          <mat-grid-tile><label>{{vehicleModel.ownerType.name}}</label></mat-grid-tile>
+        </div>
+      </mat-grid-list>
+      <mat-grid-list cols="6" rowHeight="6:1">
+        <mat-grid-tile><strong>Fecha de registro:</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.registerDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
+        <mat-grid-tile><strong>Fecha de última visita:</strong></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.lastViewDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <br/>
+    <br/>
+
+    <app-crud (create)="createRevision()" (read)="printInvoice($event)" (update)="updateRevision($event)"
+              [data]="this.revisions" (delete)="deleteRevision($event)" [title]="titleRevisions"></app-crud>
+
+  </mat-card-content>
+</mat-card>
