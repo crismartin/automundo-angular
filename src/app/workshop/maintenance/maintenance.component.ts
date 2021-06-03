@@ -17,4 +17,8 @@ export class MaintenanceComponent implements OnInit {
   replacements(): void {
     this.router.navigate(['taller', 'mantenimiento', 'repuestos']);
   }
+
+  vehicleTypes() {
+    this.router.navigate(['taller', 'mantenimiento', 'tipos-vehiculo']);
+  }
 }
