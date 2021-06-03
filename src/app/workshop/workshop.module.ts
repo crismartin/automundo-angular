@@ -10,6 +10,8 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { ReplacementsMaintenanceComponent } from './maintenance/replacements/replacements-maintenance.component';
 import { ReplacementDialogComponent } from './maintenance/replacements/replacement-dialog/replacement-dialog.component';
 import { VehicleComponent } from './vehicles/vehicle.component';
+import { VehicleTypesMaintenanceComponent } from './maintenance/vehicle-types/vehicle-types-maintenance.component';
+import { VehicleTypeDialogComponent } from './maintenance/vehicle-types/vehicle-type-dialog/vehicle-type-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { VehicleComponent } from './vehicles/vehicle.component';
     ReplacementsMaintenanceComponent,
     ReplacementDialogComponent,
     VehicleComponent,
+    VehicleTypesMaintenanceComponent,
+    VehicleTypeDialogComponent,
   ],
   imports: [
     CommonModule,
