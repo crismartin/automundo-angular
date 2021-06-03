@@ -1,9 +1,10 @@
 import {Component, Inject} from '@angular/core';
 import {Vehicle} from '../../shared/services/models/vehicle.model';
-import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {VehicleService} from '../vehicle.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {CustomerCreationUpdate} from '../../customers/customer-dialog/customer-creation-update.model';
 
 
 @Component({
@@ -20,11 +21,12 @@ export class VehicleDialogComponent {
   inCreation: boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Vehicle, private vechicleService: VehicleService,
-              private snackBar: MatSnackBar, private dialog: MatDialog) {
+              private snackBar: MatSnackBar, private dialog: MatDialogRef<VehicleDialogComponent>) {
     this.title = data ? 'Editar vehículo' : 'Crear vehículo';
     this.oldVehicle = !data;
 
     this.vehicleModel = data ? {
+      referenceId: data.referenceId,
       plate: data.plate,
       bin: data.bin,
       model: data.model,
@@ -45,26 +47,45 @@ export class VehicleDialogComponent {
     return this.vehicleForm.controls[name].hasError(errorName);
   }
 
-  onSubmit(vehicleModel: FormGroup): void {
-    if (!vehicleModel.valid) {
+  onSubmit(vehicleForm: FormGroup): void {
+    if (!vehicleForm.valid) {
       this.snackBar.open('Hay datos inválidos en el formulario', 'Error', {
         duration: 2000
       });
       return;
     }
+
+    const vehicle: Vehicle = {
+      referenceId: vehicleForm.get('referenceId').value,
+      plate: vehicleForm.get('plate').value,
+      bin: vehicleForm.get('bin').value,
+      model: vehicleForm.get('model').value,
+      yearRelease: vehicleForm.get('yearRelease').value,
+      ownerType: vehicleForm.get('ownerType').value
+    };
+
     if (this.inCreation) {
-      this.create(this.vehicleModel);
+      this.create(vehicle);
+    }else{
+      this.update(vehicle);
     }
   }
 
   private create(vehicle: Vehicle): void {
     this.vechicleService.create(vehicle)
-      .subscribe(() => this.dialog.closeAll());
+      .subscribe(vehicleSaved => this.dialog.close(vehicleSaved));
+  }
+
+  private update(vehicle: Vehicle): void {
+    console.log(vehicle);
+    this.vechicleService.update(vehicle)
+      .subscribe(vehicleSaved => this.dialog.close(vehicleSaved));
   }
 }
 
 function templateNewVehicle(): any{
   return {
+    referenceId: '',
     plate: '',
     bin: '',
     model: '',
@@ -77,6 +98,8 @@ function templateNewVehicle(): any{
 
 function templateFormVehicle(vehicle: Vehicle): FormGroup{
   return new FormGroup({
+    referenceId: new FormControl({value: vehicle.referenceId, disabled: true},
+      [Validators.required, Validators.maxLength(7)]),
     plate: new FormControl(vehicle.plate, [Validators.required, Validators.maxLength(7)]),
     bin: new FormControl(vehicle.bin, [Validators.required, Validators.maxLength(7)]),
     model: new FormControl(vehicle.model, [Validators.maxLength(50)]),

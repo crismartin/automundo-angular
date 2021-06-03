@@ -1,5 +1,6 @@
 
 export interface Vehicle {
+  referenceId?: string;
   plate: string;
   bin: string;
   model: string;
@@ -8,5 +9,5 @@ export interface Vehicle {
   registerDate?: Date;
   lastViewDate?: Date;
   ownerType?: number;
-  customer: string;
+  customer?: string;
 }

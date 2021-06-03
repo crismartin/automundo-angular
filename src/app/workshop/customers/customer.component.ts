@@ -7,6 +7,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {VehicleDialogComponent} from '../vehicles/vehicle-dialog/vehicle-dialog.component';
 import {VehicleService} from '../vehicles/vehicle.service';
+import {Vehicle} from '../shared/services/models/vehicle.model';
 
 @Component({
   selector: 'app-clients',
@@ -50,15 +51,28 @@ export class CustomerComponent implements OnInit {
     this.dialog
       .open(VehicleDialogComponent)
       .afterClosed()
-      .subscribe(() => this.searchVehicles());
+      .subscribe(vehicle => {
+        console.log(vehicle);
+        this.customerService.addVehicleDummy(vehicle);
+        this.searchVehicles();
+      });
   }
 
   printVehicle($event: any): void {
 
   }
 
-  updateVehicle($event: any): void {
-
+  updateVehicle(vehicle: Vehicle): void {
+    console.log(vehicle);
+    this.dialog
+      .open(VehicleDialogComponent, {data: vehicle})
+      .afterClosed()
+      .subscribe((vehicleUpdated) => {
+          console.log(vehicleUpdated);
+          this.customerService.updateVehicleDummy(vehicleUpdated);
+          this.searchVehicles();
+        }
+      );
   }
 
   resetSearch(): void {
@@ -66,7 +80,15 @@ export class CustomerComponent implements OnInit {
   }
 
   searchVehicles(): void {
-    console.log(this.customerModel);
     this.vehicles = this.customerService.searchVehiclesByIdCustomer(this.customerModel.id);
+  }
+
+  deleteVehicle(vehicle: Vehicle): void {
+    this.vehicleService.delete(vehicle)
+      .subscribe(() => {
+        this.customerService.deleteVehicleDummy(vehicle);
+        this.searchVehicles();
+      });
+
   }
 }

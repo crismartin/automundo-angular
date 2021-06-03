@@ -14,6 +14,7 @@ export class CustomerService {
 
   vehicles: VehicleItem[] = [
     {
+      referenceId: '1',
       plate: 'JB-007',
       bin: 'ID-007',
       model: 'Aston Martin DBS Superleggera',
@@ -22,6 +23,7 @@ export class CustomerService {
       lastViewDate: new Date()
     },
     {
+      referenceId: '2',
       plate: 'EM-A37',
       bin: 'ID-A37',
       model: 'Tesla Model S',
@@ -75,5 +77,32 @@ export class CustomerService {
     /*return this.httpService
       .put(EndPoints.CUSTOMERS + "/" + id, customer);*/
     return of(this.customer);
+  }
+
+  updateVehicleDummy(vehicle: Vehicle): void{
+    let vehicleUpdated: VehicleItem = {
+      bin: vehicle.bin,
+      lastViewDate: vehicle.lastViewDate,
+      model: vehicle.model,
+      plate: vehicle.plate,
+      yearRelease: vehicle.yearRelease
+    };
+
+    this.vehicles.forEach((value, index) => {
+        if (value.referenceId === vehicle.referenceId){
+          vehicleUpdated = value;
+          this.vehicles.splice(index, 1);
+        }
+    });
+
+    this.vehicles.push(vehicleUpdated);
+  }
+
+  deleteVehicleDummy(vehicle: Vehicle): void {
+    this.vehicles.forEach((value, index) => {
+      if (value.referenceId === vehicle.referenceId){
+        this.vehicles.splice(index, 1);
+      }
+    });
   }
 }
