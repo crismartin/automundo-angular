@@ -9,6 +9,7 @@ import { VehicleDialogComponent } from './vehicles/vehicle-dialog/vehicle-dialog
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { ReplacementsMaintenanceComponent } from './maintenance/replacements/replacements-maintenance.component';
 import { ReplacementDialogComponent } from './maintenance/replacements/replacement-dialog/replacement-dialog.component';
+import { VehicleComponent } from './vehicles/vehicle.component';
 import { VehicleTypesMaintenanceComponent } from './maintenance/vehicle-types/vehicle-types-maintenance.component';
 import { VehicleTypeDialogComponent } from './maintenance/vehicle-types/vehicle-type-dialog/vehicle-type-dialog.component';
 
@@ -21,6 +22,7 @@ import { VehicleTypeDialogComponent } from './maintenance/vehicle-types/vehicle-
     MaintenanceComponent,
     ReplacementsMaintenanceComponent,
     ReplacementDialogComponent,
+    VehicleComponent,
     VehicleTypesMaintenanceComponent,
     VehicleTypeDialogComponent,
   ],

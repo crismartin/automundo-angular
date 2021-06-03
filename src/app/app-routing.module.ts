@@ -8,6 +8,7 @@ import {CustomerComponent} from './workshop/customers/customer.component';
 import {FinderCustomersComponent} from './workshop/finder-customers/finder-customers.component';
 import {MaintenanceComponent} from './workshop/maintenance/maintenance.component';
 import {ReplacementsMaintenanceComponent} from './workshop/maintenance/replacements/replacements-maintenance.component';
+import {VehicleComponent} from './workshop/vehicles/vehicle.component';
 import {VehicleTypesMaintenanceComponent} from './workshop/maintenance/vehicle-types/vehicle-types-maintenance.component';
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
           {path: 'tipos-vehiculo', component: VehicleTypesMaintenanceComponent},
         ]},
       {path: 'cliente/:id', component: CustomerComponent},
+      {path: 'vehicle/:id', component: VehicleComponent}
     ]
     },
   {path: 'intranet', component: IntranetComponent},

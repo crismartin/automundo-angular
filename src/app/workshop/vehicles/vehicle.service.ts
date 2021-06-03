@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Vehicle} from '../shared/services/models/vehicle.model';
+import {OwnerType} from '../shared/services/models/owner-type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
+
+  ownerType: OwnerType = {
+    referenceId: '1',
+    name: 'Particular'
+  };
 
   vehicle: Vehicle = {
     plate: 'JB-007',
@@ -14,7 +20,7 @@ export class VehicleService {
     yearRelease: '2020',
     registerDate: new Date(),
     lastViewDate: new Date(),
-    ownerType: 1,
+    ownerType: this.ownerType,
     customer: 'Rochel Barlomento Santilla'
   };
   constructor() { }
