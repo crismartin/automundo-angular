@@ -5,14 +5,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from '@core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import { FinderVehiclesComponent } from './workshop/finder-vehicles/finder-vehicles.component';
-import { WorkshopComponent } from './workshop/workshop.component';
 import { CustomerComponent } from './workshop/customers/customer.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from '@shared/shared.module';
+import {HomeComponent} from './home/home.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {IntranetComponent} from './intranet/intranet.component';
+import {WorkshopComponent} from './workshop/workshop.component';
+import {WorkshopModule} from './workshop/workshop.module';
 
 @NgModule({
   imports: [
@@ -25,12 +28,15 @@ import {SharedModule} from '@shared/shared.module';
     FormsModule,
     MatIconModule,
     SharedModule,
-    // HomeModule // eager load
-    // IntranetModule // eager load
+    MatGridListModule,
+    WorkshopModule
   ],
   declarations: [
     AppComponent,
     CustomerComponent,
+    HomeComponent,
+    IntranetComponent,
+    WorkshopComponent
   ],
   bootstrap: [AppComponent]
 })

@@ -6,7 +6,6 @@ import {Customer} from '../shared/services/models/customer.model';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerDialogComponent} from '../customers/customer-dialog/customer-dialog.component';
-import {CustomerCreationUpdate} from '../customers/customer-dialog/customer-creation-update.model';
 
 @Component({
   selector: 'app-finder-customers',

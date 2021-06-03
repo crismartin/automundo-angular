@@ -1,1 +1,41 @@
+<mat-toolbar color="primary">
+  <img alt="miw" src="../../assets/images/miw.png"/>
+  <span>Automundo</span>
+  <div>
+    <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
+      <mat-icon>person_outline</mat-icon>
+      <span>Login</span>
+    </button>
+    <button mat-button routerLink="/taller">
+      <mat-icon>add_business</mat-icon>
+      <span>Taller</span>
+    </button>
+    <button (click)="redirect()" mat-button>
+      <mat-icon>settings_system_daydream</mat-icon>
+      <span>Intranet</span>
+    </button>
+    <button (click)="logout()" *ngIf="isAuthenticated()" mat-button>
+      <span>{{username}}</span>
+      <mat-icon>person_outline</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated()" mat-icon-button>
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu" xPosition="before">
+  <button mat-menu-item routerLink="/taller/buscar-clientes">
+    <mat-icon>people_alt</mat-icon>
+    <span>Clientes</span>
+  </button>
+  <button mat-menu-item routerLink="/taller/buscar-vehiculos">
+    <mat-icon>car_rental</mat-icon>
+    <span>Vehiculos</span>
+  </button>
+</mat-menu>
+
 <router-outlet></router-outlet>
+
+<app-footer></app-footer>

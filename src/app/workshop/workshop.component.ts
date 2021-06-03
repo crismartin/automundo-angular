@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-workshop',
@@ -9,21 +8,8 @@ import {Router} from '@angular/router';
 export class WorkshopComponent implements OnInit {
   username: string;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.displayMainMenu();
-  }
-
-  logout() {
-
-  }
-
-  redirect() {
-
-  }
-
-  private displayMainMenu() {
-    this.router.navigate(['taller', 'menu']);
   }
 }
