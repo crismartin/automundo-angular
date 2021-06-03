@@ -24,6 +24,21 @@ export class VehicleService {
   }
 
   create(vehicle: Vehicle): Observable<Vehicle> {
+    console.log(vehicle);
+    vehicle.registerDate = new Date();
+    vehicle.lastViewDate = new Date();
     return of(vehicle);
   }
+
+  update(vehicle: Vehicle): Observable<Vehicle> {
+    console.log(vehicle);
+    vehicle.lastViewDate = new Date();
+    return of(vehicle);
+  }
+
+  delete(vehicle: Vehicle): Observable<Vehicle> {
+    console.log(vehicle);
+    return of(vehicle);
+  }
+
 }
