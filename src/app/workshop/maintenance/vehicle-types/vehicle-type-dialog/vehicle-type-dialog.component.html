@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<form [formGroup]="vehicleTypeForm" autocomplete="off" novalidate (ngSubmit)="onSubmit(vehicleTypeForm)"
+      fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+  <div>
+    <mat-form-field class="full-width">
+      <mat-label>Referencia</mat-label>
+      <input matInput #reference type="text" formControlName="reference" maxlength="6">
+      <mat-hint align="end">{{reference.value?.length || 0}}/6</mat-hint>
+      <mat-error *ngIf="hasError('reference', 'required')">Referencia es obligatoria</mat-error>
+      <mat-error *ngIf="hasError('reference', 'maxlength')">Has escrito más de 6 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="full-width">
+      <mat-label>Nombre tipo vehículo</mat-label>
+      <input matInput #name type="text" formControlName="name" maxlength="30">
+      <mat-hint align="end">{{name.value?.length || 0}}/30</mat-hint>
+      <mat-error *ngIf="hasError('name', 'required')">Nombre es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('name', 'maxlength')">Has escrito más de 30 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput #description type="text" formControlName="description" maxlength="200"></textarea>
+      <mat-hint align="end">{{description.value?.length || 0}}/200</mat-hint>
+      <mat-error *ngIf="hasError('description', 'maxlength')">Has escrito más de 200 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions>
+    <button cdkFocusInitial mat-dialog-close mat-raised-button>Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="inCreation" [disabled]="!vehicleTypeForm.valid">Crear</button>
+    <button mat-raised-button color="primary" type="submit" *ngIf="!inCreation" [disabled]="!vehicleTypeForm.valid">Guardar</button>
+  </mat-dialog-actions>
+</form>
+
+
