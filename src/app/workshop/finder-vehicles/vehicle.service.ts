@@ -47,6 +47,30 @@ export class VehicleService {
       bin: '444444',
       model: 'Skoda',
       customer: this.customer.completeName,
+    },
+    {
+      plate: '11111',
+      bin: '444444',
+      model: 'Skoda',
+      customer: this.customer.completeName,
+    },
+    {
+      plate: '11111',
+      bin: '444444',
+      model: 'Skoda',
+      customer: this.customer.completeName,
+    },
+    {
+      plate: '11111',
+      bin: '444444',
+      model: 'Skoda',
+      customer: this.customer.completeName,
+    },
+    {
+      plate: '11111',
+      bin: '444444',
+      model: 'Skoda',
+      customer: this.customer.completeName,
     }
   ]);
 
