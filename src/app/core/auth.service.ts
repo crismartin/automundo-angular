@@ -19,19 +19,26 @@ export class AuthService {
   constructor(private httpService: HttpService, private router: Router) {
   }
 
-  login(mobile: number, password: string): Observable<User> {
-    return this.httpService.authBasic(mobile, password)
+  login(userName: string, password: string): Observable<User> {
+    return this.httpService.authBasic(userName, password)
       .post(AuthService.END_POINT)
       .pipe(
+        map(userT => {
+          this.user = userT;
+          return this.user;
+      }))
+      /*.pipe(
         map(jsonToken => {
           const jwtHelper = new JwtHelperService();
-          this.user = jsonToken; // {token:jwt} => user.token = jwt
-          this.user.mobile = jwtHelper.decodeToken(jsonToken.token).user;  // secret key is not necessary
-          this.user.name = jwtHelper.decodeToken(jsonToken.token).name;
+          this.user = jsonToken;
+          this.user.userName = jwtHelper.decodeToken(jsonToken.token).userName;
+          this.user.realName = jwtHelper.decodeToken(jsonToken.token).realName;
           this.user.role = jwtHelper.decodeToken(jsonToken.token).role;
           return this.user;
         })
-      );
+      )*/
+      ;
+
   }
 
   logout(): void {
@@ -40,7 +47,8 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.user != null && !(new JwtHelperService().isTokenExpired(this.user.token));
+
+    return this.user != null /*&& !(new JwtHelperService().isTokenExpired(this.user.token))*/;
   }
 
   hasRoles(roles: Role[]): boolean {
@@ -51,24 +59,16 @@ export class AuthService {
     return this.hasRoles([Role.ADMIN]);
   }
 
-  untilManager(): boolean {
-    return this.hasRoles([Role.ADMIN, Role.MANAGER]);
+  isOperator(): boolean {
+    return this.hasRoles([Role.OPERATOR]);
   }
 
-  untilOperator(): boolean {
-    return this.hasRoles([Role.ADMIN, Role.MANAGER, Role.ADMIN]);
+  getUserName(): string {
+    return this.user ? this.user.userName : undefined;
   }
 
-  isCustomer(): boolean {
-    return this.hasRoles([Role.CUSTOMER]);
-  }
-
-  getMobile(): number {
-    return this.user ? this.user.mobile : undefined;
-  }
-
-  getName(): string {
-    return this.user ? this.user.name : '???';
+  getRealName(): string {
+    return this.user ? this.user.realName : '???';
   }
 
   getToken(): string {

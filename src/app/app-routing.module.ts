@@ -10,13 +10,15 @@ import {MaintenanceComponent} from './workshop/maintenance/maintenance.component
 import {ReplacementsMaintenanceComponent} from './workshop/maintenance/replacements/replacements-maintenance.component';
 import {VehicleComponent} from './workshop/vehicles/vehicle.component';
 import {VehicleTypesMaintenanceComponent} from './workshop/maintenance/vehicle-types/vehicle-types-maintenance.component';
+import {RoleGuardService} from '@core/role-guard.service';
+import {Role} from '@core/role.model';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'inicio'},
   {path: 'inicio', component: HomeComponent},
   {path: 'taller',
-//    canActivate: [RoleGuardService],
-//    data: {roles: [Role.ADMIN, Role.OPERATOR]},
+    canActivate: [RoleGuardService],
+    data: {roles: [Role.ADMIN, Role.OPERATOR]},
     children: [
       {path: '', component: WorkshopComponent},
       {path: 'buscar-vehiculos', component: FinderVehiclesComponent},
@@ -32,7 +34,7 @@ const routes: Routes = [
     ]
     },
   {path: 'intranet', component: IntranetComponent},
-  {path: '**', pathMatch: 'full', redirectTo: 'inicio'},
+  {path: '**', pathMatch: 'full', redirectTo: 'taller'},
 ];
 
 @NgModule({
