@@ -9,17 +9,17 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['./dialog.component.css']
 })
 export class LoginDialogComponent {
-  mobile: number;
+  userName: string;
   password: string;
 
-  constructor(private auth: AuthService, private router: Router, private dialog: MatDialog) {
+  constructor(private authService: AuthService, private router: Router, private dialog: MatDialog) {
   }
 
   login(): void {
-    this.auth.login(this.mobile, this.password).subscribe(
+    this.authService.login(this.userName, this.password).subscribe(
       () => {
-        if (this.auth.untilOperator()) {
-          this.router.navigate(['intranet']).then().finally(() => this.dialog.closeAll());
+        if (this.authService.isAdmin() || this.authService.isOperator()) {
+          this.router.navigate(['taller']).then().finally(() => this.dialog.closeAll());
         } else {
           this.dialog.closeAll();
         }

@@ -1,11 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {EMPTY, Observable, throwError} from 'rxjs';
+import {EMPTY, Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Error} from '@core/error.model';
+import {Role} from '@core/role.model';
+import {User} from '@core/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +39,7 @@ export class HttpService {
     return this;
   }
 
-  successful(notification = 'Successful'): HttpService {
+  successful(notification = 'Éxito'): HttpService {
     this.successfulNotification = notification;
     return this;
   }
@@ -54,12 +56,19 @@ export class HttpService {
   }
 
   post(endpoint: string, body?: object): Observable<any> {
-    return this.http
+    /*return this.http
       .post(endpoint, body, this.createOptions())
       .pipe(
         map(response => this.extractData(response)),
         catchError(error => this.handleError(error))
-      );
+      );*/
+    const user: User = {
+      token: '12123123',
+      realName: 'Juan Alberto Pascual',
+      userName: 'REYESJ',
+      role: Role.OPERATOR
+    };
+    return of(user);
   }
 
   get(endpoint: string): Observable<any> {
@@ -97,8 +106,8 @@ export class HttpService {
         catchError(error => this.handleError(error)));
   }
 
-  authBasic(mobile: number, password: string): HttpService {
-    return this.header('Authorization', 'Basic ' + btoa(mobile + ':' + password));
+  authBasic(userName: string, password: string): HttpService {
+    return this.header('Authorization', 'Basic ' + btoa(userName + ':' + password));
   }
 
   header(key: string, value: string): HttpService {
@@ -157,11 +166,11 @@ export class HttpService {
   private handleError(response): any {
     let error: Error;
     if (response.status === HttpService.UNAUTHORIZED) {
-      this.showError('Unauthorized');
+      this.showError('No autorizado');
       this.router.navigate(['']).then();
       return EMPTY;
     } else if (response.status === HttpService.CONNECTION_REFUSE) {
-      this.showError('Connection Refuse');
+      this.showError('Conexión rechazada');
       return EMPTY;
     } else {
       try {
@@ -169,7 +178,7 @@ export class HttpService {
         this.showError(error.error + ' (' + response.status + '): ' + error.message);
         return throwError(error);
       } catch (e) {
-        this.showError('Not response');
+        this.showError('Sin respuesta por parte del servidor');
         return throwError(response.error);
       }
     }

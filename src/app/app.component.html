@@ -10,14 +10,14 @@
       <mat-icon>add_business</mat-icon>
       <span>Taller</span>
     </button>
-    <button (click)="redirect()" mat-button>
+    <button routerLink="intranet" mat-button>
       <mat-icon>settings_system_daydream</mat-icon>
       <span>Intranet</span>
     </button>
+    <span *ngIf="isAuthenticated()"> {{realName}} </span>
     <button (click)="logout()" *ngIf="isAuthenticated()" mat-button>
-      <span>{{username}}</span>
       <mat-icon>person_outline</mat-icon>
-      <span>Logout</span>
+      <span>Cerrar sesión</span>
     </button>
     <button [matMenuTriggerFor]="menu" *ngIf="isAuthenticated()" mat-icon-button>
       <mat-icon>more_vert</mat-icon>
