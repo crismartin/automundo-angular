@@ -1,5 +1,39 @@
-<mat-grid-list cols="1" rowHeight="4:1">
-  <button mat-button color="primary" routerLink="buscar-vehiculos">Buscar vehículos</button>
-  <button mat-button color="primary" routerLink="buscar-clientes">Buscar clientes</button>
-  <button mat-button color="primary" routerLink="mantenimiento">Mantenimiento</button>
-</mat-grid-list>
+<div>
+  <h1 class="header">TALLER</h1>
+  <div>
+    <mat-grid-list [cols]="gridConfig.cols" rowHeight="1:1">
+      <mat-grid-tile [colspan]="gridConfig.colSpan" [rowspan]="1" (click)="searchCustomers()">
+        <mat-card class="dashboard-card card-finder-customers">
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              <mat-icon>person_search</mat-icon>
+            </div>
+            <div>Buscar clientes</div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="gridConfig.colSpan" [rowspan]="1" (click)="searchVehicles()">
+        <mat-card class="dashboard-card card-finder-vehicles">
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              <mat-icon>directions_car</mat-icon>
+            </div>
+            <span>Buscar vehículos</span>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1" *ngIf="isAdmin()" (click)="maintenance()">
+        <mat-card class="dashboard-card card-maintenance">
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              <mat-icon>build_circle</mat-icon>
+            </div>
+            <span>Mantenimiento</span>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
+
+

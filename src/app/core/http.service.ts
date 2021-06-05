@@ -66,7 +66,7 @@ export class HttpService {
       token: '12123123',
       realName: 'Juan Alberto Pascual',
       userName: 'REYESJ',
-      role: Role.OPERATOR
+      role: Role.ADMIN
     };
     return of(user);
   }

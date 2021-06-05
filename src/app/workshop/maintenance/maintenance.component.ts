@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
   styleUrls: ['./maintenance.component.css']
 })
 export class MaintenanceComponent implements OnInit {
-  username: any;
 
   constructor(private router: Router) { }
 
@@ -18,7 +17,7 @@ export class MaintenanceComponent implements OnInit {
     this.router.navigate(['taller', 'mantenimiento', 'repuestos']);
   }
 
-  vehicleTypes() {
+  vehicleTypes(): void {
     this.router.navigate(['taller', 'mantenimiento', 'tipos-vehiculo']);
   }
 }
