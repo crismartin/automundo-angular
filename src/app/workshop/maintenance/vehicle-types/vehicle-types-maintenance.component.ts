@@ -5,6 +5,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {VehicleType} from './vehicle-type.model';
 import {VehicleTypeService} from './vehicle-type.service';
 import {VehicleTypeDialogComponent} from './vehicle-type-dialog/vehicle-type-dialog.component';
+import {Replacement} from '../replacements/replacement.model';
+import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 
 @Component({
   selector: 'app-vehicle-types-maintenance',
@@ -40,8 +42,18 @@ export class VehicleTypesMaintenanceComponent implements OnInit {
         .subscribe(() => this.search()));
   }
 
-  delete($event: any) {
-
+  delete(vehicleType: VehicleType): void {
+    const dialogTitle = 'Eliminar';
+    const dialogText = '¿Realmente desea eliminar el tipo de vehículo: ' + vehicleType.name + '?';
+    this.dialog.open(CancelYesDialogComponent, {data: {title: dialogTitle, text: dialogText}}).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.vehicleTypeService.delete(vehicleType.reference).subscribe(
+            () => this.search()
+          );
+        }
+      }
+    );
   }
 
   newVehicleType(): void {
