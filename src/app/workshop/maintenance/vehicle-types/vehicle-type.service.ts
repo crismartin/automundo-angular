@@ -38,4 +38,10 @@ export class VehicleTypeService {
       .get(EndPoints.VEHICLE_TYPES + '/' + reference);*/
     return of(this.vehicleTypes[0]);
   }
+
+  delete(reference: string): Observable<void> {
+    /*return this.httpService
+      .delete(EndPoints.VEHICLE_TYPES + '/' + reference);*/
+    return of();
+  }
 }

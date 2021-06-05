@@ -42,8 +42,8 @@ export class CustomerService {
 
   search(customerSearch: CustomerSearch): Observable<Customer[]> {
     /*return this.httpService
-      .paramsFrom(vehicleSearch)
-      .get(EndPoints.VEHICLES + VehicleService.SEARCH);*/
+      .paramsFrom(customerSearch)
+      .get(EndPoints.CUSTOMERS + CustomerService.SEARCH);*/
     return of(this.customers);
   }
 
@@ -51,5 +51,11 @@ export class CustomerService {
     /*return this.httpService
       .get(EndPoints.CUSTOMERS + '/' + identificationId);*/
     return of(this.fullCustomer);
+  }
+
+  delete(identificationId: string): Observable<void> {
+    /*return this.httpService
+      .delete(EndPoints.CUSTOMERS + '/' + identificationId);*/
+    return of();
   }
 }
