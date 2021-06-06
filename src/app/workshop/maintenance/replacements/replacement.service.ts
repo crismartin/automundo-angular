@@ -43,4 +43,10 @@ export class ReplacementService {
       .get(EndPoints.REPLACEMENTS + '/' + reference);*/
     return of(this.replacements[0]);
   }
+
+  delete(reference: string): Observable<void> {
+    /*return this.httpService
+      .delete(EndPoints.REPLACEMENTS + '/' + reference);*/
+    return of();
+  }
 }

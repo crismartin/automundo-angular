@@ -6,6 +6,7 @@ import {Customer} from '../shared/services/models/customer.model';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerDialogComponent} from '../customers/customer-dialog/customer-dialog.component';
+import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 
 @Component({
   selector: 'app-finder-customers',
@@ -46,8 +47,19 @@ export class FinderCustomersComponent implements OnInit {
         .subscribe(() => this.search()));
   }
 
-  delete($event: any): void {
-
+  delete(customer: Customer): void {
+    const dialogTitle = 'Dar de baja';
+    const dialogText = '¿Realmente desea dar de baja a ' + customer.completeName +
+      ' como cliente? Se eliminarán también sus vehículos asociados.';
+    this.dialog.open(CancelYesDialogComponent, {data: {title: dialogTitle, text: dialogText}}).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.customerService.delete(customer.identificationId).subscribe(
+            () => this.search()
+          );
+        }
+      }
+    );
   }
 
   newCustomer(): void {
