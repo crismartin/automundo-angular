@@ -12,6 +12,8 @@ import { ReplacementDialogComponent } from './maintenance/replacements/replaceme
 import { VehicleComponent } from './vehicles/vehicle.component';
 import { VehicleTypesMaintenanceComponent } from './maintenance/vehicle-types/vehicle-types-maintenance.component';
 import { VehicleTypeDialogComponent } from './maintenance/vehicle-types/vehicle-type-dialog/vehicle-type-dialog.component';
+import { RevisionDialogComponent } from './revisions/revision-dialog/revision-dialog.component';
+import {NgxMatDatetimePickerModule} from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -25,11 +27,13 @@ import { VehicleTypeDialogComponent } from './maintenance/vehicle-types/vehicle-
     VehicleComponent,
     VehicleTypesMaintenanceComponent,
     VehicleTypeDialogComponent,
+    RevisionDialogComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMatDatetimePickerModule
   ]
 })
 export class WorkshopModule { }

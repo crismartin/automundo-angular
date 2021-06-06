@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<form [formGroup]="revisionForm" autocomplete="off" novalidate (ngSubmit)="onSubmit(revisionForm)"
+      fxLayout="column wrap"
+      fxLayoutAlign="" fxLayoutGap="10px">
+  <div>
+    <mat-form-field  *ngIf="false">
+      <input matInput #referenceId type="text" formControlName="referenceId" maxlength="10">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field cdkFocusInitial style="width: 730px;">
+      <mat-label>Antecedente o diagnóstico</mat-label>
+      <input matInput #diagnostic type="text" formControlName="diagnostic" maxlength="50">
+      <mat-hint align="end">{{diagnostic.value?.length || 0}}/50</mat-hint>
+      <mat-error *ngIf="hasError('diagnostic', 'required')">Diagnóstico es obligatorio</mat-error>
+      <mat-error *ngIf="hasError('diagnostic', 'maxlength')">Has escrito más de 50 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="full-width">
+      <mat-label>Fecha de entrada</mat-label>
+      <input  matInput placeholder="Elija una fecha" [ngxMatDatetimePicker]="registerDate"
+              (focus)="registerDate.open()" formControlName="registerDate" readonly>
+      <mat-datepicker-toggle matSuffix [for]="registerDate"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #registerDate [showSeconds]="false"></ngx-mat-datetime-picker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width" style="width: 90px;">
+      <mat-label>Km. de entrada</mat-label>
+      <input matInput #initialKilometers type="text" pattern="[0-9]+" formControlName="initialKilometers" maxlength="6">
+      <mat-hint align="end">{{initialKilometers.value?.length || 0}}/6</mat-hint>
+      <mat-error *ngIf="hasError('initialKilometers', 'maxlength')">Has escrito más de 6 caracteres</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width" style="width: 350px;">
+      <mat-label>Técnico encargado</mat-label>
+      <mat-select #technician formControlName="technician">
+        <mat-option value="">-- Elija una opción --</mat-option>
+        <mat-option value="1">Jose Luis Señor</mat-option>
+        <mat-option value="2">Antonio Perez</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width" style="width: 90px;">
+      <mat-label>Horas empleadas</mat-label>
+      <input matInput #workedHours type="text" pattern="[0-9]+" formControlName="workedHours" maxlength="5">
+      <mat-hint align="end">{{workedHours.value?.length || 0}}/5</mat-hint>
+      <mat-error *ngIf="hasError('workedHours', 'maxlength')">Has escrito más de 5 caracteres</mat-error>
+      <mat-error *ngIf="hasError('workedHours', 'pattern')">Formato incorrecto</mat-error>
+    </mat-form-field>
+  </div>
+  <br/>
+  <div>
+    <span> TABLA de REPUESTOS </span>
+  </div>
+  <br/>
+  <div *ngIf="!inCreation">
+    <mat-form-field class="full-width" style="width: 350px;">
+      <mat-label>Estado</mat-label>
+      <mat-select #status formControlName="status" (ngModelChange)="isFinished()">
+        <mat-option value="1">POR CONFIRMAR</mat-option>
+        <mat-option value="2">NEGADO</mat-option>
+        <mat-option value="3">EN MANTENIMIENTO</mat-option>
+        <mat-option value="4">ENTREGADO</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width" *ngIf="isFinished()">
+      <mat-label>Fecha de salida</mat-label>
+      <input  matInput placeholder="Elija una fecha" [ngxMatDatetimePicker]="departureDate"
+              (focus)="departureDate.open()" formControlName="departureDate" readonly>
+      <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #departureDate></ngx-mat-datetime-picker>
+    </mat-form-field>
+    <mat-form-field class="full-width" style="width: 90px;" *ngIf="isFinished()">
+      <mat-label>Km. de salida</mat-label>
+      <input matInput #departureKilometers type="text" pattern="[0-9]+"
+             formControlName="departureKilometers" maxlength="6">
+      <mat-hint align="end">{{departureKilometers.value?.length || 0}}/6</mat-hint>
+      <mat-error *ngIf="hasError('departureKilometers', 'maxlength')">Has escrito más de 6 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field style="width: 700px;">
+      <mat-label>Descripción de la revisión</mat-label>
+      <textarea matInput #workDescription type="text" rows="8" cols="50" formControlName="workDescription" maxlength="500"></textarea>
+      <mat-hint align="end">{{workDescription.value?.length || 0}}/500</mat-hint>
+      <mat-error *ngIf="hasError('workDescription', 'maxlength')">Has escrito más de 500 caracteres</mat-error>
+    </mat-form-field>
+  </div>
+  <mat-dialog-actions>
+    <button  mat-dialog-close mat-raised-button>Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!revisionForm.valid">Guardar
+    </button>
+  </mat-dialog-actions>
+</form>

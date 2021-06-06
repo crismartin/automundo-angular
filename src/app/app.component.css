@@ -5,3 +5,7 @@
 .center {
   justify-content: center;
 }
+
+.mat-dialog-actions {
+  justify-content: flex-end;
+}

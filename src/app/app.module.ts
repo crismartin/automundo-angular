@@ -16,6 +16,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {IntranetComponent} from './intranet/intranet.component';
 import {WorkshopComponent} from './workshop/workshop.component';
 import {WorkshopModule} from './workshop/workshop.module';
+import {NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -29,14 +31,18 @@ import {WorkshopModule} from './workshop/workshop.module';
     MatIconModule,
     SharedModule,
     MatGridListModule,
-    WorkshopModule
+    WorkshopModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule
   ],
   declarations: [
     AppComponent,
     CustomerComponent,
     HomeComponent,
     IntranetComponent,
-    WorkshopComponent
+    WorkshopComponent,
   ],
   bootstrap: [AppComponent]
 })
