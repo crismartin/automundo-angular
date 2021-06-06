@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Vehicle} from '../shared/services/models/vehicle.model';
 import {VehicleService} from './vehicle.service';
 import {ActivatedRoute} from '@angular/router';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {RevisionService} from '../revisions/revision.service';
 import {MatDialog} from '@angular/material/dialog';
 import {VehicleDialogComponent} from './vehicle-dialog/vehicle-dialog.component';
@@ -22,13 +22,17 @@ export class VehicleComponent {
   constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute, private revisionService: RevisionService,
               private dialog: MatDialog) {
     this.activatedRoute.paramMap.subscribe(params => {
-      const idVehicle = params.get('idVehicle');
-      this.vehicleService.search(idVehicle)
-        .subscribe((vehicle) => {
-          this.vehicleModel = vehicle;
-          this.searchRevisions();
-        });
+      const idVehicle = params.get('id');
+      this.search(idVehicle);
     });
+  }
+
+  search(referenceId: string): void {
+    this.vehicleService.search(referenceId)
+      .subscribe(vehicleSearched => {
+        this.vehicleModel = vehicleSearched;
+        this.searchRevisions();
+      });
   }
 
   searchRevisions(): void{

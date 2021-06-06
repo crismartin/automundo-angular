@@ -8,6 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {VehicleDialogComponent} from '../vehicles/vehicle-dialog/vehicle-dialog.component';
 import {VehicleService} from '../vehicles/vehicle.service';
 import {Vehicle} from '../shared/services/models/vehicle.model';
+import {VehicleItem} from './vehicle-item';
 
 @Component({
   selector: 'app-clients',
@@ -51,27 +52,21 @@ export class CustomerComponent implements OnInit {
     this.dialog
       .open(VehicleDialogComponent)
       .afterClosed()
-      .subscribe(vehicle => {
-        console.log(vehicle);
-        this.customerService.addVehicleDummy(vehicle);
-        this.searchVehicles();
-      });
+      .subscribe(() => this.searchVehicles());
   }
 
   detailsVehicle(vehicle: Vehicle): void {
     this.router.navigate(['/taller/vehicle', vehicle.referenceId]);
   }
 
-  updateVehicle(vehicle: Vehicle): void {
-    console.log(vehicle);
-    this.dialog
-      .open(VehicleDialogComponent, {data: vehicle})
-      .afterClosed()
-      .subscribe((vehicleUpdated) => {
-          console.log(vehicleUpdated);
-          this.customerService.updateVehicleDummy(vehicleUpdated);
-          this.searchVehicles();
-        }
+  updateVehicle(vehicleItem: VehicleItem): void {
+    console.log(vehicleItem);
+    this.vehicleService.search(vehicleItem.referenceId)
+      .subscribe((vehicle: Vehicle) =>
+        this.dialog
+          .open(VehicleDialogComponent, {data: vehicle})
+          .afterClosed()
+          .subscribe(() => this.searchVehicles())
       );
   }
 
@@ -80,15 +75,12 @@ export class CustomerComponent implements OnInit {
   }
 
   searchVehicles(): void {
-    this.vehicles = this.customerService.searchVehiclesByIdCustomer(this.customerModel.id);
+    this.vehicles = this.vehicleService.searchVehiclesByIdCustomer(this.customerModel.id);
   }
 
   deleteVehicle(vehicle: Vehicle): void {
     this.vehicleService.delete(vehicle)
-      .subscribe(() => {
-        this.customerService.deleteVehicleDummy(vehicle);
-        this.searchVehicles();
-      });
+      .subscribe(() => this.searchVehicles());
 
   }
 }
