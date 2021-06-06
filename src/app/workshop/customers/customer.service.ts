@@ -12,26 +12,6 @@ import {Vehicle} from '../shared/services/models/vehicle.model';
 })
 export class CustomerService {
 
-  vehicles: VehicleItem[] = [
-    {
-      referenceId: '1',
-      plate: 'JB-007',
-      bin: 'ID-007',
-      model: 'Aston Martin DBS Superleggera',
-      yearRelease: '2020',
-      registerDate: new Date(),
-      lastViewDate: new Date()
-    },
-    {
-      referenceId: '2',
-      plate: 'EM-A37',
-      bin: 'ID-A37',
-      model: 'Tesla Model S',
-      yearRelease: '2020',
-      registerDate: new Date(),
-      lastViewDate: new Date()
-    }];
-
   customer: Customer = {
     id: '33',
     identificationId: '12121221-T',
@@ -48,29 +28,10 @@ export class CustomerService {
   constructor(private httpService: HttpService) {
   }
 
-  searchVehiclesByIdCustomer(id: string): Observable<VehicleItem[]> {
-    return of(this.vehicles);
-  }
-
   create(customer: CustomerCreationUpdate): Observable<Customer> {
     /*return this.httpService
       .post(EndPoints.CUSTOMERS, customer);*/
     return of(this.customer);
-  }
-
-  addVehicleDummy(vehicle: Vehicle): void {
-    this.vehicles.push(this.toVehicleItem(vehicle));
-  }
-
-  toVehicleItem(vehicle: Vehicle): VehicleItem {
-    return {
-      plate: vehicle.plate,
-      bin: vehicle.bin,
-      model: vehicle.model,
-      yearRelease: vehicle.yearRelease,
-      registerDate: vehicle.registerDate,
-      lastViewDate: vehicle.lastViewDate
-    };
   }
 
   update(customer: CustomerCreationUpdate, id: string): Observable<Customer> {
@@ -79,30 +40,4 @@ export class CustomerService {
     return of(this.customer);
   }
 
-  updateVehicleDummy(vehicle: Vehicle): void{
-    let vehicleUpdated: VehicleItem = {
-      bin: vehicle.bin,
-      lastViewDate: vehicle.lastViewDate,
-      model: vehicle.model,
-      plate: vehicle.plate,
-      yearRelease: vehicle.yearRelease
-    };
-
-    this.vehicles.forEach((value, index) => {
-        if (value.referenceId === vehicle.referenceId){
-          vehicleUpdated = value;
-          this.vehicles.splice(index, 1);
-        }
-    });
-
-    this.vehicles.push(vehicleUpdated);
-  }
-
-  deleteVehicleDummy(vehicle: Vehicle): void {
-    this.vehicles.forEach((value, index) => {
-      if (value.referenceId === vehicle.referenceId){
-        this.vehicles.splice(index, 1);
-      }
-    });
-  }
 }
