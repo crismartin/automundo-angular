@@ -10,6 +10,8 @@ import {EndPoints} from '@shared/end-points';
 })
 export class CustomerService {
 
+  private static SEARCH = '/search';
+
   private customers: Customer [] = ([
     {
       identificationId: '040090989-0',
@@ -41,10 +43,9 @@ export class CustomerService {
   constructor(private httpService: HttpService) { }
 
   search(customerSearch: CustomerSearch): Observable<Customer[]> {
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(customerSearch)
-      .get(EndPoints.CUSTOMERS + CustomerService.SEARCH);*/
-    return of(this.customers);
+      .get(EndPoints.CUSTOMERS + CustomerService.SEARCH);
   }
 
   read(identificationId: string): Observable<Customer> {
