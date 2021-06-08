@@ -8,6 +8,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Error} from '@core/error.model';
 import {Role} from '@core/role.model';
 import {User} from '@core/user.model';
+import {AuthService} from '@core/auth.service';
+import {environment} from '@env';
 
 @Injectable({
   providedIn: 'root',
@@ -68,7 +70,16 @@ export class HttpService {
       userName: 'REYESJ',
       role: Role.ADMIN
     };
-    return of(user);
+    const END_POINT = environment.REST_CORE + '/users/token';
+    if (endpoint === END_POINT){
+      return of(user);
+    }
+    return this.http
+      .post(endpoint, body, this.createOptions())
+      .pipe(
+        map(response => this.extractData(response)),
+        catchError(error => this.handleError(error))
+      );
   }
 
   get(endpoint: string): Observable<any> {
