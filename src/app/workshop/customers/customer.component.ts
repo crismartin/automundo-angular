@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Observable, of} from 'rxjs';
+import {of} from 'rxjs';
 import {CustomerService} from './customer.service';
 import {Customer} from '../shared/services/models/customer.model';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -21,7 +21,7 @@ export class CustomerComponent implements OnInit {
   vehicles = of([]);
   title = 'Vehículos asociados';
   idClient: string;
-  customerModel: Customer;
+  customer: any = {};
 
   constructor(private dialog: MatDialog, private customerService: CustomerService, private activatedRoute: ActivatedRoute,
               private vehicleService: VehicleService, private router: Router) {
@@ -34,17 +34,16 @@ export class CustomerComponent implements OnInit {
       address: 'Calle Falsa 123, Tulcán, Ecuador',
       email: 'rochel@gmail.com'
     }];
-
-    this.customerModel = this.customers[0];
-
-    this.resetSearch();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.idClient = params.get('id');
-      let clientFound = this.customers.find(customer => customer.identificationId === this.idClient);
-      this.customerModel = this.customers[0];
+      this.customerService.read(params.get('id'))
+        .subscribe(customer => {
+          this.customer = customer;
+          this.customer.completeName = this.buildCompleteName(customer.name, customer.surName, customer.secondSurName);
+          this.resetSearch();
+        });
     });
   }
 
@@ -75,12 +74,15 @@ export class CustomerComponent implements OnInit {
   }
 
   searchVehicles(): void {
-    this.vehicles = this.vehicleService.searchVehiclesByIdCustomer(this.customerModel.id);
+    this.vehicles = this.vehicleService.searchVehiclesByIdCustomer(this.customer.id);
   }
 
   deleteVehicle(vehicle: Vehicle): void {
     this.vehicleService.delete(vehicle)
       .subscribe(() => this.searchVehicles());
+  }
 
+  buildCompleteName(name: string, surName: string, secondSurName: string): string {
+    return name + ' ' + surName + ' ' + secondSurName;
   }
 }
