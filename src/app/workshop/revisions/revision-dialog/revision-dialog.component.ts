@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Vehicle} from '../../shared/services/models/vehicle.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RevisionService} from '../revision.service';
+import {ReplacementsService} from '../../replacements/replacements-service';
 
 @Component({
   selector: 'app-revision-dialog',
@@ -18,7 +19,7 @@ export class RevisionDialogComponent {
   revisionModel: Revision;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Revision, private snackBar: MatSnackBar, private dialog: MatDialogRef<RevisionDialogComponent>,
-              private revisionService: RevisionService) {
+              private revisionService: RevisionService, private replacementsService: ReplacementsService) {
     this.title = data ? 'Editar Revisión' : 'Crear Revisión';
     this.inCreation = !data;
 
@@ -54,6 +55,7 @@ export class RevisionDialogComponent {
       },
     };
 
+    this.replacementsService.updateDataFromTable(data ? data.replacementsUsed : []);
     this.revisionForm = templateForm(this.revisionModel);
   }
 
@@ -83,7 +85,11 @@ export class RevisionDialogComponent {
         code: revisionForm.get('status').value
       }
     };
+    console.log('antes de pillar las revisiones');
+    console.log(revision);
 
+    console.log('despues de pillar las revisiones');
+    revision.replacementsUsed = this.replacementsService.getDataFromTable();
     console.log(revision);
 
     this.save(revision);

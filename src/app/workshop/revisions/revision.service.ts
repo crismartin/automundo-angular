@@ -5,6 +5,7 @@ import {Vehicle} from '../shared/services/models/vehicle.model';
 import {RevisionItem} from '../shared/services/models/revision-item';
 import {Technician} from '../shared/services/models/technician';
 import {StatusRevision} from '../shared/services/models/status-revision';
+import {ReplacementUsedItem} from '../shared/services/models/replacement-used-item';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,29 @@ export class RevisionService {
     }
   ];
 
+  replacementsUsed: ReplacementUsedItem[] = [
+    {
+      referenceId: '1',
+      quantity: 1,
+      own: true,
+      replacement: {
+        referenceId: '1',
+        name: 'Manguera de aceite'
+      },
+      price: 150
+    },
+    {
+      referenceId: '2',
+      quantity: 2,
+      own: false,
+      replacement: {
+        referenceId: '2',
+        name: 'Bujía Motor'
+      },
+      price: 60
+    }
+  ];
+  
   revisions: Revision[] = [
     {
       referenceId: '1',
@@ -67,7 +91,8 @@ export class RevisionService {
       status: {
         code: 4,
         description: 'ENTREGADO'
-      }
+      },
+      replacementsUsed: this.replacementsUsed
     }
   ];
 

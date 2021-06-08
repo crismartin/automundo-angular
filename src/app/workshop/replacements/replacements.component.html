@@ -1,0 +1,96 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Quantity -->
+  <ng-container matColumnDef="quantity">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+  </ng-container>
+
+  <!-- ['quantity', 'replacement.name', 'own', 'price']; -->
+  <ng-container matColumnDef="replacement.name">
+    <th mat-header-cell *matHeaderCellDef> Repuesto </th>
+    <td mat-cell *matCellDef="let element"> {{element.replacement.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="own">
+    <th mat-header-cell *matHeaderCellDef> Propio </th>
+    <td mat-cell *matCellDef="let element"> {{element.own ? 'Si' : 'No'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="price">
+    <th mat-header-cell *matHeaderCellDef> Precio </th>
+    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef>
+      <button type="button" (click)="createReplacement()" mat-button mat-icon-button matSuffix>
+        <mat-icon color="warn">add</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <button type="button" (click)="updateReplacement(item)" mat-button mat-icon-button matSuffix>
+        <mat-icon>mode_edit</mat-icon>
+      </button>
+      <button type="button" (click)="deleteReplacement(item)" mat-button mat-icon-button matSuffix>
+        <mat-icon color="warn">close</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<br>
+<div class="form-full" *ngIf="showForm == true">
+  <h2 mat-dialog-title>{{titleForm}}</h2>
+  <form [formGroup]="replacementUsedForm" autocomplete="off" novalidate (ngSubmit)="onSubmit(replacementUsedForm)"
+        fxLayout="column wrap"
+        fxLayoutAlign="" fxLayoutGap="10px">
+    <div>
+      <mat-form-field  *ngIf="false">
+        <input matInput #referenceId type="text" formControlName="referenceId">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <mat-label>Cantidad</mat-label>
+        <input matInput #quantity type="text" pattern="[0-9]+" formControlName="quantity" maxlength="3">
+        <mat-hint align="end">{{quantity.value?.length || 0}}/3</mat-hint>
+        <mat-error *ngIf="hasError('quantity', 'maxlength')">Has escrito más de 3 caracteres</mat-error>
+        <mat-error *ngIf="hasError('quantity', 'pattern')">Formato incorrecto</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" style="width: 350px;">
+        <mat-label>Repuesto</mat-label>
+        <mat-select #replacement name="replacement" formControlName="replacement" (selectionChange)="changeReplacementUsedForm($event)">
+          <mat-option value="">-- Elija una opción --</mat-option>
+          <mat-option value="1">Manguera aceite</mat-option>
+          <mat-option value="2">Bujía motor</mat-option>
+          <mat-option value="3">Luces led</mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('replacement', 'required')">Repuesto es obligatorio</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="full-width">
+        <mat-label>Descuento (%)</mat-label>
+        <input matInput #discount type="text" pattern="[0-9]+" formControlName="discount" maxlength="3">
+        <mat-hint align="end">{{discount.value?.length || 0}}/3</mat-hint>
+        <mat-error *ngIf="hasError('discount', 'maxlength')">Has escrito más de 3 caracteres</mat-error>
+        <mat-error *ngIf="hasError('discount', 'pattern')">Formato incorrecto</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Precio Final ($)</mat-label>
+        <input matInput #price type="text" rows="8" cols="50" formControlName="price" maxlength="10">
+        <mat-hint align="end">{{price.value?.length || 0}}/10</mat-hint>
+        <mat-error *ngIf="hasError('price', 'maxlength')">Has escrito más de 10 caracteres</mat-error>
+      </mat-form-field>
+    </div>
+    <br/>
+    <mat-dialog-actions>
+      <button type="button" mat-raised-button (click)="toggleFormReplacement()">Cancelar</button>
+      <button type="button" mat-raised-button color="primary" type="submit" [disabled]="!replacementUsedForm.valid">Guardar
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>
