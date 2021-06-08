@@ -66,6 +66,13 @@
       <mat-error *ngIf="hasError('email', 'required')">Email es obligatorio</mat-error>
       <mat-error *ngIf="hasError('email', 'email')">Formato inválido</mat-error>
     </mat-form-field>
+    <mat-form-field *ngIf="!inCreation" class="full-width">
+      <mat-label>Fecha última visita</mat-label>
+      <input matInput #lastVisitDate [matDatepicker]="datePicker" formControlName="lastVisitDate">
+      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+      <mat-error *ngIf="hasError('lastVisitDate', 'required')">Fecha última visita es obligatoria</mat-error>
+    </mat-form-field>
   </div>
   <mat-dialog-actions>
     <button cdkFocusInitial mat-dialog-close mat-raised-button>Cancelar</button>
