@@ -48,10 +48,6 @@
     </mat-form-field>
   </div>
   <br/>
-  <div>
-    <span> TABLA de REPUESTOS </span>
-  </div>
-  <br/>
   <div *ngIf="!inCreation">
     <mat-form-field class="full-width" style="width: 350px;">
       <mat-label>Estado</mat-label>
@@ -85,6 +81,11 @@
       <mat-error *ngIf="hasError('workDescription', 'maxlength')">Has escrito más de 500 caracteres</mat-error>
     </mat-form-field>
   </div>
+  <div>
+    <h2>Repuestos Utilizados</h2>
+    <app-replacements></app-replacements>
+  </div>
+  <br/>
   <mat-dialog-actions>
     <button  mat-dialog-close mat-raised-button>Cancelar</button>
     <button mat-raised-button color="primary" type="submit" [disabled]="!revisionForm.valid">Guardar
