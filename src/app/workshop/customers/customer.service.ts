@@ -1,11 +1,9 @@
 import {Injectable} from '@angular/core';
-import {VehicleItem} from './vehicle-item';
 import {Observable, of} from 'rxjs';
 import {CustomerCreationUpdate} from './customer-dialog/customer-creation-update.model';
 import {Customer} from '../shared/services/models/customer.model';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {Vehicle} from '../shared/services/models/vehicle.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +27,9 @@ export class CustomerService {
   }
 
   create(customer: CustomerCreationUpdate): Observable<Customer> {
-    /*return this.httpService
-      .post(EndPoints.CUSTOMERS, customer);*/
-    return of(this.customer);
+    return this.httpService
+      .post(EndPoints.CUSTOMERS, customer);
+    // return of(this.customer);
   }
 
   update(customer: CustomerCreationUpdate, id: string): Observable<Customer> {

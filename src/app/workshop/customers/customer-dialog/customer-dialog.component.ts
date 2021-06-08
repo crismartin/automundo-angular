@@ -5,6 +5,7 @@ import {CustomerService} from '../customer.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../shared/services/models/customer.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-dialog',
@@ -18,7 +19,8 @@ export class CustomerDialogComponent implements OnInit {
   inCreation: boolean;
   data: Customer;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Customer, private dialog: MatDialog, private customerService: CustomerService, private snackBar: MatSnackBar) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: Customer, private router: Router, private dialog: MatDialog,
+              private customerService: CustomerService, private snackBar: MatSnackBar) {
     this.title = data ? 'Actualizar Cliente' : 'Crear Cliente';
     this.inCreation = !data;
     this.data = data;
@@ -49,12 +51,15 @@ export class CustomerDialogComponent implements OnInit {
   }
 
   create(customer: CustomerCreationUpdate): void {
-    /*this.customerService
+    this.customerService
       .create(customer)
-      .subscribe(() =>
-      Si ha ido MAL cerrar formulario y navegar al detalle del cliente creado
-      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
-      this.dialog.closeAll());*/
+      .subscribe(customerCreated => {
+        this.snackBar.open('Usuario creado correctamente', '', {
+          duration: 3500
+        });
+        this.router.navigate(['/taller/cliente', customerCreated.identificationId]);
+        this.dialog.closeAll();
+      });
   }
 
   hasError(controlName: string, errorName: string): boolean {
@@ -70,8 +75,8 @@ export class CustomerDialogComponent implements OnInit {
     }
     const customer: CustomerCreationUpdate = {
         identificationId: customerForm.get('identificationId').value,
-        completeName: customerForm.get('name').value + ' ' + customerForm.get('surName').value
-          + ' ' + customerForm.get('secondSurName').value,
+      //  completeName: customerForm.get('name').value + ' ' + customerForm.get('surName').value
+       //   + ' ' + customerForm.get('secondSurName').value,
         name: customerForm.get('name').value,
         surName: customerForm.get('surName').value,
         secondSurName: customerForm.get('secondSurName').value,
