@@ -5,7 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from '@core/core.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import { CustomerComponent } from './workshop/customers/customer.component';
+import {CustomerComponent} from './workshop/customers/customer.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
@@ -18,6 +18,7 @@ import {WorkshopComponent} from './workshop/workshop.component';
 import {WorkshopModule} from './workshop/workshop.module';
 import {NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -44,7 +45,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     IntranetComponent,
     WorkshopComponent,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}
+    ]
 })
 export class AppModule {
 }

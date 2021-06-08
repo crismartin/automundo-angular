@@ -31,7 +31,8 @@ export class CustomerDialogComponent implements OnInit {
       phone: new FormControl(data.phone, [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]+')]),
       mobilePhone: new FormControl(data.mobilePhone, [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]+')]),
       address: new FormControl(data.address, [Validators.required, Validators.maxLength(100)]),
-      email: new FormControl(data.email, [Validators.required, Validators.email])
+      email: new FormControl(data.email, [Validators.required, Validators.email]),
+      lastVisitDate: new FormControl(data.email, [Validators.required])
     }) : new FormGroup({
       identificationId: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
@@ -82,6 +83,7 @@ export class CustomerDialogComponent implements OnInit {
     if (this.inCreation) {
       this.create(customer);
     } else {
+      customer.lastVisitDate = customerForm.get('lastVisitDate').value;
       this.update(customer);
     }
   }
