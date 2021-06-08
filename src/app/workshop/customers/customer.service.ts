@@ -40,4 +40,9 @@ export class CustomerService {
     return of(this.customer);
   }
 
+  read(identificationId: string): Observable<Customer> {
+    return this.httpService
+      .get(EndPoints.CUSTOMERS + '/' + identificationId);
+  }
+
 }

@@ -1,7 +1,7 @@
 export interface Customer {
   id?: string;
   identificationId: string;
-  completeName: string;
+  completeName?: string;
   registrationDate?: Date;
   lastVisitDate?: Date;
   phone?: string;

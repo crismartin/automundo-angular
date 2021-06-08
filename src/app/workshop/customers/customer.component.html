@@ -5,25 +5,25 @@
     <div>
       <mat-grid-list cols="6" rowHeight="6:1">
         <mat-grid-tile><strong>Nombre Completo:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.completeName}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.completeName}}</label></mat-grid-tile>
         <mat-grid-tile><strong>Num. Identificación:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.identificationId}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.identificationId}}</label></mat-grid-tile>
         <mat-grid-tile> <strong>Num. Teléfono:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.mobilePhone}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.mobilePhone}}</label></mat-grid-tile>
       </mat-grid-list>
       <mat-grid-list cols="6" rowHeight="6:1">
         <mat-grid-tile><strong>Num. Móvil:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.mobilePhone}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.mobilePhone}}</label></mat-grid-tile>
         <mat-grid-tile><strong>Dirección:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.address}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.address}}</label></mat-grid-tile>
         <mat-grid-tile><strong>Correo electrónico:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.email}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.email}}</label></mat-grid-tile>
       </mat-grid-list>
       <mat-grid-list cols="6" rowHeight="6:1">
         <mat-grid-tile><strong>Fecha de registro:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.registrationDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.registrationDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
         <mat-grid-tile><strong>Fecha de última visita:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{customerModel.lastVisitDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{customer.lastVisitDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
       </mat-grid-list>
     </div>
     <br/>
