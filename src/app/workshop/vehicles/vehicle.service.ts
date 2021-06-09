@@ -3,6 +3,8 @@ import {Observable, of} from 'rxjs';
 import {Vehicle} from '../shared/services/models/vehicle.model';
 import {OwnerType} from '../shared/services/models/owner-type';
 import {VehicleItem} from '../customers/vehicle-item';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class VehicleService {
       plate: 'JB-007',
       bin: 'ID-007',
       model: 'Aston Martin DBS Superleggera',
-      yearRelease: '2020',
+      yearRelease: 2020,
       registerDate: new Date(),
       lastViewDate: new Date()
     },
@@ -29,7 +31,7 @@ export class VehicleService {
       plate: 'EM-A37',
       bin: 'ID-A37',
       model: 'Tesla Model S',
-      yearRelease: '2020',
+      yearRelease: 2020,
       registerDate: new Date(),
       lastViewDate: new Date()
     }];
@@ -40,7 +42,7 @@ export class VehicleService {
       plate: 'JB-007',
       bin: 'ID-007',
       model: 'Aston Martin DBS Superleggera',
-      yearRelease: '2020',
+      yearRelease: 2020,
       registerDate: new Date(),
       lastViewDate: new Date(),
       ownerType: this.ownerType,
@@ -51,16 +53,17 @@ export class VehicleService {
       plate: 'EM-A37',
       bin: 'ID-A37',
       model: 'Tesla Model S',
-      yearRelease: '2020',
+      yearRelease: 2020,
       registerDate: new Date(),
       lastViewDate: new Date(),
       ownerType: this.ownerType,
       customer: 'Rochel Barlomento Santilla'
     }];
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
-  searchVehiclesByIdCustomer(idCustomer: string): Observable<VehicleItem[]> {
-    return of(this.vehiclesItem);
+  searchVehiclesByIdentificationCustomer(identificationId: string): Observable<VehicleItem[]> {
+    return this.httpService
+      .get(EndPoints.CUSTOMERS + '/' + identificationId + '/vehicles');
   }
 
   search(idVehicle: string): Observable<Vehicle>{

@@ -74,7 +74,7 @@ export class CustomerComponent implements OnInit {
   }
 
   searchVehicles(): void {
-    this.vehicles = this.vehicleService.searchVehiclesByIdCustomer(this.customer.id);
+    this.vehicles = this.vehicleService.searchVehiclesByIdentificationCustomer(this.customer.identificationId);
   }
 
   deleteVehicle(vehicle: Vehicle): void {
