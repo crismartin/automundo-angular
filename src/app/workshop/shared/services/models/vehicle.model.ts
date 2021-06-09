@@ -7,7 +7,7 @@ export interface Vehicle {
   bin: string;
   model: string;
   manufacturedDate?: number;
-  yearRelease?: string;
+  yearRelease?: number;
   registerDate?: Date;
   lastViewDate?: Date;
   ownerType?: OwnerType;

@@ -3,7 +3,7 @@ export interface VehicleItem {
   plate: string;
   bin: string;
   model: string;
-  yearRelease: string;
+  yearRelease: number;
   registerDate?: Date;
   lastViewDate?: Date;
 }
