@@ -57,7 +57,7 @@ export class CustomerDialogComponent implements OnInit {
     this.customerService
       .create(customer)
       .subscribe(customerCreated => {
-        this.snackBar.open('Usuario creado correctamente', '', {
+        this.snackBar.open('Cliente creado correctamente', '', {
           duration: 3500
         });
         this.router.navigate(['/taller/cliente', customerCreated.identificationId]);
@@ -98,7 +98,7 @@ export class CustomerDialogComponent implements OnInit {
     this.customerService
       .update(customer, this.data.identificationId)
       .subscribe(customerUpdated => {
-        this.snackBar.open('Usuario creado correctamente', '', {
+        this.snackBar.open('Cliente editado correctamente', '', {
           duration: 3500
         });
         this.router.navigate(['/taller/cliente', customerUpdated.identificationId]);

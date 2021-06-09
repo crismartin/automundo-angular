@@ -54,8 +54,7 @@ export class CustomerService {
   }
 
   delete(identificationId: string): Observable<void> {
-    /*return this.httpService
-      .delete(EndPoints.CUSTOMERS + '/' + identificationId);*/
-    return of();
+    return this.httpService
+      .delete(EndPoints.CUSTOMERS + '/' + identificationId);
   }
 }
