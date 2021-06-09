@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {CustomerDialogComponent} from '../customers/customer-dialog/customer-dialog.component';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-finder-customers',
@@ -19,7 +20,7 @@ export class FinderCustomersComponent implements OnInit {
   customers = of([]);
   title = 'Buscador de clientes';
 
-  constructor(private customerService: CustomerService, private router: Router, private dialog: MatDialog) {
+  constructor(private customerService: CustomerService, private snackBar: MatSnackBar, private router: Router, private dialog: MatDialog) {
     this.resetSearch();
   }
 
@@ -55,7 +56,12 @@ export class FinderCustomersComponent implements OnInit {
       result => {
         if (result) {
           this.customerService.delete(customer.identificationId).subscribe(
-            () => this.search()
+            () => {
+              this.snackBar.open('Cliente eliminado correctamente', '', {
+                duration: 3500
+              });
+              this.search();
+            }
           );
         }
       }
