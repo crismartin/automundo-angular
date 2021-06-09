@@ -33,9 +33,8 @@ export class CustomerService {
   }
 
   update(customer: CustomerCreationUpdate, id: string): Observable<Customer> {
-    /*return this.httpService
-      .put(EndPoints.CUSTOMERS + "/" + id, customer);*/
-    return of(this.customer);
+    return this.httpService
+      .put(EndPoints.CUSTOMERS + '/' + id, customer);
   }
 
   read(identificationId: string): Observable<Customer> {

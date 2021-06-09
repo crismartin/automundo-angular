@@ -49,9 +49,8 @@ export class CustomerService {
   }
 
   read(identificationId: string): Observable<Customer> {
-    /*return this.httpService
-      .get(EndPoints.CUSTOMERS + '/' + identificationId);*/
-    return of(this.fullCustomer);
+    return this.httpService
+      .get(EndPoints.CUSTOMERS + '/' + identificationId);
   }
 
   delete(identificationId: string): Observable<void> {
