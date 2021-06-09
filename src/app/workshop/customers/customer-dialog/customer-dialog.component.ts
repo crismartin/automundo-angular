@@ -6,11 +6,13 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../shared/services/models/customer.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-customer-dialog',
   templateUrl: './customer-dialog.component.html',
-  styleUrls: ['./customer-dialog.component.css']
+  styleUrls: ['./customer-dialog.component.css'],
+  providers: [DatePipe]
 })
 export class CustomerDialogComponent implements OnInit {
 
@@ -20,10 +22,11 @@ export class CustomerDialogComponent implements OnInit {
   data: Customer;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Customer, private router: Router, private dialog: MatDialog,
-              private customerService: CustomerService, private snackBar: MatSnackBar) {
+              private customerService: CustomerService, private snackBar: MatSnackBar, private datePipe: DatePipe) {
     this.title = data ? 'Actualizar Cliente' : 'Crear Cliente';
     this.inCreation = !data;
     this.data = data;
+    console.log(this.data);
 
     this.customerForm = data ? new FormGroup({
       identificationId: new FormControl({value: data.identificationId, disabled: true}, [Validators.required, Validators.maxLength(10)]),
@@ -34,7 +37,7 @@ export class CustomerDialogComponent implements OnInit {
       mobilePhone: new FormControl(data.mobilePhone, [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]+')]),
       address: new FormControl(data.address, [Validators.required, Validators.maxLength(100)]),
       email: new FormControl(data.email, [Validators.required, Validators.email]),
-      lastVisitDate: new FormControl(data.email, [Validators.required])
+      lastVisitDate: new FormControl(new Date(data.lastVisitDate), [Validators.required])
     }) : new FormGroup({
       identificationId: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
@@ -75,8 +78,6 @@ export class CustomerDialogComponent implements OnInit {
     }
     const customer: CustomerCreationUpdate = {
         identificationId: customerForm.get('identificationId').value,
-      //  completeName: customerForm.get('name').value + ' ' + customerForm.get('surName').value
-       //   + ' ' + customerForm.get('secondSurName').value,
         name: customerForm.get('name').value,
         surName: customerForm.get('surName').value,
         secondSurName: customerForm.get('secondSurName').value,
@@ -88,17 +89,20 @@ export class CustomerDialogComponent implements OnInit {
     if (this.inCreation) {
       this.create(customer);
     } else {
-      customer.lastVisitDate = customerForm.get('lastVisitDate').value;
+      customer.lastVisitDate = this.datePipe.transform(customerForm.get('lastVisitDate').value, 'yyyy-MM-dd HH:mm:ss');
       this.update(customer);
     }
   }
 
   update(customer: CustomerCreationUpdate): void {
-    /*this.customerService
-      .update(customer, this.data.id)
-      .subscribe(() =>
-      Si ha ido MAL cerrar formulario y navegar al detalle del cliente editado
-      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
-      this.dialog.closeAll());*/
+    this.customerService
+      .update(customer, this.data.identificationId)
+      .subscribe(customerUpdated => {
+        this.snackBar.open('Usuario creado correctamente', '', {
+          duration: 3500
+        });
+        this.router.navigate(['/taller/cliente', customerUpdated.identificationId]);
+        this.dialog.closeAll();
+      });
   }
 }

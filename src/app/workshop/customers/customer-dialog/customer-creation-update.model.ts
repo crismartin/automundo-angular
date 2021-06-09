@@ -1,6 +1,6 @@
 export interface CustomerCreationUpdate {
   id?: string;
-  identificationId: string;
+  identificationId?: string;
 //  completeName?: string;
   name: string;
   surName: string;
