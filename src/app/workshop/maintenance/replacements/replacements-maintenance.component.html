@@ -9,6 +9,10 @@
       <mat-label>Nombre repuesto</mat-label>
       <input [(ngModel)]="replacementSearch.name" matInput>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input [(ngModel)]="replacementSearch.description" matInput>
+    </mat-form-field>
     <button (click)="search()" mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
