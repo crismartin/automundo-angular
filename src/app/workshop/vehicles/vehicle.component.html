@@ -16,16 +16,16 @@
         <mat-grid-tile><label>{{vehicleModel.yearRelease}}</label></mat-grid-tile>
         <mat-grid-tile><strong>Tipo de Propietario:</strong></mat-grid-tile>
         <mat-grid-tile><label>{{vehicleModel.ownerType.name}}</label></mat-grid-tile>
-        <div *ngIf="vehicleModel.ownerType.referenceId === '2'" >
-          <mat-grid-tile><strong>Tipo de Propietario:</strong></mat-grid-tile>
-          <mat-grid-tile><label>{{vehicleModel.ownerType.name}}</label></mat-grid-tile>
+        <div *ngIf="vehicleModel.ownerType.reference === '2'" >
+          <mat-grid-tile><strong>Número:</strong></mat-grid-tile>
+          <mat-grid-tile><label>{{vehicleModel.ownerNumber}}</label></mat-grid-tile>
         </div>
       </mat-grid-list>
       <mat-grid-list cols="6" rowHeight="6:1">
         <mat-grid-tile><strong>Fecha de registro:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{vehicleModel.registerDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.registerDate | date: 'dd/MM/yyyy HH:mm'}}</label></mat-grid-tile>
         <mat-grid-tile><strong>Fecha de última visita:</strong></mat-grid-tile>
-        <mat-grid-tile><label>{{vehicleModel.lastViewDate | date: 'dd/MM/yyyy'}}</label></mat-grid-tile>
+        <mat-grid-tile><label>{{vehicleModel.lastViewDate | date: 'dd/MM/yyyy HH:mm'}}</label></mat-grid-tile>
       </mat-grid-list>
     </div>
     <br/>

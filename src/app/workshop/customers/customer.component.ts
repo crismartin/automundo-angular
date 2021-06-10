@@ -55,7 +55,7 @@ export class CustomerComponent implements OnInit {
   }
 
   detailsVehicle(vehicle: Vehicle): void {
-    this.router.navigate(['/taller/vehicle', vehicle.referenceId]);
+    this.router.navigate(['/taller/vehicle', vehicle.reference]);
   }
 
   updateVehicle(vehicleItem: VehicleItem): void {

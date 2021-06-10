@@ -2,7 +2,7 @@ import {OwnerType} from './owner-type';
 import {Revision} from './revision';
 
 export interface Vehicle {
-  referenceId?: string;
+  reference?: string;
   plate: string;
   bin: string;
   model: string;

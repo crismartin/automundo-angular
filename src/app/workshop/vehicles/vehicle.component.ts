@@ -15,29 +15,28 @@ import {ReplacementsService} from '../replacements/replacements-service';
   templateUrl: './vehicle.component.html',
   styleUrls: ['./vehicle.component.css']
 })
-export class VehicleComponent {
-  vehicleModel: Vehicle;
+export class VehicleComponent implements OnInit {
+  vehicleModel: any = {};
   titleRevisions = 'Historial de revisiones';
   revisions = of([]);
 
   constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute,
               private revisionService: RevisionService, private dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
       const idVehicle = params.get('id');
-      this.search(idVehicle);
+      this.vehicleService.search(idVehicle)
+        .subscribe(vehicleSearched => {
+          this.vehicleModel = vehicleSearched;
+          this.searchRevisions();
+        });
     });
   }
 
-  search(referenceId: string): void {
-    this.vehicleService.search(referenceId)
-      .subscribe(vehicleSearched => {
-        this.vehicleModel = vehicleSearched;
-        this.searchRevisions();
-      });
-  }
-
   searchRevisions(): void{
-    this.revisions = this.revisionService.search(this.vehicleModel.referenceId);
+    this.revisions = this.revisionService.search(this.vehicleModel.reference);
   }
 
   createRevision(): void {

@@ -26,7 +26,7 @@ export class VehicleDialogComponent {
     this.oldVehicle = !data;
 
     this.vehicleModel = data ? {
-      referenceId: data.referenceId,
+      reference: data.reference,
       plate: data.plate,
       bin: data.bin,
       model: data.model,
@@ -57,12 +57,12 @@ export class VehicleDialogComponent {
     }
 
     const vehicle: Vehicle = {
-      referenceId: vehicleForm.get('referenceId').value,
+      reference: vehicleForm.get('referenceId').value,
       plate: vehicleForm.get('plate').value,
       bin: vehicleForm.get('bin').value,
       model: vehicleForm.get('model').value,
       yearRelease: vehicleForm.get('yearRelease').value,
-      ownerType: {referenceId: vehicleForm.get('ownerType').value}
+      ownerType: {reference: vehicleForm.get('ownerType').value}
     };
 
     if (this.inCreation) {
@@ -102,12 +102,12 @@ function templateNewVehicle(): any{
 
 function templateFormVehicle(vehicle: Vehicle): FormGroup{
   return new FormGroup({
-    referenceId: new FormControl({value: vehicle.referenceId, disabled: true},
+    referenceId: new FormControl({value: vehicle.reference, disabled: true},
       [Validators.required, Validators.maxLength(7)]),
     plate: new FormControl(vehicle.plate, [Validators.required, Validators.maxLength(7)]),
     bin: new FormControl(vehicle.bin, [Validators.required, Validators.maxLength(7)]),
     model: new FormControl(vehicle.model, [Validators.maxLength(50)]),
     yearRelease: new FormControl(vehicle.yearRelease, [Validators.maxLength(4), Validators.pattern('[0-9]+')]),
-    ownerType: new FormControl(vehicle.ownerType.referenceId, [Validators.required]),
+    ownerType: new FormControl(vehicle.ownerType.reference, [Validators.required]),
   });
 }
