@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 import {Replacement} from './replacement.model';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {Customer} from '../../shared/services/models/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +46,10 @@ export class ReplacementService {
     /*return this.httpService
       .delete(EndPoints.REPLACEMENTS + '/' + reference);*/
     return of();
+  }
+
+  create(replacement: Replacement): Observable<Replacement> {
+    return this.httpService
+      .post(EndPoints.REPLACEMENTS, replacement);
   }
 }

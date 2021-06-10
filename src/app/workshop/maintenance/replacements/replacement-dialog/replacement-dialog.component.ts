@@ -17,18 +17,19 @@ export class ReplacementDialogComponent implements OnInit {
   inCreation: boolean;
   data: Replacement;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: Replacement, private dialog: MatDialog, private replacementService: ReplacementService, private snackBar: MatSnackBar) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: Replacement, private dialog: MatDialog,
+              private replacementService: ReplacementService, private snackBar: MatSnackBar) {
     this.title = data ? 'Actualizar Repuesto' : 'Crear Repuesto';
     this.inCreation = !data;
     this.data = data;
 
     this.replacementForm = data ? new FormGroup({
-      reference: new FormControl({value: data.reference, disabled: true}, [Validators.required, Validators.maxLength(6)]),
+      reference: new FormControl({value: data.reference, disabled: true}, [Validators.required, Validators.maxLength(10)]),
       name: new FormControl(data.name, [Validators.required, Validators.maxLength(30)]),
       price: new FormControl(data.price, [Validators.required]),
       description: new FormControl(data.description, [Validators.maxLength(200)]),
     }) : new FormGroup({
-      reference: new FormControl('', [Validators.required, Validators.maxLength(6)]),
+      reference: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       price: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.maxLength(200)])
@@ -39,12 +40,14 @@ export class ReplacementDialogComponent implements OnInit {
   }
 
   create(replacement: Replacement): void {
-    /*this.customerService
-      .create(customer)
-      .subscribe(() =>
-      Si ha ido MAL cerrar formulario y navegar al detalle del cliente creado
-      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
-      this.dialog.closeAll());*/
+    this.replacementService
+      .create(replacement)
+      .subscribe(replacementCreated => {
+        this.snackBar.open('Repuesto creado correctamente', '', {
+          duration: 3500
+        });
+        this.dialog.closeAll();
+      });
   }
 
   hasError(controlName: string, errorName: string): boolean {
