@@ -32,10 +32,9 @@ export class ReplacementService {
   constructor(private httpService: HttpService) { }
 
   search(replacementSearch: ReplacementSearch): Observable<Replacement[]> {
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(replacementSearch)
-      .get(EndPoints.REPLACEMENTS + ReplacementService.SEARCH);*/
-    return of(this.replacements);
+      .get(EndPoints.REPLACEMENTS + ReplacementService.SEARCH);
   }
 
   read(reference: string): Observable<Replacement> {
