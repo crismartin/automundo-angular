@@ -63,7 +63,7 @@ export class VehicleService {
 
   searchVehiclesByIdentificationCustomer(identificationId: string): Observable<VehicleItem[]> {
     return this.httpService
-      .get(EndPoints.CUSTOMERS + '/' + identificationId + '/vehicles');
+      .get(EndPoints.VEHICLES + '/customer/' + identificationId);
   }
 
   search(idVehicle: string): Observable<Vehicle>{
