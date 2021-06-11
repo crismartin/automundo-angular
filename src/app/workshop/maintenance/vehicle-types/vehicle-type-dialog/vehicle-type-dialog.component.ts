@@ -73,12 +73,14 @@ export class VehicleTypeDialogComponent implements OnInit {
   }
 
   update(vehicleType: VehicleType): void {
-    /*this.replacementService
-      .update(vehicleType, this.data.id)
-      .subscribe(() =>
-      Si ha ido MAL cerrar formulario y navegar al detalle del cliente editado
-      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
-      this.dialog.closeAll());*/
+    this.vehicleTypeService
+      .update(vehicleType, this.data.reference)
+      .subscribe(vehicleTypeUpdated => {
+        this.snackBar.open('Tipo de vehículo editado correctamente', '', {
+          duration: 3500
+        });
+        this.dialog.closeAll();
+      });
   }
 
 }
