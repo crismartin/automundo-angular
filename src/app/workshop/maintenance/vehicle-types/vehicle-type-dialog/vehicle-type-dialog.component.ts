@@ -1,10 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Replacement} from '../../replacements/replacement.model';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
-import {ReplacementService} from '../../replacements/replacement.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {VehicleType} from '../vehicle-type.model';
+import {VehicleTypeService} from '../vehicle-type.service';
 
 @Component({
   selector: 'app-vehicle-type-dialog',
@@ -19,18 +18,18 @@ export class VehicleTypeDialogComponent implements OnInit {
   data: VehicleType;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: VehicleType, private dialog: MatDialog,
-              private replacementService: ReplacementService, private snackBar: MatSnackBar) {
+              private vehicleTypeService: VehicleTypeService, private snackBar: MatSnackBar) {
 
     this.title = data ? 'Actualizar Tipo de vehículo' : 'Crear Tipo de vehículo';
     this.inCreation = !data;
     this.data = data;
 
     this.vehicleTypeForm = data ? new FormGroup({
-      reference: new FormControl({value: data.reference, disabled: true}, [Validators.required, Validators.maxLength(6)]),
+      reference: new FormControl({value: data.reference, disabled: true}, [Validators.required, Validators.maxLength(10)]),
       name: new FormControl(data.name, [Validators.required, Validators.maxLength(30)]),
       description: new FormControl(data.description, [Validators.maxLength(200)]),
     }) : new FormGroup({
-      reference: new FormControl('', [Validators.required, Validators.maxLength(6)]),
+      reference: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
       description: new FormControl('', [Validators.maxLength(200)])
     });
@@ -40,12 +39,14 @@ export class VehicleTypeDialogComponent implements OnInit {
   }
 
   create(vehicleType: VehicleType): void {
-    /*this.replacementService
-      .create(customer)
-      .subscribe(() =>
-      Si ha ido MAL cerrar formulario y navegar al detalle del cliente creado
-      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
-      this.dialog.closeAll());*/
+    this.vehicleTypeService
+      .create(vehicleType)
+      .subscribe(vehicleTypeCreated => {
+        this.snackBar.open('Tipo de vehículo creado correctamente', '', {
+          duration: 3500
+        });
+        this.dialog.closeAll();
+      });
   }
 
   hasError(controlName: string, errorName: string): boolean {

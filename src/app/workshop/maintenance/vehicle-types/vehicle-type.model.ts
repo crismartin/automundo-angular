@@ -1,5 +1,5 @@
 export interface VehicleType {
-  reference: string;
+  reference?: string;
   name: string;
   description?: string;
 }
