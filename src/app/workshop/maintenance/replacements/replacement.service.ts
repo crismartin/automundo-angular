@@ -10,23 +10,6 @@ import {EndPoints} from '@shared/end-points';
 })
 export class ReplacementService {
   private static SEARCH = '/search';
-  private replacements: Replacement[] = [{
-    reference: '111111',
-    name: 'Repuesto1',
-    price: 11,
-    description: 'Este repuesto vale para coches'
-  },{
-    reference: '222222',
-    name: 'Repuesto2',
-    price: 22.5,
-    description: 'Este repuesto vale para coches 2'
-  },{
-    reference: '333333',
-    name: 'Repuesto3',
-    price: 23.5,
-    description: 'Este repuesto vale para coches 3'
-  },
-  ];
 
   constructor(private httpService: HttpService) { }
 
@@ -42,9 +25,8 @@ export class ReplacementService {
   }
 
   delete(reference: string): Observable<void> {
-    /*return this.httpService
-      .delete(EndPoints.REPLACEMENTS + '/' + reference);*/
-    return of();
+    return this.httpService
+      .delete(EndPoints.REPLACEMENTS + '/' + reference);
   }
 
   create(replacement: Replacement): Observable<Replacement> {
