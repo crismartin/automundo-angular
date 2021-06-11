@@ -3,6 +3,7 @@ import {Observable, of} from 'rxjs';
 import {VehicleType} from './vehicle-type.model';
 import {VehicleTypeSearch} from './vehicle-type-search.model';
 import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,9 @@ export class VehicleTypeService {
   constructor(private httpService: HttpService) { }
 
   search(vehicleTypeSearch: VehicleTypeSearch): Observable<VehicleType[]> {
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(vehicleTypeSearch)
-      .get(EndPoints.VEHICLE_TYPES + VehicleTypeService.SEARCH);*/
-    return of(this.vehicleTypes);
+      .get(EndPoints.VEHICLE_TYPES + VehicleTypeService.SEARCH);
   }
 
   read(reference: string): Observable<VehicleType> {
