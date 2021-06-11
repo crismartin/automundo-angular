@@ -6,6 +6,7 @@ import {Replacement} from './replacement.model';
 import {MatDialog} from '@angular/material/dialog';
 import {ReplacementDialogComponent} from './replacement-dialog/replacement-dialog.component';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-replacements-maintenance',
@@ -18,7 +19,7 @@ export class ReplacementsMaintenanceComponent implements OnInit {
   replacements = of([]);
   title = 'Repuestos';
 
-  constructor(private replacementService: ReplacementService, private dialog: MatDialog) {
+  constructor(private replacementService: ReplacementService, private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.resetSearch();
   }
 
@@ -48,7 +49,12 @@ export class ReplacementsMaintenanceComponent implements OnInit {
       result => {
         if (result) {
           this.replacementService.delete(replacement.reference).subscribe(
-            () => this.search()
+            () => {
+              this.snackBar.open('Repuesto eliminado correctamente', '', {
+                duration: 3500
+              });
+              this.search();
+            }
           );
         }
       }
