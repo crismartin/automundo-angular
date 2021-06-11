@@ -12,7 +12,7 @@ import {EndPoints} from '@shared/end-points';
 export class VehicleService {
 
   ownerType: OwnerType = {
-    referenceId: '1',
+    reference: '1',
     name: 'Particular'
   };
 
@@ -38,7 +38,7 @@ export class VehicleService {
 
   vehicles: Vehicle[] = [
     {
-      referenceId: '1',
+      reference: '1',
       plate: 'JB-007',
       bin: 'ID-007',
       model: 'Aston Martin DBS Superleggera',
@@ -49,7 +49,7 @@ export class VehicleService {
       customer: 'Rochel Barlomento Santilla'
     },
     {
-      referenceId: '2',
+      reference: '2',
       plate: 'EM-A37',
       bin: 'ID-A37',
       model: 'Tesla Model S',
@@ -66,8 +66,10 @@ export class VehicleService {
       .get(EndPoints.VEHICLES + '/customer/' + identificationId);
   }
 
-  search(idVehicle: string): Observable<Vehicle>{
-    return of(this.vehicles.find(vehicleArray => vehicleArray.referenceId === idVehicle));
+  search(reference: string): Observable<Vehicle>{
+    // return of(this.vehicles.find(vehicleArray => vehicleArray.referenceId === idVehicle));
+    return this.httpService
+      .get(EndPoints.VEHICLES + '/' + reference);
   }
 
   create(vehicle: Vehicle): Observable<Vehicle> {
@@ -83,17 +85,17 @@ export class VehicleService {
   update(vehicleUpdated: Vehicle): Observable<Vehicle> {
     console.log(vehicleUpdated);
     vehicleUpdated.lastViewDate = new Date();
-    const vehicleItem = findInArray(this.vehiclesItem, vehicleUpdated.referenceId);
+    const vehicleItem = findInArray(this.vehiclesItem, vehicleUpdated.reference);
     updateItem(vehicleItem, vehicleUpdated);
-    const vehicle = findInArray(this.vehicles, vehicleUpdated.referenceId);
+    const vehicle = findInArray(this.vehicles, vehicleUpdated.reference);
     updateItem(vehicle, vehicleUpdated);
     vehicle.ownerType = vehicleUpdated.ownerType;
     return of(vehicleUpdated);
   }
 
   delete(vehicle: Vehicle): Observable<void> {
-    const indexItem = this.vehiclesItem.findIndex(vehicleArray => vehicleArray.referenceId === vehicle.referenceId);
-    const index = this.vehicles.findIndex(vehicleArray => vehicleArray.referenceId === vehicle.referenceId);
+    const indexItem = this.vehiclesItem.findIndex(vehicleArray => vehicleArray.referenceId === vehicle.reference);
+    const index = this.vehicles.findIndex(vehicleArray => vehicleArray.reference === vehicle.reference);
     this.vehicles.splice(index, 1);
     this.vehiclesItem.splice(indexItem, 1);
     return of(null);

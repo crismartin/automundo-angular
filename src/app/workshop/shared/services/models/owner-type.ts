@@ -1,5 +1,5 @@
 export interface OwnerType {
-  referenceId?: string;
+  reference?: string;
   name?: string;
   numberId?: string;
 }
