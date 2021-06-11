@@ -37,9 +37,8 @@ export class ReplacementService {
   }
 
   read(reference: string): Observable<Replacement> {
-    /*return this.httpService
-      .get(EndPoints.REPLACEMENTS + '/' + reference);*/
-    return of(this.replacements[0]);
+    return this.httpService
+      .get(EndPoints.REPLACEMENTS + '/' + reference);
   }
 
   delete(reference: string): Observable<void> {
@@ -51,5 +50,10 @@ export class ReplacementService {
   create(replacement: Replacement): Observable<Replacement> {
     return this.httpService
       .post(EndPoints.REPLACEMENTS, replacement);
+  }
+
+  update(replacement: Replacement, reference: string): Observable<Replacement> {
+    return this.httpService
+      .put(EndPoints.REPLACEMENTS + '/' + reference, replacement);
   }
 }

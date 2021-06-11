@@ -75,12 +75,14 @@ export class ReplacementDialogComponent implements OnInit {
   }
 
   update(replacement: Replacement): void {
-    /*this.customerService
-      .update(customer, this.data.id)
-      .subscribe(() =>
-      Si ha ido MAL cerrar formulario y navegar al detalle del cliente editado
-      Si hay ido MAL mostrar snackbar error y no cerrar el formulario
-      this.dialog.closeAll());*/
+    this.replacementService
+      .update(replacement, this.data.reference)
+      .subscribe(customerUpdated => {
+        this.snackBar.open('Repuesto editado correctamente', '', {
+          duration: 3500
+        });
+        this.dialog.closeAll();
+      });
   }
 
 }
