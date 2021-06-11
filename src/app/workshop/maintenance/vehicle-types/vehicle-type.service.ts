@@ -44,4 +44,9 @@ export class VehicleTypeService {
       .delete(EndPoints.VEHICLE_TYPES + '/' + reference);*/
     return of();
   }
+
+  create(vehicleType: VehicleType): Observable<VehicleType> {
+    return this.httpService
+      .post(EndPoints.VEHICLE_TYPES, vehicleType);
+  }
 }
