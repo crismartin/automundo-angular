@@ -1,5 +1,5 @@
 export interface Replacement {
-  reference: string;
+  reference?: string;
   name: string;
   price: number;
   description?: string;

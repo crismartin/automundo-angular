@@ -26,7 +26,6 @@ export class CustomerDialogComponent implements OnInit {
     this.title = data ? 'Actualizar Cliente' : 'Crear Cliente';
     this.inCreation = !data;
     this.data = data;
-    console.log(this.data);
 
     this.customerForm = data ? new FormGroup({
       identificationId: new FormControl({value: data.identificationId, disabled: true}, [Validators.required, Validators.maxLength(10)]),
