@@ -36,10 +36,9 @@ export class TechnicianService {
   constructor(private httpService: HttpService) { }
 
   search(technicianSearch: TechnicianSearch): Observable<Technician[]> {
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(technicianSearch)
-      .get(EndPoints.TECHNICIANS + TechnicianService.SEARCH);*/
-    return of(TechnicianService.technicians);
+      .get(EndPoints.TECHNICIANS + TechnicianService.SEARCH);
   }
 
   read(identificationId: string): Observable<Technician> {

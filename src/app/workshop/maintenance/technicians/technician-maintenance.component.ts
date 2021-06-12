@@ -24,6 +24,7 @@ export class TechnicianMaintenanceComponent implements OnInit {
   }
 
   search(): void {
+    console.log(this.technicianSearch);
     this.technicians = this.technicianService.search(this.technicianSearch);
   }
 
