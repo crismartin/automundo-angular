@@ -48,9 +48,8 @@ export class TechnicianService {
   }
 
   create(technician: Technician): Observable<Technician> {
-    /*return this.httpService
-      .post(EndPoints.TECHNICIANS, technician);*/
-    return of(this.technician);
+    return this.httpService
+      .post(EndPoints.TECHNICIANS, technician);
   }
 
   update(technician: Technician, identificationId: string): Observable<Technician> {
