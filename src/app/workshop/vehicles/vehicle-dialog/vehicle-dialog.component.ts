@@ -25,7 +25,7 @@ export class VehicleDialogComponent {
     this.title = data ? 'Editar vehículo' : 'Crear vehículo';
     this.oldVehicle = !data;
 
-    this.vehicleModel = data ? {
+    this.vehicleModel = data.reference ? {
       reference: data.reference,
       plate: data.plate,
       bin: data.bin,
@@ -36,11 +36,11 @@ export class VehicleDialogComponent {
       lastViewDate: data.lastViewDate,
       customer: data.customer,
       vehicleType: data.vehicleType
-    } : templateNewVehicle();
+    } : templateNewVehicle(data.identificationCustomer);
 
     this.vehicleForm = templateFormVehicle(this.vehicleModel);
 
-    this.inCreation = !data;
+    this.inCreation = !data.reference;
 
   }
 
@@ -62,10 +62,12 @@ export class VehicleDialogComponent {
       bin: vehicleForm.get('bin').value,
       model: vehicleForm.get('model').value,
       yearRelease: vehicleForm.get('yearRelease').value,
-      vehicleType: {reference: vehicleForm.get('ownerType').value}
+      vehicleType: {reference: vehicleForm.get('vehicleType').value},
+      identificationCustomer: this.vehicleModel.identificationCustomer
     };
 
     if (this.inCreation) {
+      console.log(vehicle);
       this.create(vehicle);
     }else{
       this.update(vehicle);
@@ -84,7 +86,7 @@ export class VehicleDialogComponent {
   }
 }
 
-function templateNewVehicle(): any{
+function templateNewVehicle(identificacionCustomer: string): any{
   return {
     referenceId: '',
     plate: '',
@@ -94,9 +96,10 @@ function templateNewVehicle(): any{
     registerDate: '',
     lastViewDate: '',
     customer: '',
-    ownerType: {
-      referenceId: ''
-    }
+    vehicleType: {
+      reference: ''
+    },
+    identificationCustomer: identificacionCustomer
   };
 }
 
@@ -108,6 +111,6 @@ function templateFormVehicle(vehicle: Vehicle): FormGroup{
     bin: new FormControl(vehicle.bin, [Validators.required, Validators.maxLength(7)]),
     model: new FormControl(vehicle.model, [Validators.maxLength(50)]),
     yearRelease: new FormControl(vehicle.yearRelease, [Validators.maxLength(4), Validators.pattern('[0-9]+')]),
-    ownerType: new FormControl(vehicle.vehicleType.reference, [Validators.required]),
+    vehicleType: new FormControl(vehicle.vehicleType.reference, [Validators.required]),
   });
 }

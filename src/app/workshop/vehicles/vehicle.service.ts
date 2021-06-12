@@ -67,19 +67,13 @@ export class VehicleService {
   }
 
   search(reference: string): Observable<Vehicle>{
-    // return of(this.vehicles.find(vehicleArray => vehicleArray.referenceId === idVehicle));
     return this.httpService
       .get(EndPoints.VEHICLES + '/' + reference);
   }
 
   create(vehicle: Vehicle): Observable<Vehicle> {
-    console.log(vehicle);
-    vehicle.registerDate = new Date();
-    vehicle.lastViewDate = new Date();
-    const vehicleItem = toVehicleItem(vehicle);
-    this.vehiclesItem.push(vehicleItem);
-    this.vehicles.push(vehicle);
-    return of(vehicle);
+    return this.httpService
+      .post(EndPoints.VEHICLES, vehicle);
   }
 
   update(vehicleUpdated: Vehicle): Observable<Vehicle> {
