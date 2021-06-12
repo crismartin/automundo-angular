@@ -20,4 +20,8 @@ export class MaintenanceComponent implements OnInit {
   vehicleTypes(): void {
     this.router.navigate(['taller', 'mantenimiento', 'tipos-vehiculo']);
   }
+
+  technicians(): void {
+    this.router.navigate(['taller', 'mantenimiento', 'tecnicos']);
+  }
 }
