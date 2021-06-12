@@ -12,6 +12,7 @@ import {VehicleComponent} from './workshop/vehicles/vehicle.component';
 import {VehicleTypesMaintenanceComponent} from './workshop/maintenance/vehicle-types/vehicle-types-maintenance.component';
 import {RoleGuardService} from '@core/role-guard.service';
 import {Role} from '@core/role.model';
+import {TechnicianMaintenanceComponent} from './workshop/maintenance/technicians/technician-maintenance.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'inicio'},
@@ -28,6 +29,7 @@ const routes: Routes = [
           {path: '', component: MaintenanceComponent},
           {path: 'repuestos', component: ReplacementsMaintenanceComponent},
           {path: 'tipos-vehiculo', component: VehicleTypesMaintenanceComponent},
+          {path: 'tecnicos', component: TechnicianMaintenanceComponent},
         ]},
       {path: 'cliente/:id', component: CustomerComponent},
       {path: 'vehicle/:id', component: VehicleComponent}

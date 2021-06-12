@@ -1,4 +1,4 @@
 export interface Technician {
-  referenceId?: string;
+  referenceId?: string; // TODO change name to identificationId
   completeName?: string;
 }

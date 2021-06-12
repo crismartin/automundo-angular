@@ -15,6 +15,8 @@ import { VehicleTypeDialogComponent } from './maintenance/vehicle-types/vehicle-
 import { RevisionDialogComponent } from './revisions/revision-dialog/revision-dialog.component';
 import {NgxMatDatetimePickerModule} from '@angular-material-components/datetime-picker';
 import { ReplacementsComponent } from './replacements/replacements.component';
+import { TechnicianMaintenanceComponent } from './maintenance/technicians/technician-maintenance.component';
+import { TechnicianDialogComponent } from './maintenance/technicians/technician-dialog/technician-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { ReplacementsComponent } from './replacements/replacements.component';
     VehicleTypeDialogComponent,
     RevisionDialogComponent,
     ReplacementsComponent,
+    TechnicianMaintenanceComponent,
+    TechnicianDialogComponent,
   ],
   imports: [
     CommonModule,
