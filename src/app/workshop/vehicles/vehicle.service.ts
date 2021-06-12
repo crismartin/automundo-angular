@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Vehicle} from '../shared/services/models/vehicle.model';
-import {OwnerType} from '../shared/services/models/owner-type';
+import {VehicleType} from '../shared/services/models/vehicle-type';
 import {VehicleItem} from '../customers/vehicle-item';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
@@ -11,7 +11,7 @@ import {EndPoints} from '@shared/end-points';
 })
 export class VehicleService {
 
-  ownerType: OwnerType = {
+  vehicleType: VehicleType = {
     reference: '1',
     name: 'Particular'
   };
@@ -45,7 +45,7 @@ export class VehicleService {
       yearRelease: 2020,
       registerDate: new Date(),
       lastViewDate: new Date(),
-      ownerType: this.ownerType,
+      vehicleType: this.vehicleType,
       customer: 'Rochel Barlomento Santilla'
     },
     {
@@ -56,7 +56,7 @@ export class VehicleService {
       yearRelease: 2020,
       registerDate: new Date(),
       lastViewDate: new Date(),
-      ownerType: this.ownerType,
+      vehicleType: this.vehicleType,
       customer: 'Rochel Barlomento Santilla'
     }];
   constructor(private httpService: HttpService) { }
@@ -89,7 +89,7 @@ export class VehicleService {
     updateItem(vehicleItem, vehicleUpdated);
     const vehicle = findInArray(this.vehicles, vehicleUpdated.reference);
     updateItem(vehicle, vehicleUpdated);
-    vehicle.ownerType = vehicleUpdated.ownerType;
+    vehicle.vehicleType = vehicleUpdated.vehicleType;
     return of(vehicleUpdated);
   }
 

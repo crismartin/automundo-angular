@@ -35,7 +35,7 @@ export class VehicleDialogComponent {
       registerDate: data.registerDate,
       lastViewDate: data.lastViewDate,
       customer: data.customer,
-      ownerType: data.ownerType
+      vehicleType: data.vehicleType
     } : templateNewVehicle();
 
     this.vehicleForm = templateFormVehicle(this.vehicleModel);
@@ -62,7 +62,7 @@ export class VehicleDialogComponent {
       bin: vehicleForm.get('bin').value,
       model: vehicleForm.get('model').value,
       yearRelease: vehicleForm.get('yearRelease').value,
-      ownerType: {reference: vehicleForm.get('ownerType').value}
+      vehicleType: {reference: vehicleForm.get('ownerType').value}
     };
 
     if (this.inCreation) {
@@ -108,6 +108,6 @@ function templateFormVehicle(vehicle: Vehicle): FormGroup{
     bin: new FormControl(vehicle.bin, [Validators.required, Validators.maxLength(7)]),
     model: new FormControl(vehicle.model, [Validators.maxLength(50)]),
     yearRelease: new FormControl(vehicle.yearRelease, [Validators.maxLength(4), Validators.pattern('[0-9]+')]),
-    ownerType: new FormControl(vehicle.ownerType.reference, [Validators.required]),
+    ownerType: new FormControl(vehicle.vehicleType.reference, [Validators.required]),
   });
 }
