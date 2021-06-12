@@ -31,7 +31,9 @@ export class ReplacementsMaintenanceComponent implements OnInit {
   }
 
   resetSearch(): void {
-    this.replacementSearch = {};
+    this.replacementSearch = {
+      active: true
+    };
   }
 
   update(replacement: Replacement): void {
@@ -40,25 +42,6 @@ export class ReplacementsMaintenanceComponent implements OnInit {
         .open(ReplacementDialogComponent, {data: replacementReaded})
         .afterClosed()
         .subscribe(() => this.search()));
-  }
-
-  delete(replacement: Replacement): void {
-    const dialogTitle = 'Eliminar';
-    const dialogText = '¿Realmente desea eliminar el repuesto: ' + replacement.name + '?';
-    this.dialog.open(CancelYesDialogComponent, {data: {title: dialogTitle, text: dialogText}}).afterClosed().subscribe(
-      result => {
-        if (result) {
-          this.replacementService.delete(replacement.reference).subscribe(
-            () => {
-              this.snackBar.open('Repuesto eliminado correctamente', '', {
-                duration: 3500
-              });
-              this.search();
-            }
-          );
-        }
-      }
-    );
   }
 
   newReplacement(): void {

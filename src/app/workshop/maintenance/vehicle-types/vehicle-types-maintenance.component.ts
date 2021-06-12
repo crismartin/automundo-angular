@@ -31,7 +31,9 @@ export class VehicleTypesMaintenanceComponent implements OnInit {
   }
 
   resetSearch(): void {
-    this.vehicleTypeSearch = {};
+    this.vehicleTypeSearch = {
+      active: true
+    };
   }
 
   update(vehicleType: VehicleType): void {
@@ -40,20 +42,6 @@ export class VehicleTypesMaintenanceComponent implements OnInit {
         .open(VehicleTypeDialogComponent, {data: vehicleTypeReaded})
         .afterClosed()
         .subscribe(() => this.search()));
-  }
-
-  delete(vehicleType: VehicleType): void {
-    const dialogTitle = 'Eliminar';
-    const dialogText = '¿Realmente desea eliminar el tipo de vehículo: ' + vehicleType.name + '?';
-    this.dialog.open(CancelYesDialogComponent, {data: {title: dialogTitle, text: dialogText}}).afterClosed().subscribe(
-      result => {
-        if (result) {
-          this.vehicleTypeService.delete(vehicleType.reference).subscribe(
-            () => this.search()
-          );
-        }
-      }
-    );
   }
 
   newVehicleType(): void {

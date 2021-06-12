@@ -13,6 +13,7 @@
       <mat-label>Descripción</mat-label>
       <input [(ngModel)]="replacementSearch.description" matInput>
     </mat-form-field>
+    <mat-slide-toggle [(ngModel)]="replacementSearch.active">Activos</mat-slide-toggle>
     <button (click)="search()" mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
@@ -22,8 +23,8 @@
   </mat-card-content>
 </mat-card>
 
-<app-crud (update)="update($event)" (delete)="delete($event)"
-          [data]="replacements" [createAction]="false" [readAction]="false" [title]="title"></app-crud>
+<app-crud (update)="update($event)" [data]="replacements"
+          [createAction]="false" [readAction]="false" [deleteAction]="false" [title]="title"></app-crud>
 
 <div class="create-replacement-button-container">
   <button (click)="newReplacement()" mat-fab color="warn">
