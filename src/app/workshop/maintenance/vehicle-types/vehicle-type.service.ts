@@ -25,12 +25,6 @@ export class VehicleTypeService {
       .get(EndPoints.VEHICLE_TYPES + '/' + reference);
   }
 
-  delete(reference: string): Observable<void> {
-    /*return this.httpService
-      .delete(EndPoints.VEHICLE_TYPES + '/' + reference);*/
-    return of();
-  }
-
   create(vehicleType: VehicleType): Observable<VehicleType> {
     return this.httpService
       .post(EndPoints.VEHICLE_TYPES, vehicleType);

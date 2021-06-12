@@ -13,6 +13,7 @@
       <mat-label>Descripción</mat-label>
       <input [(ngModel)]="vehicleTypeSearch.description" matInput>
     </mat-form-field>
+    <mat-slide-toggle [(ngModel)]="vehicleTypeSearch.active">Activos</mat-slide-toggle>
     <button (click)="search()" mat-icon-button>
       <mat-icon>search</mat-icon>
     </button>
@@ -22,8 +23,7 @@
   </mat-card-content>
 </mat-card>
 
-<app-crud (update)="update($event)" (delete)="delete($event)"
-          [data]="vehicleTypes" [createAction]="false" [readAction]="false" [title]="title"></app-crud>
+<app-crud (update)="update($event)" [data]="vehicleTypes" [deleteAction]="false" [createAction]="false" [readAction]="false" [title]="title"></app-crud>
 
 <div class="create-replacement-button-container">
   <button (click)="newVehicleType()" mat-fab color="warn">

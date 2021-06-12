@@ -2,8 +2,8 @@
   <h1 class="header">MANTENIMIENTO</h1>
   <div>
     <mat-grid-list cols="3" rowHeight="1:1">
-      <mat-grid-tile [colspan]="1" [rowspan]="1" (click)="replacements()">
-        <mat-card class="dashboard-card card-replacements">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card card-replacements" (click)="replacements()">
           <mat-card-content class="dashboard-card-content">
             <div>
               <mat-icon>home_repair_service</mat-icon>
@@ -13,7 +13,7 @@
         </mat-card>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card card-technicians">
+        <mat-card class="dashboard-card card-technicians" (click)="technicians()">
           <mat-card-content class="dashboard-card-content">
             <div>
               <mat-icon>engineering</mat-icon>
@@ -22,8 +22,8 @@
           </mat-card-content>
         </mat-card>
       </mat-grid-tile>
-      <mat-grid-tile [colspan]="1" [rowspan]="1" (click)="vehicleTypes()">
-        <mat-card class="dashboard-card card-vehicle-types">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-card class="dashboard-card card-vehicle-types" (click)="vehicleTypes()">
           <mat-card-content class="dashboard-card-content">
             <div>
               <mat-icon>car_repair</mat-icon>

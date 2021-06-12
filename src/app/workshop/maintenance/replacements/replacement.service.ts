@@ -24,11 +24,6 @@ export class ReplacementService {
       .get(EndPoints.REPLACEMENTS + '/' + reference);
   }
 
-  delete(reference: string): Observable<void> {
-    return this.httpService
-      .delete(EndPoints.REPLACEMENTS + '/' + reference);
-  }
-
   create(replacement: Replacement): Observable<Replacement> {
     return this.httpService
       .post(EndPoints.REPLACEMENTS, replacement);
