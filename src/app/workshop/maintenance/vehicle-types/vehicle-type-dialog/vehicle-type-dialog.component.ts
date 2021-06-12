@@ -28,6 +28,7 @@ export class VehicleTypeDialogComponent implements OnInit {
       reference: new FormControl({value: data.reference, disabled: true}, [Validators.required, Validators.maxLength(10)]),
       name: new FormControl(data.name, [Validators.required, Validators.maxLength(30)]),
       description: new FormControl(data.description, [Validators.maxLength(200)]),
+      active: new FormControl(data.active),
     }) : new FormGroup({
       reference: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
@@ -63,7 +64,8 @@ export class VehicleTypeDialogComponent implements OnInit {
     const vehicleType: VehicleType = {
       reference: vehicleTypeForm.get('reference').value,
       name: vehicleTypeForm.get('name').value,
-      description: vehicleTypeForm.get('description').value || null
+      description: vehicleTypeForm.get('description').value || null,
+      active: this.inCreation ? true : vehicleTypeForm.get('active').value
     };
     if (this.inCreation) {
       this.create(vehicleType);

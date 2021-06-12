@@ -12,6 +12,7 @@ import {UppercaseWords} from '@shared/pipes/UppercaseWordsPipe';
 
 import {CrudComponent} from '@shared/components/crud.component';
 import {FooterComponent} from '@shared/components/footer.component';
+import {ActiveElementPipe} from '@shared/pipes/ActiveElementPipe';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {FooterComponent} from '@shared/components/footer.component';
     FooterComponent,
     LoginDialogComponent,
     UppercaseWords,
+    ActiveElementPipe
   ],
   exports: [
     CancelYesDialogComponent,
@@ -39,6 +41,7 @@ import {FooterComponent} from '@shared/components/footer.component';
     LoginDialogComponent,
     MaterialModule,
     UppercaseWords,
+    ActiveElementPipe
   ],
   entryComponents: [
     CancelYesDialogComponent,

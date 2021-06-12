@@ -30,6 +30,7 @@
       <mat-hint align="end">{{description.value?.length || 0}}/200</mat-hint>
       <mat-error *ngIf="hasError('description', 'maxlength')">Has escrito más de 200 caracteres</mat-error>
     </mat-form-field>
+    <mat-slide-toggle *ngIf="!inCreation" formControlName="active">Activo</mat-slide-toggle>
   </div>
   <mat-dialog-actions>
     <button cdkFocusInitial mat-dialog-close mat-raised-button>Cancelar</button>

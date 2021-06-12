@@ -28,6 +28,7 @@ export class ReplacementDialogComponent implements OnInit {
       name: new FormControl(data.name, [Validators.required, Validators.maxLength(30)]),
       price: new FormControl(data.price, [Validators.required]),
       description: new FormControl(data.description, [Validators.maxLength(200)]),
+      active: new FormControl(data.active),
     }) : new FormGroup({
       reference: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(30)]),
@@ -65,7 +66,8 @@ export class ReplacementDialogComponent implements OnInit {
       reference: replacementForm.get('reference').value,
       name: replacementForm.get('name').value,
       price: replacementForm.get('price').value,
-      description: replacementForm.get('description').value || null
+      description: replacementForm.get('description').value || null,
+      active: this.inCreation ? true : replacementForm.get('active').value
     };
     if (this.inCreation) {
       this.create(replacement);
