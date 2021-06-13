@@ -85,7 +85,7 @@ export class TechnicianDialogComponent implements OnInit {
   update(technician: Technician): void {
     this.technicianService
       .update(technician, this.data.identificationId)
-      .subscribe(customerUpdated => {
+      .subscribe(technicianUpdated => {
         this.snackBar.open('Técnico editado correctamente', '', {
           duration: 3500
         });

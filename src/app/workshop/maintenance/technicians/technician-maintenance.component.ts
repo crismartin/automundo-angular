@@ -24,7 +24,6 @@ export class TechnicianMaintenanceComponent implements OnInit {
   }
 
   search(): void {
-    console.log(this.technicianSearch);
     this.technicians = this.technicianService.search(this.technicianSearch);
   }
 
@@ -35,7 +34,6 @@ export class TechnicianMaintenanceComponent implements OnInit {
   }
 
   update(technician: Technician): void {
-    // return of(TechnicianService.technicians[0]);
     this.technicianService.read(technician.identificationId)
       .subscribe(technicianReaded => this.dialog
         .open(TechnicianDialogComponent, {data: technicianReaded})

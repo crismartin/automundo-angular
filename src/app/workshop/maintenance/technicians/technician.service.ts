@@ -10,28 +10,6 @@ import {TechnicianSearch} from './technician-search.model';
 })
 export class TechnicianService {
   private static SEARCH = '/search';
-  public static technicians: Technician[] = [{
-    identificationId: '11111111-T',
-    ssNumber: '0000000001',
-    completeName: 'Juan López Mármol',
-    registrationDate: new Date(),
-    leaveDate: new Date(),
-    mobile: '675489302',
-    active: true
-  }];
-
-  public technician: Technician = {
-    identificationId: '11111111-T',
-    ssNumber: '0000000001',
-    completeName: 'Juan López Mármol',
-    registrationDate: new Date(),
-    leaveDate: new Date(),
-    mobile: '675489302',
-    name: 'Juan',
-    surName: 'López',
-    secondSurName: 'Mármol',
-    active: true
-  };
 
   constructor(private httpService: HttpService) { }
 
@@ -42,9 +20,8 @@ export class TechnicianService {
   }
 
   read(identificationId: string): Observable<Technician> {
-    /*return this.httpService
-      .get(EndPoints.TECHNICIANS + '/' + identificationId);*/
-    return of(this.technician);
+    return this.httpService
+      .get(EndPoints.TECHNICIANS + '/' + identificationId);
   }
 
   create(technician: Technician): Observable<Technician> {
@@ -53,8 +30,7 @@ export class TechnicianService {
   }
 
   update(technician: Technician, identificationId: string): Observable<Technician> {
-    /*return this.httpService
-      .put(EndPoints.TECHNICIANS + '/' + identificationId, technician);*/
-    return of(this.technician);
+    return this.httpService
+      .put(EndPoints.TECHNICIANS + '/' + identificationId, technician);
   }
 }
