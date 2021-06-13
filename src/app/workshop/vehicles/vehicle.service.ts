@@ -95,6 +95,10 @@ export class VehicleService {
     return of(null);
   }
 
+  searchVehicleTypes(): Observable<VehicleType[]> {
+    return this.httpService
+      .get(EndPoints.VEHICLE_TYPES);
+  }
 }
 
 function updateItem(vehicle: any, vehicleUpdated: any): void{

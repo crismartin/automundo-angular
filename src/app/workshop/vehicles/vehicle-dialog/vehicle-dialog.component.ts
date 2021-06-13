@@ -5,6 +5,8 @@ import {VehicleService} from '../vehicle.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {CustomerCreationUpdate} from '../../customers/customer-dialog/customer-creation-update.model';
+import {VehicleType} from '../../shared/services/models/vehicle-type';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -19,6 +21,7 @@ export class VehicleDialogComponent {
   oldVehicle = false;
   vehicleForm: FormGroup;
   inCreation: boolean;
+  vehicleTypes: VehicleType[];
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Vehicle, private vechicleService: VehicleService,
               private snackBar: MatSnackBar, private dialog: MatDialogRef<VehicleDialogComponent>) {
@@ -42,6 +45,8 @@ export class VehicleDialogComponent {
 
     this.inCreation = !data.reference;
 
+    this.vechicleService.searchVehicleTypes()
+      .subscribe(vehicleTypes => this.vehicleTypes = vehicleTypes );
   }
 
   hasError(name: string, errorName: string): boolean {
