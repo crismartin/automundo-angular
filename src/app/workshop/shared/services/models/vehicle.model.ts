@@ -12,6 +12,7 @@ export interface Vehicle {
   registerDate?: Date;
   lastViewDate?: Date;
   vehicleType?: VehicleType;
+  typeNumber?: string;
   customer?: string;
   revisions?: Revision[];
 }

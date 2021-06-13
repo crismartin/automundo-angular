@@ -25,8 +25,9 @@ export class VehicleDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Vehicle, private vechicleService: VehicleService,
               private snackBar: MatSnackBar, private dialog: MatDialogRef<VehicleDialogComponent>) {
-    this.title = data ? 'Editar vehículo' : 'Crear vehículo';
-    this.oldVehicle = !data;
+    this.title = data.reference ? 'Editar vehículo' : 'Crear vehículo';
+    this.oldVehicle = !data.reference;
+    this.inCreation = !data.reference;
 
     this.vehicleModel = data.reference ? {
       reference: data.reference,
@@ -38,12 +39,12 @@ export class VehicleDialogComponent {
       registerDate: data.registerDate,
       lastViewDate: data.lastViewDate,
       customer: data.customer,
-      vehicleType: data.vehicleType
+      vehicleType: data.vehicleType,
+      typeNumber: data.typeNumber,
+      identificationCustomer: data.identificationCustomer
     } : templateNewVehicle(data.identificationCustomer);
 
     this.vehicleForm = templateFormVehicle(this.vehicleModel);
-
-    this.inCreation = !data.reference;
 
     this.vechicleService.searchVehicleTypes()
       .subscribe(vehicleTypes => this.vehicleTypes = vehicleTypes );
@@ -68,6 +69,7 @@ export class VehicleDialogComponent {
       model: vehicleForm.get('model').value,
       yearRelease: vehicleForm.get('yearRelease').value,
       vehicleType: {reference: vehicleForm.get('vehicleType').value},
+      typeNumber: vehicleForm.get('typeNumber').value,
       identificationCustomer: this.vehicleModel.identificationCustomer
     };
 
@@ -104,6 +106,7 @@ function templateNewVehicle(identificacionCustomer: string): any{
     vehicleType: {
       reference: ''
     },
+    typeNumber: '',
     identificationCustomer: identificacionCustomer
   };
 }
@@ -117,5 +120,6 @@ function templateFormVehicle(vehicle: Vehicle): FormGroup{
     model: new FormControl(vehicle.model, [Validators.maxLength(50)]),
     yearRelease: new FormControl(vehicle.yearRelease, [Validators.maxLength(4), Validators.pattern('[0-9]+')]),
     vehicleType: new FormControl(vehicle.vehicleType.reference, [Validators.required]),
+    typeNumber: new FormControl(vehicle.typeNumber, [Validators.maxLength(10)])
   });
 }

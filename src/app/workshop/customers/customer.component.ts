@@ -64,7 +64,7 @@ export class CustomerComponent implements OnInit {
 
   updateVehicle(vehicleItem: VehicleItem): void {
     console.log(vehicleItem);
-    this.vehicleService.search(vehicleItem.referenceId)
+    this.vehicleService.search(vehicleItem.reference)
       .subscribe((vehicle: Vehicle) =>
         this.dialog
           .open(VehicleDialogComponent, {data: vehicle})
