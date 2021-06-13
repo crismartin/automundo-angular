@@ -1,5 +1,5 @@
 export interface VehicleItem {
-  referenceId?: string;
+  reference?: string;
   plate: string;
   bin: string;
   model: string;

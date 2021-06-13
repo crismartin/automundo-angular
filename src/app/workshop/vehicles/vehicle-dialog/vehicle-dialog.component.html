@@ -37,11 +37,17 @@
       <mat-error *ngIf="hasError('yearRelease', 'pattern')">Formato incorrecto</mat-error>
     </mat-form-field>
     <mat-form-field class="full-width">
-      <mat-label>Propietario</mat-label>
+      <mat-label>Tipo Vehículo</mat-label>
       <mat-select #vehicleType  formControlName="vehicleType">
         <mat-option value="">-- Elija una opción --</mat-option>
         <mat-option *ngFor="let option of vehicleTypes" [value]="option.reference">{{ option.name }}</mat-option>
       </mat-select>
+    </mat-form-field>
+    <mat-form-field class="full-width" *ngIf="vehicleType.value === '11111111' ">
+      <mat-label>Número</mat-label>
+      <input matInput #typeNumber type="text" formControlName="typeNumber" maxlength="10">
+      <mat-hint align="end">{{typeNumber.value?.length || 0}}/10</mat-hint>
+      <mat-error *ngIf="hasError('typeNumber', 'maxlength')">Has escrito más de 10 caracteres</mat-error>
     </mat-form-field>
   </div>
   <mat-dialog-actions>
