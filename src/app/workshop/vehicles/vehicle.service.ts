@@ -18,7 +18,7 @@ export class VehicleService {
 
   vehiclesItem: VehicleItem[] = [
     {
-      referenceId: '1',
+      reference: '1',
       plate: 'JB-007',
       bin: 'ID-007',
       model: 'Aston Martin DBS Superleggera',
@@ -27,7 +27,7 @@ export class VehicleService {
       lastViewDate: new Date()
     },
     {
-      referenceId: '2',
+      reference: '2',
       plate: 'EM-A37',
       bin: 'ID-A37',
       model: 'Tesla Model S',
@@ -77,6 +77,7 @@ export class VehicleService {
   }
 
   update(vehicleUpdated: Vehicle): Observable<Vehicle> {
+    /*
     console.log(vehicleUpdated);
     vehicleUpdated.lastViewDate = new Date();
     const vehicleItem = findInArray(this.vehiclesItem, vehicleUpdated.reference);
@@ -85,16 +86,23 @@ export class VehicleService {
     updateItem(vehicle, vehicleUpdated);
     vehicle.vehicleType = vehicleUpdated.vehicleType;
     return of(vehicleUpdated);
+    */
+    return this.httpService
+      .put(EndPoints.VEHICLES + '/' + vehicleUpdated.reference, vehicleUpdated);
   }
 
   delete(vehicle: Vehicle): Observable<void> {
-    const indexItem = this.vehiclesItem.findIndex(vehicleArray => vehicleArray.referenceId === vehicle.reference);
+    const indexItem = this.vehiclesItem.findIndex(vehicleArray => vehicleArray.reference === vehicle.reference);
     const index = this.vehicles.findIndex(vehicleArray => vehicleArray.reference === vehicle.reference);
     this.vehicles.splice(index, 1);
     this.vehiclesItem.splice(indexItem, 1);
     return of(null);
   }
 
+  searchVehicleTypes(): Observable<VehicleType[]> {
+    return this.httpService
+      .get(EndPoints.VEHICLE_TYPES);
+  }
 }
 
 function updateItem(vehicle: any, vehicleUpdated: any): void{
