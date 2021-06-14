@@ -9,7 +9,6 @@ import {environment} from '@env';
 export class FooterComponent {
   version: string;
   profile: string;
-  backEndUser: string;
   backEndCore: string;
 
   constructor() {
@@ -17,5 +16,4 @@ export class FooterComponent {
     this.profile = environment.production ? 'Prod' : 'Dev';
     this.backEndCore = environment.REST_CORE;
   }
-
 }
