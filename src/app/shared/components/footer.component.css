@@ -1,5 +1,61 @@
-.mat-grid-list {
-  justify-content: space-between;
-
+.footer {
+  padding: 0px;
+  font-size: 13px;
+  background: #485cc1;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  color: whitesmoke;
 }
 
+.footer-cols {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 8px;
+}
+
+.footer-logo{
+  width: 50%;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  flex: 1;
+}
+
+.automundo-logo {
+  height: 50px;
+}
+
+.automundo-text{
+  margin-left: 10px !important;
+}
+
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.copyright a {
+  margin-left: 8px;
+  color: whitesmoke !important;
+}
+
+.info-container {
+  width: 33%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin: 0px;
+}
+
+.back-icon-container {
+  margin-right: 8px;
+}
