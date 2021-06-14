@@ -80,7 +80,7 @@ export class RevisionService {
 
   revisions: Revision[] = [
     {
-      referenceId: '1',
+      reference: '1',
       diagnostic: 'Todo roto, todo roto!',
       registerDate: new Date(),
       departureDate: new Date(),
@@ -106,24 +106,17 @@ export class RevisionService {
   }
 
   create(revision: Revision): Observable<Revision> {
-    revision.referenceId = getIdGenerate();
-    revision.status = {
-      code: 1,
-      description: 'POR_CONFIRMAR'
-    };
-    this.revisions.push(revision);
-    const revisionItem = toRevisionItem(revision);
-    this.revisionsItems.push(revisionItem);
-    return of(revisionItem);
+    return this.httpService
+      .post(EndPoints.REVISIONS, revision);
   }
 
   read(referenceId: string): Observable<Revision> {
-    const revision = this.revisions.find(revisionArray => revisionArray.referenceId === referenceId);
+    const revision = this.revisions.find(revisionArray => revisionArray.reference === referenceId);
     return of(revision);
   }
 
   update(revisionUpdated: Revision): Observable<RevisionItem> {
-    const revision = this.revisions.find(revisionArray => revisionArray.referenceId === revisionUpdated.referenceId);
+    const revision = this.revisions.find(revisionArray => revisionArray.reference === revisionUpdated.reference);
     revision.diagnostic = revisionUpdated.diagnostic;
     revision.registerDate = revisionUpdated.registerDate;
     revision.initialKilometers = revisionUpdated.initialKilometers;
@@ -134,7 +127,7 @@ export class RevisionService {
     revision.workDescription = revisionUpdated.workDescription;
     revision.status = this.statusRevision.find(statusArray => String(statusArray.code) === String(revisionUpdated.status.code));
 
-    const revisionItem = this.revisionsItems.find(revisionArray => revisionArray.reference === revisionUpdated.referenceId);
+    const revisionItem = this.revisionsItems.find(revisionArray => revisionArray.reference === revisionUpdated.reference);
     revisionItem.technicianName = revision.technician.completeName;
     revisionItem.cost = revision.cost;
     revisionItem.departureDate = revision.departureDate;
@@ -149,7 +142,7 @@ export class RevisionService {
     const indexItem = this.revisionsItems.findIndex(revItem => revItem.reference === referenceId);
     this.revisionsItems.splice(indexItem, 1);
 
-    const index = this.revisions.findIndex(rev => rev.referenceId === referenceId);
+    const index = this.revisions.findIndex(rev => rev.reference === referenceId);
     this.revisions.splice(index, 1);
 
     return of(null);
@@ -162,7 +155,7 @@ function getIdGenerate(): string {
 
 function toRevisionItem(revision: Revision): RevisionItem {
   const revisionItem: RevisionItem = {
-    reference: revision.referenceId,
+    reference: revision.reference,
     diagnostic: revision.diagnostic,
     registerDate: revision.registerDate,
     departureDate: revision.departureDate,
