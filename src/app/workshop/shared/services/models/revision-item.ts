@@ -1,7 +1,7 @@
 import {Technician} from './technician';
 
 export interface RevisionItem {
-  referenceId?: string;
+  reference?: string;
   diagnostic?: string;
   registerDate?: Date;
   departureDate?: Date;

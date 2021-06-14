@@ -6,6 +6,8 @@ import {RevisionItem} from '../shared/services/models/revision-item';
 import {Technician} from '../shared/services/models/technician';
 import {StatusRevision} from '../shared/services/models/status-revision';
 import {ReplacementUsedItem} from '../shared/services/models/replacement-used-item';
+import {EndPoints} from '@shared/end-points';
+import {HttpService} from '@core/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ import {ReplacementUsedItem} from '../shared/services/models/replacement-used-it
 export class RevisionService {
   revisionsItems: RevisionItem[] = [
     {
-      referenceId: '1',
+      reference: '1',
       diagnostic: 'Todo roto, todo roto!',
       registerDate: new Date(),
       departureDate: new Date(),
@@ -75,7 +77,7 @@ export class RevisionService {
       price: 60
     }
   ];
-  
+
   revisions: Revision[] = [
     {
       referenceId: '1',
@@ -96,10 +98,11 @@ export class RevisionService {
     }
   ];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
-  search(idVehicle: string): Observable<RevisionItem[]> {
-    return of(this.revisionsItems);
+  search(vehicleReference: string): Observable<RevisionItem[]> {
+    return this.httpService
+      .get(EndPoints.REVISIONS + '/vehicle/' + vehicleReference);
   }
 
   create(revision: Revision): Observable<Revision> {
@@ -131,7 +134,7 @@ export class RevisionService {
     revision.workDescription = revisionUpdated.workDescription;
     revision.status = this.statusRevision.find(statusArray => String(statusArray.code) === String(revisionUpdated.status.code));
 
-    const revisionItem = this.revisionsItems.find(revisionArray => revisionArray.referenceId === revisionUpdated.referenceId);
+    const revisionItem = this.revisionsItems.find(revisionArray => revisionArray.reference === revisionUpdated.referenceId);
     revisionItem.technicianName = revision.technician.completeName;
     revisionItem.cost = revision.cost;
     revisionItem.departureDate = revision.departureDate;
@@ -143,7 +146,7 @@ export class RevisionService {
 
   delete(referenceId: string): Observable<any> {
     console.log(referenceId);
-    const indexItem = this.revisionsItems.findIndex(revItem => revItem.referenceId === referenceId);
+    const indexItem = this.revisionsItems.findIndex(revItem => revItem.reference === referenceId);
     this.revisionsItems.splice(indexItem, 1);
 
     const index = this.revisions.findIndex(rev => rev.referenceId === referenceId);
@@ -159,7 +162,7 @@ function getIdGenerate(): string {
 
 function toRevisionItem(revision: Revision): RevisionItem {
   const revisionItem: RevisionItem = {
-    referenceId: revision.referenceId,
+    reference: revision.referenceId,
     diagnostic: revision.diagnostic,
     registerDate: revision.registerDate,
     departureDate: revision.departureDate,
