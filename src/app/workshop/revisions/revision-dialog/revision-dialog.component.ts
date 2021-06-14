@@ -20,11 +20,11 @@ export class RevisionDialogComponent {
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Revision, private snackBar: MatSnackBar, private dialog: MatDialogRef<RevisionDialogComponent>,
               private revisionService: RevisionService, private replacementsService: ReplacementsService) {
-    this.title = data ? 'Editar Revisión' : 'Crear Revisión';
-    this.inCreation = !data;
+    this.title = data.reference ? 'Editar Revisión' : 'Crear Revisión';
+    this.inCreation = !data.reference;
 
-    this.revisionModel = data ? {
-      referenceId: data.referenceId,
+    this.revisionModel = data.reference ? {
+      reference: data.reference,
       diagnostic: data.diagnostic,
       registerDate: data.registerDate,
       initialKilometers: data.initialKilometers,
@@ -34,10 +34,11 @@ export class RevisionDialogComponent {
       departureKilometers: data.departureKilometers,
       workDescription: data.workDescription,
       cost: data.cost,
-      status: data.status
+      status: data.status,
+      vehicleReference: data.vehicleReference
 
     } : {
-      referenceId: '',
+      reference: '',
       diagnostic: '',
       registerDate: null,
       initialKilometers: null,
@@ -53,6 +54,7 @@ export class RevisionDialogComponent {
         id: '',
         code: null
       },
+      vehicleReference: data.vehicleReference
     };
 
     this.replacementsService.updateDataFromTable(data ? data.replacementsUsed : []);
@@ -70,7 +72,7 @@ export class RevisionDialogComponent {
     }
 
     const revision: Revision = {
-      referenceId: revisionForm.get('referenceId').value,
+      reference: revisionForm.get('referenceId').value,
       diagnostic: revisionForm.get('diagnostic').value,
       registerDate: revisionForm.get('registerDate').value,
       initialKilometers: revisionForm.get('initialKilometers').value,
@@ -83,7 +85,8 @@ export class RevisionDialogComponent {
       workDescription: revisionForm.get('workDescription').value,
       status: {
         code: revisionForm.get('status').value
-      }
+      },
+      vehicleReference: this.revisionModel.vehicleReference
     };
     console.log('antes de pillar las revisiones');
     console.log(revision);
@@ -133,7 +136,7 @@ export class RevisionDialogComponent {
 
 function templateForm(revision: Revision): FormGroup {
   return new FormGroup({
-    referenceId: new FormControl({value: revision.referenceId, disabled: true}),
+    referenceId: new FormControl({value: revision.reference, disabled: true}),
     diagnostic: new FormControl(revision.diagnostic, [Validators.required, Validators.maxLength(50)]),
     registerDate: new FormControl(revision.registerDate, [Validators.required, Validators.maxLength(16)]),
     initialKilometers: new FormControl(revision.initialKilometers, [Validators.maxLength(6), Validators.pattern('[0-9]+')]),

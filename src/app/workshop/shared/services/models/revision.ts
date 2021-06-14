@@ -3,7 +3,7 @@ import {StatusRevision} from './status-revision';
 import {ReplacementUsedItem} from './replacement-used-item';
 
 export interface Revision {
-  referenceId?: string;
+  reference?: string;
   diagnostic?: string;
   registerDate?: Date;
   initialKilometers?: number;
@@ -15,4 +15,5 @@ export interface Revision {
   workDescription?: string;
   status?: StatusRevision;
   replacementsUsed?: ReplacementUsedItem[];
+  vehicleReference?: string;
 }

@@ -48,7 +48,10 @@ export class VehicleComponent implements OnInit {
       .open(RevisionDialogComponent, {
         height: '500px',
         width: '800px',
-        disableClose: true
+        disableClose: true,
+        data: {
+          vehicleReference: this.vehicleModel.reference
+        }
       })
       .afterClosed()
       .subscribe(() => this.searchRevisions());
@@ -59,7 +62,7 @@ export class VehicleComponent implements OnInit {
   }
 
   updateRevision(revision: Revision): void {
-    this.revisionService.read(revision.referenceId)
+    this.revisionService.read(revision.reference)
       .subscribe(revisionSearched => this.dialog.open(RevisionDialogComponent, {
             height: '500px',
             width: '800px',
@@ -72,7 +75,7 @@ export class VehicleComponent implements OnInit {
   }
 
   deleteRevision(revision: Revision): void {
-    this.revisionService.delete(revision.referenceId)
+    this.revisionService.delete(revision.reference)
       .subscribe(() => this.searchRevisions());
   }
 }
