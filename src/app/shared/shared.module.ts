@@ -8,11 +8,10 @@ import {MaterialModule} from '@shared/material.module';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 import {LoginDialogComponent} from '@shared/dialogs/login-dialog.component';
 
-import {UppercaseWords} from '@shared/pipes/UppercaseWordsPipe';
-
 import {CrudComponent} from '@shared/components/crud.component';
 import {FooterComponent} from '@shared/components/footer.component';
 import {ActiveElementPipe} from '@shared/pipes/ActiveElementPipe';
+import {ColumnHeadersPipe} from '@shared/pipes/ColumnHeadersPipe';
 
 @NgModule({
   imports: [
@@ -27,8 +26,8 @@ import {ActiveElementPipe} from '@shared/pipes/ActiveElementPipe';
     CrudComponent,
     FooterComponent,
     LoginDialogComponent,
-    UppercaseWords,
-    ActiveElementPipe
+    ActiveElementPipe,
+    ColumnHeadersPipe
   ],
   exports: [
     CancelYesDialogComponent,
@@ -40,8 +39,8 @@ import {ActiveElementPipe} from '@shared/pipes/ActiveElementPipe';
     FooterComponent,
     LoginDialogComponent,
     MaterialModule,
-    UppercaseWords,
-    ActiveElementPipe
+    ActiveElementPipe,
+    ColumnHeadersPipe
   ],
   entryComponents: [
     CancelYesDialogComponent,
