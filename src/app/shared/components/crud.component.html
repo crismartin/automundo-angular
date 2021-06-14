@@ -6,7 +6,7 @@
       <mat-row *matRowDef="let item; columns: columnsHeader"></mat-row>
       <!-- Dynamic column -->
       <ng-container *ngFor="let def of columns" [matColumnDef]="def">
-        <mat-header-cell *matHeaderCellDef>{{ def | uppercaseWords }}</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef>{{ def | columnHeaders }}</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row[def] | activeElement }}</mat-cell>
       </ng-container>
       <ng-container matColumnDef="actions">
