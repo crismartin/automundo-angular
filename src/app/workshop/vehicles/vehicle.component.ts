@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Vehicle} from '../shared/services/models/vehicle.model';
 import {VehicleService} from './vehicle.service';
 import {ActivatedRoute} from '@angular/router';
 import {Observable, of} from 'rxjs';
 import {RevisionService} from '../revisions/revision.service';
 import {MatDialog} from '@angular/material/dialog';
-import {VehicleDialogComponent} from './vehicle-dialog/vehicle-dialog.component';
 import {RevisionDialogComponent} from '../revisions/revision-dialog/revision-dialog.component';
 import {Revision} from '../shared/services/models/revision';
-import {ReplacementsService} from '../replacements/replacements-service';
+import {Vehicle} from '../shared/services/models/vehicle.model';
+
 
 @Component({
   selector: 'app-vehicle',
@@ -16,7 +15,12 @@ import {ReplacementsService} from '../replacements/replacements-service';
   styleUrls: ['./vehicle.component.css']
 })
 export class VehicleComponent implements OnInit {
-  vehicleModel: any = {};
+  vehicleModel: Vehicle = {
+    vehicleType: {
+      reference: '',
+      name: ''
+    }
+  };
   titleRevisions = 'Historial de revisiones';
   revisions = of([]);
 
