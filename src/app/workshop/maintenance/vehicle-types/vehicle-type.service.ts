@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 
-import {VehicleTypeSearch} from './vehicle-type-search.model';
+import {VehicleTypeSearch} from '../../shared/services/models/vehicle-type-search.model';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
 import {VehicleType} from '../../shared/services/models/vehicle-type';

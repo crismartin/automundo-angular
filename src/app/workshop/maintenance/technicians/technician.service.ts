@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {TechnicianSearch} from './technician-search.model';
+import {TechnicianSearch} from '../../shared/services/models/technician-search.model';
 import {Technician} from '../../shared/services/models/technician';
 
 @Injectable({

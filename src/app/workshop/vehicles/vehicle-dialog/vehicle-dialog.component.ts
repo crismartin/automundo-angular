@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {CustomerCreationUpdate} from '../../customers/customer-dialog/customer-creation-update.model';
 import {VehicleType} from '../../shared/services/models/vehicle-type';
 import {Observable} from 'rxjs';
+import {SharedVehicleTypeService} from '../../shared/services/shared.vehicle-type.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class VehicleDialogComponent {
   vehicleTypes: VehicleType[];
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Vehicle, private vechicleService: VehicleService,
-              private snackBar: MatSnackBar, private dialog: MatDialogRef<VehicleDialogComponent>) {
+              private snackBar: MatSnackBar, private dialog: MatDialogRef<VehicleDialogComponent>,
+              private sharedVehicleTypeService: SharedVehicleTypeService) {
     this.title = data.reference ? 'Editar vehículo' : 'Crear vehículo';
     this.oldVehicle = !data.reference;
     this.inCreation = !data.reference;
@@ -46,7 +48,7 @@ export class VehicleDialogComponent {
 
     this.vehicleForm = templateFormVehicle(this.vehicleModel);
 
-    this.vechicleService.searchVehicleTypes()
+    this.sharedVehicleTypeService.search({active: true})
       .subscribe(vehicleTypes => this.vehicleTypes = vehicleTypes );
   }
 

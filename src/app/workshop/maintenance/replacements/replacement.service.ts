@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ReplacementSearch} from './replacement-search.model';
+import {ReplacementSearch} from '../../shared/services/models/replacement-search.model';
 import {Observable, of} from 'rxjs';
 
 import {HttpService} from '@core/http.service';
