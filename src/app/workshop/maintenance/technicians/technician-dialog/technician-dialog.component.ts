@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Technician} from '../technician.model';
+
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {TechnicianService} from '../technician.service';
+import {Technician} from '../../../shared/services/models/technician';
 
 @Component({
   selector: 'app-technician-dialog',

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {of} from 'rxjs';
 import {VehicleTypeSearch} from './vehicle-type-search.model';
 import {MatDialog} from '@angular/material/dialog';
-import {VehicleType} from './vehicle-type.model';
+
 import {VehicleTypeService} from './vehicle-type.service';
 import {VehicleTypeDialogComponent} from './vehicle-type-dialog/vehicle-type-dialog.component';
-import {Replacement} from '../replacements/replacement.model';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {VehicleType} from '../../shared/services/models/vehicle-type';
 
 @Component({
   selector: 'app-vehicle-types-maintenance',

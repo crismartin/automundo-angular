@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Revision} from '../../shared/services/models/revision';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Vehicle} from '../../shared/services/models/vehicle.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RevisionService} from '../revision.service';
 import {ReplacementsService} from '../../replacements/replacements-service';
@@ -43,7 +42,7 @@ export class RevisionDialogComponent {
       registerDate: null,
       initialKilometers: null,
       technician: {
-        referenceId: '',
+        identificationId: '',
       },
       workedHours: null,
       departureDate: null,
@@ -77,7 +76,7 @@ export class RevisionDialogComponent {
       registerDate: revisionForm.get('registerDate').value,
       initialKilometers: revisionForm.get('initialKilometers').value,
       technician: {
-        referenceId: revisionForm.get('technician').value,
+        identificationId: revisionForm.get('technician').value,
       },
       workedHours: revisionForm.get('workedHours').value,
       departureDate: this.checkDepartureDate(revisionForm.get('status').value, revisionForm.get('departureDate').value),
@@ -140,7 +139,7 @@ function templateForm(revision: Revision): FormGroup {
     diagnostic: new FormControl(revision.diagnostic, [Validators.required, Validators.maxLength(50)]),
     registerDate: new FormControl(revision.registerDate, [Validators.required, Validators.maxLength(16)]),
     initialKilometers: new FormControl(revision.initialKilometers, [Validators.maxLength(6), Validators.pattern('[0-9]+')]),
-    technician: new FormControl(revision.technician.referenceId, [Validators.required]),
+    technician: new FormControl(revision.technician.identificationId, [Validators.required]),
     workedHours: new FormControl(revision.workedHours, [Validators.maxLength(5), Validators.pattern('[0-9]+')]),
     departureDate: new FormControl(revision.departureDate, [Validators.maxLength(16)]),
     departureKilometers: new FormControl(revision.departureKilometers, [Validators.maxLength(6), Validators.pattern('[0-9]+')]),

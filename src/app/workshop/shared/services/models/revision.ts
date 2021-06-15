@@ -1,6 +1,7 @@
-import {Technician} from './technician';
+
 import {StatusRevision} from './status-revision';
 import {ReplacementUsedItem} from './replacement-used-item';
+import {Technician} from './technician';
 
 export interface Revision {
   reference?: string;

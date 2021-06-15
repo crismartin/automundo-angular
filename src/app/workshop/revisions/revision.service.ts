@@ -27,11 +27,11 @@ export class RevisionService {
 
   technicians: Technician[] = [
     {
-      referenceId: '1',
+      identificationId: '1',
       completeName: 'Jose Luis Señor'
     },
     {
-      referenceId: '2',
+      identificationId: '2',
       completeName: 'Antonio Perez'
     }
   ];
@@ -61,7 +61,7 @@ export class RevisionService {
       quantity: 1,
       own: true,
       replacement: {
-        referenceId: '1',
+        reference: '1',
         name: 'Manguera de aceite'
       },
       price: 150
@@ -71,7 +71,7 @@ export class RevisionService {
       quantity: 2,
       own: false,
       replacement: {
-        referenceId: '2',
+        reference: '2',
         name: 'Bujía Motor'
       },
       price: 60
@@ -120,7 +120,7 @@ export class RevisionService {
     revision.diagnostic = revisionUpdated.diagnostic;
     revision.registerDate = revisionUpdated.registerDate;
     revision.initialKilometers = revisionUpdated.initialKilometers;
-    revision.technician = this.technicians.find(technician => technician.referenceId === revisionUpdated.technician.referenceId );
+    revision.technician = this.technicians.find(technician => technician.identificationId === revisionUpdated.technician.identificationId );
     revision.workedHours = revisionUpdated.workedHours;
     revision.departureDate = revisionUpdated.departureDate;
     revision.departureKilometers = revisionUpdated.departureKilometers;

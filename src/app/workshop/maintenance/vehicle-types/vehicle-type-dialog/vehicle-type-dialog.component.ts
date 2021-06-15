@@ -2,8 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {VehicleType} from '../vehicle-type.model';
 import {VehicleTypeService} from '../vehicle-type.service';
+import {VehicleType} from '../../../shared/services/models/vehicle-type';
 
 @Component({
   selector: 'app-vehicle-type-dialog',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
-import {Technician} from './technician.model';
 import {TechnicianSearch} from './technician-search.model';
+import {Technician} from '../../shared/services/models/technician';
 
 @Injectable({
   providedIn: 'root'
