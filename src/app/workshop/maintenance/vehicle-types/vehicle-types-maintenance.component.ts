@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {of} from 'rxjs';
-import {VehicleTypeSearch} from './vehicle-type-search.model';
+import {VehicleTypeSearch} from '../../shared/services/models/vehicle-type-search.model';
 import {MatDialog} from '@angular/material/dialog';
 
 import {VehicleTypeService} from './vehicle-type.service';

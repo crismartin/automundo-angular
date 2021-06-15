@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ReplacementSearch} from './replacement-search.model';
+import {ReplacementSearch} from '../../shared/services/models/replacement-search.model';
 import {of} from 'rxjs';
 import {ReplacementService} from './replacement.service';
 

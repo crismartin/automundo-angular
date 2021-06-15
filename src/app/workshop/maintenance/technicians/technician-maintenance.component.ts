@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TechnicianSearch} from './technician-search.model';
+import {TechnicianSearch} from '../../shared/services/models/technician-search.model';
 import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {TechnicianService} from './technician.service';
