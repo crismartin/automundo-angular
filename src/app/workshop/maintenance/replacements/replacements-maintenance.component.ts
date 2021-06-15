@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {ReplacementSearch} from './replacement-search.model';
 import {of} from 'rxjs';
 import {ReplacementService} from './replacement.service';
-import {Replacement} from './replacement.model';
+
 import {MatDialog} from '@angular/material/dialog';
 import {ReplacementDialogComponent} from './replacement-dialog/replacement-dialog.component';
 import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Replacement} from '../../shared/services/models/replacement';
 
 @Component({
   selector: 'app-replacements-maintenance',

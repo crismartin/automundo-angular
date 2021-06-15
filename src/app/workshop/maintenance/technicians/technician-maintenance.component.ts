@@ -3,8 +3,9 @@ import {TechnicianSearch} from './technician-search.model';
 import {Observable, of} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {TechnicianService} from './technician.service';
-import {Technician} from './technician.model';
+
 import {TechnicianDialogComponent} from './technician-dialog/technician-dialog.component';
+import {Technician} from '../../shared/services/models/technician';
 
 @Component({
   selector: 'app-technician-maintenance',

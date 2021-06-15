@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ReplacementSearch} from './replacement-search.model';
 import {Observable, of} from 'rxjs';
-import {Replacement} from './replacement.model';
+
 import {HttpService} from '@core/http.service';
 import {EndPoints} from '@shared/end-points';
+import {Replacement} from '../../shared/services/models/replacement';
 
 @Injectable({
   providedIn: 'root'

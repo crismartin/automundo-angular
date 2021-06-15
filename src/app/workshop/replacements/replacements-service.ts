@@ -7,7 +7,7 @@ let ELEMENTS_DATA: ReplacementUsedItem[] = [
     quantity: 1,
     own: true,
     replacement: {
-      referenceId: '1',
+      reference: '1',
       name: 'Manguera de aceite'
     },
     price: 150
@@ -17,7 +17,7 @@ let ELEMENTS_DATA: ReplacementUsedItem[] = [
     quantity: 2,
     own: false,
     replacement: {
-      referenceId: '2',
+      reference: '2',
       name: 'Bujía Motor'
     },
     price: 60

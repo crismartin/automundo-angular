@@ -2,8 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Replacement} from '../replacement.model';
+
 import {ReplacementService} from '../replacement.service';
+import {Replacement} from '../../../shared/services/models/replacement';
 
 @Component({
   selector: 'app-replacement-dialog',

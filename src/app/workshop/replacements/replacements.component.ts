@@ -30,7 +30,7 @@ export class ReplacementsComponent {
       quantity: null,
       own: false,
       replacement: {
-        referenceId: '',
+        reference: '',
         name: null
       },
       price: null
@@ -76,7 +76,7 @@ export class ReplacementsComponent {
 
   deleteReplacement(replacemementUsed: ReplacementUsedItem): void {
     console.log(replacemementUsed);
-    const indexItem = ELEMENTS_DATA.findIndex(repItem => repItem.replacement.referenceId === replacemementUsed.replacement.referenceId);
+    const indexItem = ELEMENTS_DATA.findIndex(repItem => repItem.replacement.reference === replacemementUsed.replacement.reference);
     ELEMENTS_DATA.splice(indexItem, 1);
     this.refreshTable();
   }
@@ -96,7 +96,7 @@ export class ReplacementsComponent {
       own: replacementUsedForm.get('own').value,
       price: replacementUsedForm.get('price').value,
       replacement: {
-        referenceId: replacementUsedForm.get('replacement').value,
+        reference: replacementUsedForm.get('replacement').value,
         name: this.nameReplacementSelectForm
       }
     };
@@ -108,7 +108,7 @@ export class ReplacementsComponent {
 
   saveReplacement(replacementUsed: ReplacementUsedItem): void {
     const replacementFounded = ELEMENTS_DATA.find(replacementArray =>
-      replacementArray.replacement.referenceId === replacementUsed.replacement.referenceId);
+      replacementArray.replacement.reference === replacementUsed.replacement.reference);
 
     if (replacementFounded !== undefined){
       replacementFounded.replacement = replacementUsed.replacement;
@@ -140,6 +140,6 @@ function templateForm(replacementUsed: ReplacementUsedItem): FormGroup {
     own: new FormControl(replacementUsed.own),
     price: new FormControl(replacementUsed.price, [Validators.maxLength(10), Validators.pattern('[0-9]+')]),
     discount: new FormControl(replacementUsed.discount, [Validators.maxLength(3), Validators.pattern('[0-9]+')]),
-    replacement: new FormControl(String(replacementUsed.replacement.referenceId), [Validators.required])
+    replacement: new FormControl(String(replacementUsed.replacement.reference), [Validators.required])
   });
 }

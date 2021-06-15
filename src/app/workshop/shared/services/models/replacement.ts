@@ -1,6 +1,7 @@
 export interface Replacement {
-  referenceId?: string;
+  reference?: string;
   name?: string;
-  priceRecomended?: string;
+  price?: number;
   description?: string;
+  active?: boolean;
 }
