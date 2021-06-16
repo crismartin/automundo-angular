@@ -145,7 +145,7 @@ function templateForm(replacementUsed: ReplacementUsed): FormGroup {
     referenceId: new FormControl({value: replacementUsed.reference, disabled: true}),
     quantity: new FormControl(replacementUsed.quantity, [Validators.maxLength(3), Validators.pattern('[0-9]+')]),
     own: new FormControl(replacementUsed.own),
-    price: new FormControl(replacementUsed.price, [Validators.maxLength(10), Validators.pattern('[0-9]+')]),
+    price: new FormControl(replacementUsed.price, [Validators.maxLength(10), Validators.pattern('^[1-9]\\d*(\\.\\d+)?$')]),
     discount: new FormControl(replacementUsed.discount, [Validators.maxLength(3), Validators.pattern('[0-9]+')]),
     replacement: new FormControl(String(replacementUsed.replacement.reference), [Validators.required])
   });

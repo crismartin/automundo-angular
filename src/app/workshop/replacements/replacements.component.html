@@ -79,7 +79,7 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Precio Final ($)</mat-label>
-        <input matInput #price type="text" rows="8" cols="50" formControlName="price" maxlength="10">
+        <input matInput #price type="text" rows="8" cols="50" pattern="^[1-9]\d*(\.\d+)?$" formControlName="price" maxlength="10">
         <mat-hint align="end">{{price.value?.length || 0}}/10</mat-hint>
         <mat-error *ngIf="hasError('price', 'maxlength')">Has escrito más de 10 caracteres</mat-error>
       </mat-form-field>

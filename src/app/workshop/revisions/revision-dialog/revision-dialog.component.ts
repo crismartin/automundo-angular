@@ -69,6 +69,7 @@ export class RevisionDialogComponent {
 
   onSubmit(revisionForm: FormGroup): void  {
     console.log('submit');
+    console.log(this.revisionForm.value);
 
     if (!revisionForm.valid) {
       this.snackBar.open('Hay datos inválidos en el formulario', 'Error', {
@@ -77,20 +78,22 @@ export class RevisionDialogComponent {
       return;
     }
 
+    const formData = this.revisionForm.value;
+
     const revision: Revision = {
-      reference: revisionForm.get('referenceId').value,
-      diagnostic: revisionForm.get('diagnostic').value,
-      registerDate: revisionForm.get('registerDate').value,
-      initialKilometers: revisionForm.get('initialKilometers').value,
+      reference: this.revisionModel.reference,
+      diagnostic: formData.diagnostic,
+      registerDate: formData.registerDate,
+      initialKilometers: formData.initialKilometers,
       technician: {
-        identificationId: revisionForm.get('technician').value,
+        identificationId: formData.technician,
       },
-      workedHours: revisionForm.get('workedHours').value,
-      departureDate: this.checkDepartureDate(revisionForm.get('status').value, revisionForm.get('departureDate').value),
-      departureKilometers: revisionForm.get('departureKilometers').value,
-      workDescription: revisionForm.get('workDescription').value,
+      workedHours: formData.workedHours,
+      departureDate: formData.departureDate,
+      departureKilometers: formData.departureKilometers,
+      workDescription: formData.workDescription,
       status: {
-        code: revisionForm.get('status').value
+        code: formData.status
       },
       vehicleReference: this.revisionModel.vehicleReference
     };
@@ -122,7 +125,7 @@ export class RevisionDialogComponent {
   }
 
   isFinished(): boolean {
-    return this.revisionForm.get('status').value === '4';
+    return this.revisionForm.get('status').value === 'FINALIZADO';
   }
 
   create(revision: Revision): void {
@@ -151,6 +154,6 @@ function templateForm(revision: Revision): FormGroup {
     departureDate: new FormControl(revision.departureDate, [Validators.maxLength(16)]),
     departureKilometers: new FormControl(revision.departureKilometers, [Validators.maxLength(6), Validators.pattern('[0-9]+')]),
     workDescription: new FormControl(revision.workDescription, [Validators.maxLength(500)]),
-    status: new FormControl(String(revision.status.code), [Validators.required])
+    status: new FormControl(String(revision.status), [Validators.required])
   });
 }
