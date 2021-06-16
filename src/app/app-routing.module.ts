@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'inicio', component: HomeComponent},
   {path: 'taller',
     canActivate: [RoleGuardService],
-    data: {roles: [Role.ADMIN, Role.OPERATOR]},
+    data: {roles: [Role.ADMIN]},
     children: [
       {path: '', component: WorkshopComponent},
       {path: 'buscar-vehiculos', component: FinderVehiclesComponent},
