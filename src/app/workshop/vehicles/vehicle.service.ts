@@ -77,16 +77,6 @@ export class VehicleService {
   }
 
   update(vehicleUpdated: Vehicle): Observable<Vehicle> {
-    /*
-    console.log(vehicleUpdated);
-    vehicleUpdated.lastViewDate = new Date();
-    const vehicleItem = findInArray(this.vehiclesItem, vehicleUpdated.reference);
-    updateItem(vehicleItem, vehicleUpdated);
-    const vehicle = findInArray(this.vehicles, vehicleUpdated.reference);
-    updateItem(vehicle, vehicleUpdated);
-    vehicle.vehicleType = vehicleUpdated.vehicleType;
-    return of(vehicleUpdated);
-    */
     return this.httpService
       .put(EndPoints.VEHICLES + '/' + vehicleUpdated.reference, vehicleUpdated);
   }

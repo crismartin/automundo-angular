@@ -124,9 +124,9 @@ export class RevisionService {
           .post(EndPoints.REVISIONS + '/replacements-used', revision);
   }
 
-  read(referenceId: string): Observable<Revision> {
-    const revision = this.revisions.find(revisionArray => revisionArray.reference === referenceId);
-    return of(revision);
+  read(reference: string): Observable<Revision> {
+    return this.httpService
+      .get(EndPoints.REVISIONS + '/' + reference);
   }
 
   update(revisionUpdated: Revision): Observable<RevisionItem> {
