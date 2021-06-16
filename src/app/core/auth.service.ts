@@ -23,11 +23,6 @@ export class AuthService {
     return this.httpService.authBasic(userName, password)
       .post(AuthService.END_POINT)
       .pipe(
-        map(userT => {
-          this.user = userT;
-          return this.user;
-      }))
-      /*.pipe(
         map(jsonToken => {
           const jwtHelper = new JwtHelperService();
           this.user = jsonToken;
@@ -36,9 +31,7 @@ export class AuthService {
           this.user.role = jwtHelper.decodeToken(jsonToken.token).role;
           return this.user;
         })
-      )*/
-      ;
-
+      );
   }
 
   logout(): void {
@@ -47,8 +40,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-
-    return this.user != null /*&& !(new JwtHelperService().isTokenExpired(this.user.token))*/;
+    return this.user != null && !(new JwtHelperService().isTokenExpired(this.user.token));
   }
 
   hasRoles(roles: Role[]): boolean {
@@ -57,10 +49,6 @@ export class AuthService {
 
   isAdmin(): boolean {
     return this.hasRoles([Role.ADMIN]);
-  }
-
-  isOperator(): boolean {
-    return this.hasRoles([Role.OPERATOR]);
   }
 
   getUserName(): string {
