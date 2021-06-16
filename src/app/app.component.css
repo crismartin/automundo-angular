@@ -9,3 +9,21 @@
 .mat-dialog-actions {
   justify-content: flex-end;
 }
+
+.automundo-logo {
+  height: 50px;
+}
+
+.toolbar-element {
+  width: 33%;
+  display: flex;
+}
+
+.app-title {
+  justify-content: center;
+}
+
+.login-container {
+  justify-content: flex-end;
+}
+
