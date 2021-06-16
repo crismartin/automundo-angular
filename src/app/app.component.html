@@ -1,7 +1,9 @@
 <mat-toolbar color="primary">
-  <img alt="miw" src="../../assets/images/miw.png"/>
-  <span>Automundo</span>
-  <div>
+  <div class="toolbar-element">
+  <img class="automundo-logo" src="../../assets/images/logo.png"/>
+  </div>
+  <div class="toolbar-element app-title">Automundo</div>
+  <div class="toolbar-element login-container">
     <button (click)="login()" *ngIf="!isAuthenticated()" mat-button>
       <mat-icon>person_outline</mat-icon>
       <span>Login</span>
