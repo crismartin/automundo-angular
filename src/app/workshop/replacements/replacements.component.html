@@ -64,9 +64,9 @@
         <mat-label>Repuesto</mat-label>
         <mat-select #replacement name="replacement" formControlName="replacement" (selectionChange)="changeReplacementUsedForm($event)">
           <mat-option value="">-- Elija una opción --</mat-option>
-          <mat-option value="1">Manguera aceite</mat-option>
-          <mat-option value="2">Bujía motor</mat-option>
-          <mat-option value="3">Luces led</mat-option>
+          <mat-option value="11111111">Pastillas de freno</mat-option>
+          <mat-option value="44444444">Alternador</mat-option>
+          <mat-option value="55555555">Fusibles</mat-option>
         </mat-select>
         <mat-error *ngIf="hasError('replacement', 'required')">Repuesto es obligatorio</mat-error>
       </mat-form-field>

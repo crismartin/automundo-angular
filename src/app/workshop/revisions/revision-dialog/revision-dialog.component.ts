@@ -56,7 +56,7 @@ export class RevisionDialogComponent {
       vehicleReference: data.vehicleReference
     };
 
-    this.replacementsService.updateDataFromTable(data ? data.replacementsUsed : []);
+    this.replacementsService.updateDataFromTable(data.reference ? data.replacementsUsed : []);
     this.revisionForm = templateForm(this.revisionModel);
   }
 

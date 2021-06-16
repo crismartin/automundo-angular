@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ReplacementUsedItem} from '../shared/services/models/replacement-used-item';
+import {ReplacementUsed} from '../shared/services/models/replacement-used';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatSelectChange} from '@angular/material/select';
 import {ReplacementsService} from './replacements-service';
 
-let ELEMENTS_DATA: ReplacementUsedItem[];
 
 @Component({
   selector: 'app-replacements',
@@ -14,19 +13,20 @@ let ELEMENTS_DATA: ReplacementUsedItem[];
   styleUrls: ['./replacements.component.css']
 })
 export class ReplacementsComponent {
+  replacementsUsed: ReplacementUsed[];
   replacementUsedForm: FormGroup;
   titleForm = 'Añadir repuesto';
-  replacements: ReplacementUsedItem[];
-  replacementModel: ReplacementUsedItem;
+  replacements: ReplacementUsed[];
+  replacementModel: ReplacementUsed;
   showForm = false;
   displayedColumns: string[] = ['quantity', 'replacement.name', 'own', 'price', 'actions'];
-  dataSource = new MatTableDataSource(ELEMENTS_DATA);
+  dataSource: MatTableDataSource<ReplacementUsed>;
   nameReplacementSelectForm = '';
 
 
   constructor(private snackBar: MatSnackBar, private replacementsService: ReplacementsService) {
     this.replacementModel =  {
-      referenceId: '',
+      reference: '',
       quantity: null,
       own: false,
       replacement: {
@@ -38,7 +38,7 @@ export class ReplacementsComponent {
 
     this.replacementUsedForm = templateForm(this.replacementModel);
 
-    ELEMENTS_DATA = this.replacementsService.getDataFromTable();
+    this.replacementsUsed = this.replacementsService.getDataFromTable();
     this.refreshTable();
   }
 
@@ -68,16 +68,16 @@ export class ReplacementsComponent {
     this.replacementUsedForm = templateForm(replacementUsed);
   }
 
-  updateReplacement(replacementUsed: ReplacementUsedItem): void {
+  updateReplacement(replacementUsed: ReplacementUsed): void {
     this.titleForm = 'Editar Repuesto';
     this.toggleFormReplacement();
     this.replacementUsedForm = templateForm(replacementUsed);
   }
 
-  deleteReplacement(replacemementUsed: ReplacementUsedItem): void {
+  deleteReplacement(replacemementUsed: ReplacementUsed): void {
     console.log(replacemementUsed);
-    const indexItem = ELEMENTS_DATA.findIndex(repItem => repItem.replacement.reference === replacemementUsed.replacement.reference);
-    ELEMENTS_DATA.splice(indexItem, 1);
+    const indexItem = this.replacementsUsed.findIndex(repItem => repItem.replacement.reference === replacemementUsed.replacement.reference);
+    this.replacementsUsed.splice(indexItem, 1);
     this.refreshTable();
   }
 
@@ -89,8 +89,8 @@ export class ReplacementsComponent {
       return;
     }
 
-    const replacementUsed: ReplacementUsedItem = {
-      referenceId: replacementUsedForm.get('referenceId').value,
+    const replacementUsed: ReplacementUsed = {
+      reference: replacementUsedForm.get('referenceId').value,
       quantity: replacementUsedForm.get('quantity').value,
       discount: replacementUsedForm.get('discount').value,
       own: replacementUsedForm.get('own').value,
@@ -106,8 +106,8 @@ export class ReplacementsComponent {
     this.toggleFormReplacement();
   }
 
-  saveReplacement(replacementUsed: ReplacementUsedItem): void {
-    const replacementFounded = ELEMENTS_DATA.find(replacementArray =>
+  saveReplacement(replacementUsed: ReplacementUsed): void {
+    const replacementFounded = this.replacementsUsed.find(replacementArray =>
       replacementArray.replacement.reference === replacementUsed.replacement.reference);
 
     if (replacementFounded !== undefined){
@@ -117,10 +117,10 @@ export class ReplacementsComponent {
       replacementFounded.discount = replacementUsed.discount;
       replacementFounded.quantity = replacementUsed.quantity;
     }else{
-      ELEMENTS_DATA.push(replacementUsed);
+      this.replacementsUsed.push(replacementUsed);
     }
 
-    this.replacementsService.updateDataFromTable(ELEMENTS_DATA);
+    this.replacementsService.updateDataFromTable(this.replacementsUsed);
     this.refreshTable();
   }
 
@@ -129,13 +129,13 @@ export class ReplacementsComponent {
   }
 
   refreshTable(): void {
-    this.dataSource = new MatTableDataSource(ELEMENTS_DATA);
+    this.dataSource = new MatTableDataSource<ReplacementUsed>(this.replacementsUsed);
   }
 }
 
-function templateForm(replacementUsed: ReplacementUsedItem): FormGroup {
+function templateForm(replacementUsed: ReplacementUsed): FormGroup {
   return new FormGroup({
-    referenceId: new FormControl({value: replacementUsed.referenceId, disabled: true}),
+    referenceId: new FormControl({value: replacementUsed.reference, disabled: true}),
     quantity: new FormControl(replacementUsed.quantity, [Validators.maxLength(3), Validators.pattern('[0-9]+')]),
     own: new FormControl(replacementUsed.own),
     price: new FormControl(replacementUsed.price, [Validators.maxLength(10), Validators.pattern('[0-9]+')]),

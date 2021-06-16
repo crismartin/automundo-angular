@@ -1,6 +1,6 @@
 
 import {StatusRevision} from './status-revision';
-import {ReplacementUsedItem} from './replacement-used-item';
+import {ReplacementUsed} from './replacement-used';
 import {Technician} from './technician';
 
 export interface Revision {
@@ -15,6 +15,6 @@ export interface Revision {
   departureKilometers?: number;
   workDescription?: string;
   status?: StatusRevision;
-  replacementsUsed?: ReplacementUsedItem[];
+  replacementsUsed?: ReplacementUsed[];
   vehicleReference?: string;
 }

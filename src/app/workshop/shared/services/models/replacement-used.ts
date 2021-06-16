@@ -1,8 +1,7 @@
 import {Replacement} from './replacement';
 
-
-export interface ReplacementUsedItem {
-  referenceId?: string;
+export interface ReplacementUsed {
+  reference?: string;
   quantity?: number;
   own?: boolean;
   price?: number;

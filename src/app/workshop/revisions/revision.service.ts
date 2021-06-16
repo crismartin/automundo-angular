@@ -5,9 +5,11 @@ import {Vehicle} from '../shared/services/models/vehicle.model';
 import {RevisionItem} from '../shared/services/models/revision-item';
 import {Technician} from '../shared/services/models/technician';
 import {StatusRevision} from '../shared/services/models/status-revision';
-import {ReplacementUsedItem} from '../shared/services/models/replacement-used-item';
+import {ReplacementUsed} from '../shared/services/models/replacement-used';
 import {EndPoints} from '@shared/end-points';
 import {HttpService} from '@core/http.service';
+import {concatMap} from 'rxjs/operators';
+import {ReplacementsService} from '../replacements/replacements-service';
 
 @Injectable({
   providedIn: 'root'
@@ -55,9 +57,9 @@ export class RevisionService {
     }
   ];
 
-  replacementsUsed: ReplacementUsedItem[] = [
+  replacementsUsed: ReplacementUsed[] = [
     {
-      referenceId: '1',
+      reference: '1',
       quantity: 1,
       own: true,
       replacement: {
@@ -67,7 +69,7 @@ export class RevisionService {
       price: 150
     },
     {
-      referenceId: '2',
+      reference: '2',
       quantity: 2,
       own: false,
       replacement: {
@@ -98,16 +100,28 @@ export class RevisionService {
     }
   ];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private replacementsService: ReplacementsService) { }
 
   search(vehicleReference: string): Observable<RevisionItem[]> {
     return this.httpService
       .get(EndPoints.REVISIONS + '/vehicle/' + vehicleReference);
   }
 
-  create(revision: Revision): Observable<Revision> {
+  create(revision: Revision): Observable<void> {
     return this.httpService
-      .post(EndPoints.REVISIONS, revision);
+      .post(EndPoints.REVISIONS, revision)
+      .pipe(
+        concatMap(revisionCreated => {
+          return this.createReplacementsUsedByRevisionReference(revisionCreated.reference);
+        })
+      );
+  }
+
+  private createReplacementsUsedByRevisionReference(revisionReference: string): Observable<void> {
+    const replacementsUsed = this.replacementsService.getDataFromTable();
+    const revision = {revisionReference, replacementsUsed};
+    return this.httpService
+          .post(EndPoints.REVISIONS + '/replacements-used', revision);
   }
 
   read(referenceId: string): Observable<Revision> {
