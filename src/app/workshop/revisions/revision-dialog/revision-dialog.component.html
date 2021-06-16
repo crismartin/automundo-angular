@@ -35,8 +35,7 @@
       <mat-label>Técnico encargado</mat-label>
       <mat-select #technician formControlName="technician">
         <mat-option value="">-- Elija una opción --</mat-option>
-        <mat-option value="11111111-T">Ramon Blanco Lopez</mat-option>
-        <mat-option value="22222222-T">Alfredo Diaz Garcia</mat-option>
+        <mat-option *ngFor="let option of technicians" [value]="option.identificationId">{{ option.completeName }}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="full-width" style="width: 90px;">

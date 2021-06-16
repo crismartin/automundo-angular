@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatSelectChange} from '@angular/material/select';
 import {ReplacementsService} from './replacements-service';
+import {Replacement} from '../shared/services/models/replacement';
+import {SharedReplacementService} from '../shared/services/shared.replacement.service';
 
 
 @Component({
@@ -22,9 +24,11 @@ export class ReplacementsComponent {
   displayedColumns: string[] = ['quantity', 'replacement.name', 'own', 'price', 'actions'];
   dataSource: MatTableDataSource<ReplacementUsed>;
   nameReplacementSelectForm = '';
+  replacementsOptions: Replacement[];
 
 
-  constructor(private snackBar: MatSnackBar, private replacementsService: ReplacementsService) {
+  constructor(private snackBar: MatSnackBar, private replacementsService: ReplacementsService,
+              private sharedReplacementService: SharedReplacementService) {
     this.replacementModel =  {
       reference: '',
       quantity: null,
@@ -40,6 +44,9 @@ export class ReplacementsComponent {
 
     this.replacementsUsed = this.replacementsService.getDataFromTable();
     this.refreshTable();
+
+    this.sharedReplacementService.search({active: true})
+      .subscribe(replacementsOptions => this.replacementsOptions = replacementsOptions);
   }
 
 

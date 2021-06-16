@@ -58,22 +58,6 @@ export class HttpService {
   }
 
   post(endpoint: string, body?: object): Observable<any> {
-    /*return this.http
-      .post(endpoint, body, this.createOptions())
-      .pipe(
-        map(response => this.extractData(response)),
-        catchError(error => this.handleError(error))
-      );*/
-    const user: User = {
-      token: '12123123',
-      realName: 'Juan Alberto Pascual',
-      userName: 'REYESJ',
-      role: Role.ADMIN
-    };
-    const END_POINT = environment.REST_CORE + '/users/token';
-    if (endpoint === END_POINT){
-      return of(user);
-    }
     return this.http
       .post(endpoint, body, this.createOptions())
       .pipe(

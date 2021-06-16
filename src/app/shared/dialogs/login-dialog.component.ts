@@ -18,7 +18,7 @@ export class LoginDialogComponent {
   login(): void {
     this.authService.login(this.userName, this.password).subscribe(
       () => {
-        if (this.authService.isAdmin() || this.authService.isOperator()) {
+        if (this.authService.isAdmin()) {
           this.router.navigate(['taller']).then().finally(() => this.dialog.closeAll());
         } else {
           this.dialog.closeAll();

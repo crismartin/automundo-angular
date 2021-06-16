@@ -5,6 +5,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RevisionService} from '../revision.service';
 import {ReplacementsService} from '../../replacements/replacements-service';
+import {Technician} from '../../shared/services/models/technician';
+import {SharedTechnicianService} from '../../shared/services/shared.technician.service';
 
 @Component({
   selector: 'app-revision-dialog',
@@ -12,14 +14,16 @@ import {ReplacementsService} from '../../replacements/replacements-service';
   styleUrls: ['./revision-dialog.component.css']
 })
 export class RevisionDialogComponent {
-  title = 'Create/Update Revision';
+  title = 'Crear/Actualizar Revision';
   inCreation: boolean;
   revisionForm: FormGroup;
   revisionModel: Revision;
+  technicians: Technician[];
 
   constructor(@Inject(MAT_DIALOG_DATA) data: Revision, private snackBar: MatSnackBar, private dialog: MatDialogRef<RevisionDialogComponent>,
-              private revisionService: RevisionService, private replacementsService: ReplacementsService) {
-    this.title = data.reference ? 'Editar Revisión' : 'Crear Revisión';
+              private revisionService: RevisionService, private replacementsService: ReplacementsService,
+              private sharedTechnicianService: SharedTechnicianService) {
+    this.title = data.reference ? 'Actualizar Revisión' : 'Crear Revisión';
     this.inCreation = !data.reference;
 
     this.revisionModel = data.reference ? {
@@ -58,6 +62,9 @@ export class RevisionDialogComponent {
 
     this.replacementsService.updateDataFromTable(data.reference ? data.replacementsUsed : []);
     this.revisionForm = templateForm(this.revisionModel);
+
+    this.sharedTechnicianService.search({active: true})
+      .subscribe(technicians => this.technicians = technicians);
   }
 
   onSubmit(revisionForm: FormGroup): void  {
