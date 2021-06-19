@@ -48,11 +48,6 @@
         fxLayout="column wrap"
         fxLayoutAlign="" fxLayoutGap="10px">
     <div>
-      <mat-form-field  *ngIf="false">
-        <input matInput #referenceId type="text" formControlName="referenceId">
-      </mat-form-field>
-    </div>
-    <div>
       <mat-form-field>
         <mat-label>Cantidad</mat-label>
         <input matInput #quantity type="text" pattern="[0-9]+" formControlName="quantity" maxlength="3">

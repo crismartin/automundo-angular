@@ -7,4 +7,5 @@ export interface ReplacementUsed {
   price?: number;
   discount?: number;
   replacement?: Replacement;
+  revisionReference?: string;
 }
