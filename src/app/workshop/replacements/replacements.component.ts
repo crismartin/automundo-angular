@@ -71,7 +71,8 @@ export class ReplacementsComponent {
         referenceId: '',
         name: null
       },
-      price: null
+      price: null,
+
     };
 
     this.replacementUsedForm = templateForm(replacementUsed);
@@ -107,16 +108,20 @@ export class ReplacementsComponent {
   }
 
   saveReplacement(replacementUsed: ReplacementUsed): void {
-    if (replacementNotSavedYet(replacementUsed)){
-      this.replacementsService.create(replacementUsed)
+    if (hasReference(replacementUsed)){
+      this.replacementsService.update(replacementUsed)
         .subscribe(() => this.replacementsService.search(replacementUsed));
     }else{
-      this.replacementsService.update(replacementUsed)
-        .subscribe(() => this.replacementsService.search(replacementUsed));;
+      if ( hasRevision(replacementUsed) ) {
+        this.replacementsService.create(replacementUsed)
+          .subscribe(() => this.replacementsService.search(replacementUsed));
+      }else{
+        this.replacementsUsed.push(replacementUsed);
+        this.replacementsService.updateDataFromTable(this.replacementsUsed);
+        this.refreshTable();
+      }
     }
   }
-
-
 
   changeReplacementUsedForm(event: MatSelectChange): void {
     this.nameReplacementSelectForm = event.source.triggerValue;
@@ -157,6 +162,7 @@ function hasRevision(replacementUsed: ReplacementUsed): boolean {
   return replacementUsed.revisionReference !== undefined;
 }
 
-function replacementNotSavedYet(replacementUsed: ReplacementUsed): boolean {
-  return replacementUsed.reference === undefined;
+function hasReference(replacementUsed: ReplacementUsed): boolean {
+  const nullables = ['', null, undefined];
+  return nullables.indexOf(replacementUsed.reference) === -1;
 }
