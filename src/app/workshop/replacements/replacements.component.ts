@@ -7,6 +7,8 @@ import {MatSelectChange} from '@angular/material/select';
 import {ReplacementsService} from './replacements-service';
 import {Replacement} from '../shared/services/models/replacement';
 import {SharedReplacementService} from '../shared/services/shared.replacement.service';
+import {Revision} from '../shared/services/models/revision';
+import {RevisionService} from '../revisions/revision.service';
 
 
 @Component({
@@ -28,7 +30,7 @@ export class ReplacementsComponent {
 
 
   constructor(private snackBar: MatSnackBar, private replacementsService: ReplacementsService,
-              private sharedReplacementService: SharedReplacementService) {
+              private sharedReplacementService: SharedReplacementService, private revisionService: RevisionService) {
     this.replacementModel =  {
       reference: '',
       quantity: null,
@@ -98,40 +100,23 @@ export class ReplacementsComponent {
       return;
     }
 
-    const replacementUsed: ReplacementUsed = {
-      reference: replacementUsedForm.get('referenceId').value,
-      quantity: replacementUsedForm.get('quantity').value,
-      discount: replacementUsedForm.get('discount').value,
-      own: replacementUsedForm.get('own').value,
-      price: replacementUsedForm.get('price').value,
-      replacement: {
-        reference: replacementUsedForm.get('replacement').value,
-        name: this.nameReplacementSelectForm
-      }
-    };
-
+    const replacementUsed = this.serializeForm(replacementUsedForm.value);
     this.saveReplacement(replacementUsed);
 
     this.toggleFormReplacement();
   }
 
   saveReplacement(replacementUsed: ReplacementUsed): void {
-    const replacementFounded = this.replacementsUsed.find(replacementArray =>
-      replacementArray.replacement.reference === replacementUsed.replacement.reference);
-
-    if (replacementFounded !== undefined){
-      replacementFounded.replacement = replacementUsed.replacement;
-      replacementFounded.price = replacementUsed.price;
-      replacementFounded.own = replacementUsed.own;
-      replacementFounded.discount = replacementUsed.discount;
-      replacementFounded.quantity = replacementUsed.quantity;
+    if (replacementNotSavedYet(replacementUsed)){
+      this.replacementsService.create(replacementUsed)
+        .subscribe(() => this.replacementsService.search(replacementUsed));
     }else{
-      this.replacementsUsed.push(replacementUsed);
+      this.replacementsService.update(replacementUsed)
+        .subscribe(() => this.replacementsService.search(replacementUsed));;
     }
-
-    this.replacementsService.updateDataFromTable(this.replacementsUsed);
-    this.refreshTable();
   }
+
+
 
   changeReplacementUsedForm(event: MatSelectChange): void {
     this.nameReplacementSelectForm = event.source.triggerValue;
@@ -140,15 +125,38 @@ export class ReplacementsComponent {
   refreshTable(): void {
     this.dataSource = new MatTableDataSource<ReplacementUsed>(this.replacementsUsed);
   }
+
+  serializeForm(formData: any): ReplacementUsed {
+    return {
+      reference: formData.reference,
+      quantity: formData.quantity,
+      own: formData.own,
+      price: formData.price,
+      discount: formData.discount,
+      replacement: {
+        reference: formData.replacement
+      },
+      revisionReference: formData.revisionReference
+    };
+  }
 }
 
 function templateForm(replacementUsed: ReplacementUsed): FormGroup {
   return new FormGroup({
-    referenceId: new FormControl({value: replacementUsed.reference, disabled: true}),
+    reference: new FormControl(replacementUsed.reference),
     quantity: new FormControl(replacementUsed.quantity, [Validators.maxLength(3), Validators.pattern('[0-9]+')]),
     own: new FormControl(replacementUsed.own),
     price: new FormControl(replacementUsed.price, [Validators.maxLength(10), Validators.pattern('^[1-9]\\d*(\\.\\d+)?$')]),
     discount: new FormControl(replacementUsed.discount, [Validators.maxLength(3), Validators.pattern('[0-9]+')]),
-    replacement: new FormControl(String(replacementUsed.replacement.reference), [Validators.required])
+    replacement: new FormControl(String(replacementUsed.replacement.reference), [Validators.required]),
+    revisionReference: new FormControl(replacementUsed.revisionReference)
   });
+}
+
+function hasRevision(replacementUsed: ReplacementUsed): boolean {
+  return replacementUsed.revisionReference !== undefined;
+}
+
+function replacementNotSavedYet(replacementUsed: ReplacementUsed): boolean {
+  return replacementUsed.reference === undefined;
 }

@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ReplacementUsed} from '../shared/services/models/replacement-used';
+import {HttpService} from '@core/http.service';
+import {EndPoints} from '@shared/end-points';
+import {Observable} from 'rxjs';
 
 
 
@@ -9,7 +12,7 @@ import {ReplacementUsed} from '../shared/services/models/replacement-used';
 export class ReplacementsService {
   replacementUsedItems: ReplacementUsed[];
 
-  constructor() {
+  constructor(private httpService: HttpService) {
     this.replacementUsedItems = [
       {
         reference: '1',
@@ -40,5 +43,19 @@ export class ReplacementsService {
 
   updateDataFromTable(replacementsUpdated: ReplacementUsed[]): void {
     this.replacementUsedItems = replacementsUpdated;
+  }
+
+  create(replacementUsed: ReplacementUsed): Observable<void> {
+    return this.httpService
+      .post(EndPoints.REPLACEMENTS_USED, replacementUsed);
+  }
+
+  update(replacementUsed: ReplacementUsed): Observable<void> {
+    return this.httpService
+      .put(EndPoints.REPLACEMENTS_USED, replacementUsed);
+  }
+
+  search(replacementUsed: ReplacementUsed): void {
+
   }
 }
