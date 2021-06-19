@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ReplacementsService {
+  revisionReference: string;
   replacementUsedItems: ReplacementUsed[];
 
   constructor(private httpService: HttpService) {
@@ -37,6 +38,10 @@ export class ReplacementsService {
     ];
   }
 
+  setRevisionReference(revisionReference: string): void{
+    this.revisionReference = revisionReference;
+  }
+
   getDataFromTable(): ReplacementUsed[] {
     return this.replacementUsedItems;
   }
@@ -46,6 +51,7 @@ export class ReplacementsService {
   }
 
   create(replacementUsed: ReplacementUsed): Observable<void> {
+    replacementUsed.revisionReference = this.revisionReference;
     return this.httpService
       .post(EndPoints.REPLACEMENTS_USED, replacementUsed);
   }
@@ -56,6 +62,5 @@ export class ReplacementsService {
   }
 
   search(replacementUsed: ReplacementUsed): void {
-
   }
 }

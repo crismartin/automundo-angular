@@ -61,6 +61,7 @@ export class RevisionDialogComponent {
     };
 
     this.replacementsService.updateDataFromTable(data.reference ? data.replacementsUsed : []);
+    this.replacementsService.setRevisionReference(data.reference);
     this.revisionForm = templateForm(this.revisionModel);
 
     this.sharedTechnicianService.search({active: true})
