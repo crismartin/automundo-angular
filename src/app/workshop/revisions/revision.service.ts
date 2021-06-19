@@ -129,26 +129,9 @@ export class RevisionService {
       .get(EndPoints.REVISIONS + '/' + reference);
   }
 
-  update(revisionUpdated: Revision): Observable<RevisionItem> {
-    const revision = this.revisions.find(revisionArray => revisionArray.reference === revisionUpdated.reference);
-    revision.diagnostic = revisionUpdated.diagnostic;
-    revision.registerDate = revisionUpdated.registerDate;
-    revision.initialKilometers = revisionUpdated.initialKilometers;
-    revision.technician = this.technicians.find(technician => technician.identificationId === revisionUpdated.technician.identificationId );
-    revision.workedHours = revisionUpdated.workedHours;
-    revision.departureDate = revisionUpdated.departureDate;
-    revision.departureKilometers = revisionUpdated.departureKilometers;
-    revision.workDescription = revisionUpdated.workDescription;
-    revision.status = this.statusRevision.find(statusArray => String(statusArray.code) === String(revisionUpdated.status.code));
-
-    const revisionItem = this.revisionsItems.find(revisionArray => revisionArray.reference === revisionUpdated.reference);
-    revisionItem.technicianName = revision.technician.completeName;
-    revisionItem.cost = revision.cost;
-    revisionItem.departureDate = revision.departureDate;
-    revisionItem.diagnostic = revision.diagnostic;
-    revisionItem.registerDate = revision.registerDate;
-    revisionItem.statusName = revision.status.description;
-    return of(revision);
+  update(revision: Revision): Observable<void> {
+    return this.httpService
+      .put(EndPoints.REVISIONS, revision);
   }
 
   delete(referenceId: string): Observable<any> {

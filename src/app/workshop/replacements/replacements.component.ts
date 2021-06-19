@@ -85,6 +85,8 @@ export class ReplacementsComponent {
     console.log(replacemementUsed);
     const indexItem = this.replacementsUsed.findIndex(repItem => repItem.replacement.reference === replacemementUsed.replacement.reference);
     this.replacementsUsed.splice(indexItem, 1);
+
+    this.replacementsService.updateDataFromTable(this.replacementsUsed);
     this.refreshTable();
   }
 
