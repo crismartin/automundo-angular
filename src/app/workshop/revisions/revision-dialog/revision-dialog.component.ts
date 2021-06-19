@@ -67,20 +67,8 @@ export class RevisionDialogComponent {
       .subscribe(technicians => this.technicians = technicians);
   }
 
-  onSubmit(revisionForm: FormGroup): void  {
-    console.log('submit');
-    console.log(this.revisionForm.value);
-
-    if (!revisionForm.valid) {
-      this.snackBar.open('Hay datos inválidos en el formulario', 'Error', {
-        duration: 2000
-      });
-      return;
-    }
-
-    const formData = this.revisionForm.value;
-
-    const revision: Revision = {
+  serializeForm(formData: any): Revision {
+    return {
       reference: this.revisionModel.reference,
       diagnostic: formData.diagnostic,
       registerDate: formData.registerDate,
@@ -92,18 +80,24 @@ export class RevisionDialogComponent {
       departureDate: formData.departureDate,
       departureKilometers: formData.departureKilometers,
       workDescription: formData.workDescription,
-      status: {
-        code: formData.status
-      },
+      status: formData.status,
       vehicleReference: this.revisionModel.vehicleReference
     };
-    console.log('antes de pillar las revisiones');
-    console.log(revision);
+  }
 
-    console.log('despues de pillar las revisiones');
+  onSubmit(revisionForm: FormGroup): void  {
+    console.log('submit');
+    console.log(this.revisionForm.value);
+
+    if (!revisionForm.valid) {
+      this.snackBar.open('Hay datos inválidos en el formulario', 'Error', {
+        duration: 2000
+      });
+      return;
+    }
+
+    const revision = this.serializeForm(this.revisionForm.value);
     revision.replacementsUsed = this.replacementsService.getDataFromTable();
-    console.log(revision);
-
     this.save(revision);
   }
 
@@ -117,7 +111,6 @@ export class RevisionDialogComponent {
 
   save(revision: Revision): void{
     if (this.inCreation) {
-      revision.status.code = 1;
       this.create(revision);
     }else{
       this.update(revision);

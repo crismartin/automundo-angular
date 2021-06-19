@@ -52,8 +52,8 @@
       <mat-label>Estado</mat-label>
       <mat-select #status formControlName="status" (ngModelChange)="isFinished()">
         <mat-option value="POR_CONFIRMAR">POR CONFIRMAR</mat-option>
-        <mat-option value="EN_MANTENIMIENTO">NEGADO</mat-option>
-        <mat-option value="NEGADO">EN MANTENIMIENTO</mat-option>
+        <mat-option value="EN_MANTENIMIENTO">EN MANTENIMIENTO</mat-option>
+        <mat-option value="NEGADO">NEGADO POR EL USUARIO</mat-option>
         <mat-option value="FINALIZADO">FINALIZADO</mat-option>
       </mat-select>
     </mat-form-field>
