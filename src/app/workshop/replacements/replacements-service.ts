@@ -14,28 +14,6 @@ export class ReplacementsService {
   replacementUsedItems: ReplacementUsed[];
 
   constructor(private httpService: HttpService) {
-    this.replacementUsedItems = [
-      {
-        reference: '1',
-        quantity: 1,
-        own: true,
-        replacement: {
-          reference: '1',
-          name: 'Manguera de aceite'
-        },
-        price: 150
-      },
-      {
-        reference: '2',
-        quantity: 2,
-        own: false,
-        replacement: {
-          reference: '2',
-          name: 'Bujía Motor'
-        },
-        price: 60
-      }
-    ];
   }
 
   setRevisionReference(revisionReference: string): void{
@@ -61,6 +39,9 @@ export class ReplacementsService {
       .put(EndPoints.REPLACEMENTS_USED, replacementUsed);
   }
 
-  search(replacementUsed: ReplacementUsed): void {
+  search(replacementUsed: ReplacementUsed): Observable<ReplacementUsed[]> {
+    return this.httpService
+      .param('reference', replacementUsed.revisionReference)
+      .get(EndPoints.REPLACEMENTS_USED + '/revision');
   }
 }

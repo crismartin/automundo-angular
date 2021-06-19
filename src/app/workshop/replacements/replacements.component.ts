@@ -109,22 +109,47 @@ export class ReplacementsComponent {
 
   saveReplacement(replacementUsed: ReplacementUsed): void {
     if (hasReference(replacementUsed)){
-      this.replacementsService.update(replacementUsed)
-        .subscribe(() => this.replacementsService.search(replacementUsed));
+      this.update(replacementUsed);
     }else{
       if ( hasRevision(replacementUsed) ) {
-        this.replacementsService.create(replacementUsed)
-          .subscribe(() => this.replacementsService.search(replacementUsed));
+        this.create(replacementUsed);
       }else{
-        this.replacementsUsed.push(replacementUsed);
-        this.replacementsService.updateDataFromTable(this.replacementsUsed);
-        this.refreshTable();
+        this.addToTable(replacementUsed);
       }
     }
   }
 
+  update(replacementUsed: ReplacementUsed): void {
+    this.replacementsService.update(replacementUsed)
+      .subscribe(() => this.replacementsService.search(replacementUsed)
+        .subscribe(replacementsUsed => {
+          this.setTableAndRefresh(replacementsUsed);
+        })
+      );
+  }
+
+  create(replacementUsed: ReplacementUsed): void {
+    this.replacementsService.create(replacementUsed)
+      .subscribe(() => this.replacementsService.search(replacementUsed)
+        .subscribe(replacementsUsed => {
+          this.setTableAndRefresh(replacementsUsed);
+        })
+      );
+  }
+
+  addToTable(replacementUsed: ReplacementUsed): void {
+    this.replacementsUsed.push(replacementUsed);
+    this.replacementsService.updateDataFromTable(this.replacementsUsed);
+    this.refreshTable();
+  }
+
   changeReplacementUsedForm(event: MatSelectChange): void {
     this.nameReplacementSelectForm = event.source.triggerValue;
+  }
+
+  setTableAndRefresh(replacementsUsed: ReplacementUsed[]): void{
+    this.replacementsUsed = replacementsUsed;
+    this.refreshTable();
   }
 
   refreshTable(): void {
