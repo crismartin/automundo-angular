@@ -58,7 +58,8 @@ export class VehicleComponent implements OnInit {
   }
 
   printInvoice(revision: Revision): void {
-
+    this.revisionService.printPdf(revision.reference)
+      .subscribe(value => value);
   }
 
   updateRevision(revision: Revision): void {

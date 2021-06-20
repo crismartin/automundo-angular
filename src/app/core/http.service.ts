@@ -1,15 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {EMPTY, Observable, of, throwError} from 'rxjs';
+import {EMPTY, Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import {Error} from '@core/error.model';
-import {Role} from '@core/role.model';
-import {User} from '@core/user.model';
-import {AuthService} from '@core/auth.service';
-import {environment} from '@env';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +13,7 @@ import {environment} from '@env';
 export class HttpService {
   static CONNECTION_REFUSE = 0;
   static UNAUTHORIZED = 401;
+  static METHOD_ARGUMENT_NOT_VALID_EXCEPTION = 400;
 
   private headers: HttpHeaders;
   private params: HttpParams;
@@ -166,6 +163,9 @@ export class HttpService {
       return EMPTY;
     } else if (response.status === HttpService.CONNECTION_REFUSE) {
       this.showError('Conexión rechazada');
+      return EMPTY;
+    } else if (response.status === HttpService.METHOD_ARGUMENT_NOT_VALID_EXCEPTION) {
+      this.showError('You must complete the required fields!');
       return EMPTY;
     } else {
       try {

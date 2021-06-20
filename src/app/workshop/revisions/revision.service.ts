@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {Revision} from '../shared/services/models/revision';
-import {Vehicle} from '../shared/services/models/vehicle.model';
 import {RevisionItem} from '../shared/services/models/revision-item';
 import {Technician} from '../shared/services/models/technician';
 import {StatusRevision} from '../shared/services/models/status-revision';
@@ -143,6 +142,12 @@ export class RevisionService {
     this.revisions.splice(index, 1);
 
     return of(null);
+  }
+
+  printPdf(reference: string): Observable<void> {
+    return this.httpService.pdf()
+      .paramsFrom({reference})
+      .get(EndPoints.REVISIONS + '/print');
   }
 }
 
