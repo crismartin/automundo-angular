@@ -44,4 +44,9 @@ export class ReplacementsService {
       .param('reference', replacementUsed.revisionReference)
       .get(EndPoints.REPLACEMENTS_USED + '/revision');
   }
+
+  delete(replacementUsed: ReplacementUsed): Observable<void> {
+    return this.httpService
+      .delete(EndPoints.REPLACEMENTS_USED + '/' + replacementUsed.reference);
+  }
 }
