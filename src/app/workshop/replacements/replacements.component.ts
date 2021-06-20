@@ -86,11 +86,11 @@ export class ReplacementsComponent {
 
   deleteReplacement(replacemementUsed: ReplacementUsed): void {
     console.log(replacemementUsed);
-    const indexItem = this.replacementsUsed.findIndex(repItem => repItem.replacement.reference === replacemementUsed.replacement.reference);
-    this.replacementsUsed.splice(indexItem, 1);
-
-    this.replacementsService.updateDataFromTable(this.replacementsUsed);
-    this.refreshTable();
+    if (hasReference(replacemementUsed)){
+      this.delete(replacemementUsed);
+    }else{
+      this.deleteToTable(replacemementUsed);
+    }
   }
 
   onSubmit(replacementUsedForm: FormGroup): void {
@@ -137,8 +137,25 @@ export class ReplacementsComponent {
       );
   }
 
+  delete(replacementUsed: ReplacementUsed): void {
+    this.replacementsService.delete(replacementUsed)
+      .subscribe(() => this.replacementsService.search(replacementUsed)
+        .subscribe(replacementsUsed => {
+          this.setTableAndRefresh(replacementsUsed);
+        })
+      );
+  }
+
   addToTable(replacementUsed: ReplacementUsed): void {
     this.replacementsUsed.push(replacementUsed);
+    this.replacementsService.updateDataFromTable(this.replacementsUsed);
+    this.refreshTable();
+  }
+
+  deleteToTable(replacementUsed: ReplacementUsed): void {
+    const indexItem = this.replacementsUsed.findIndex(repItem => repItem.replacement.reference === replacementUsed.replacement.reference);
+    this.replacementsUsed.splice(indexItem, 1);
+
     this.replacementsService.updateDataFromTable(this.replacementsUsed);
     this.refreshTable();
   }
@@ -238,15 +255,6 @@ function toInteger(numberStr: string): number {
   const nullables = ['', null, undefined];
   if (nullables.indexOf(numberStr) < 0){
     result = parseInt(numberStr, 0);
-  }
-  return result;
-}
-
-function toFloat(numberStr: string): number {
-  let result = 0;
-  const nullables = ['', null, undefined];
-  if (nullables.indexOf(numberStr) < 0){
-    result = parseFloat(numberStr);
   }
   return result;
 }
