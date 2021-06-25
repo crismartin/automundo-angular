@@ -81,12 +81,10 @@ export class VehicleService {
       .put(EndPoints.VEHICLES + '/' + vehicleUpdated.reference, vehicleUpdated);
   }
 
-  delete(vehicle: Vehicle): Observable<void> {
-    const indexItem = this.vehiclesItem.findIndex(vehicleArray => vehicleArray.reference === vehicle.reference);
-    const index = this.vehicles.findIndex(vehicleArray => vehicleArray.reference === vehicle.reference);
-    this.vehicles.splice(index, 1);
-    this.vehiclesItem.splice(indexItem, 1);
-    return of(null);
+  delete(reference: string): Observable<void> {
+    console.log(reference);
+    return this.httpService
+      .delete(EndPoints.VEHICLES + '/' + reference);
   }
 
   searchVehicleTypes(): Observable<VehicleType[]> {
