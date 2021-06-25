@@ -7,6 +7,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {RevisionDialogComponent} from '../revisions/revision-dialog/revision-dialog.component';
 import {Revision} from '../shared/services/models/revision';
 import {Vehicle} from '../shared/services/models/vehicle.model';
+import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class VehicleComponent implements OnInit {
   revisions = of([]);
 
   constructor(private vehicleService: VehicleService, private activatedRoute: ActivatedRoute,
-              private revisionService: RevisionService, private dialog: MatDialog) {
+              private revisionService: RevisionService, private dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -76,7 +78,21 @@ export class VehicleComponent implements OnInit {
   }
 
   deleteRevision(revision: Revision): void {
-    this.revisionService.delete(revision.reference)
-      .subscribe(() => this.searchRevisions());
+    const dialogTitle = 'Dar de baja';
+    const dialogText = '¿Realmente desea dar de baja la Revisión?';
+    this.dialog.open(CancelYesDialogComponent, {data: {title: dialogTitle, text: dialogText}}).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.revisionService.delete(revision.reference).subscribe(
+            () => {
+              this.snackBar.open('Revisión eliminada correctamente', '', {
+                duration: 3500
+              });
+              this.searchRevisions();
+            }
+          );
+        }
+      }
+    );
   }
 }

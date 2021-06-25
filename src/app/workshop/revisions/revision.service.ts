@@ -138,15 +138,10 @@ export class RevisionService {
       .put(EndPoints.REVISIONS, revision);
   }
 
-  delete(referenceId: string): Observable<any> {
-    console.log(referenceId);
-    const indexItem = this.revisionsItems.findIndex(revItem => revItem.reference === referenceId);
-    this.revisionsItems.splice(indexItem, 1);
-
-    const index = this.revisions.findIndex(rev => rev.reference === referenceId);
-    this.revisions.splice(index, 1);
-
-    return of(null);
+  delete(reference: string): Observable<any> {
+    console.log(reference);
+    return this.httpService
+      .delete(EndPoints.REVISIONS + '/' + reference);
   }
 
   printPdf(reference: string): Observable<void> {
