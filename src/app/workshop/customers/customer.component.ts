@@ -9,6 +9,8 @@ import {VehicleDialogComponent} from '../vehicles/vehicle-dialog/vehicle-dialog.
 import {VehicleService} from '../vehicles/vehicle.service';
 import {Vehicle} from '../shared/services/models/vehicle.model';
 import {VehicleItem} from './vehicle-item';
+import {CancelYesDialogComponent} from '@shared/dialogs/cancel-yes-dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-clients',
@@ -24,7 +26,7 @@ export class CustomerComponent implements OnInit {
   customer: any = {};
 
   constructor(private dialog: MatDialog, private customerService: CustomerService, private activatedRoute: ActivatedRoute,
-              private vehicleService: VehicleService, private router: Router) {
+              private vehicleService: VehicleService, private router: Router, private snackBar: MatSnackBar) {
     this.customers = [{
       id: '15',
       completeName: 'Rochel Barlomento Santilla',
@@ -82,8 +84,22 @@ export class CustomerComponent implements OnInit {
   }
 
   deleteVehicle(vehicle: Vehicle): void {
-    this.vehicleService.delete(vehicle)
-      .subscribe(() => this.searchVehicles());
+    const dialogTitle = 'Dar de baja';
+    const dialogText = '¿Realmente desea dar de baja el vehículo "' + vehicle.model + '" ? Se eliminarán también sus revisiones asociadas.';
+    this.dialog.open(CancelYesDialogComponent, {data: {title: dialogTitle, text: dialogText}}).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.vehicleService.delete(vehicle.reference).subscribe(
+            () => {
+              this.snackBar.open('Vehículo eliminado correctamente', '', {
+                duration: 3500
+              });
+              this.searchVehicles();
+            }
+          );
+        }
+      }
+    );
   }
 
   buildCompleteName(name: string, surName: string, secondSurName: string): string {
