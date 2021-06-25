@@ -111,7 +111,12 @@ export class RevisionService {
       .post(EndPoints.REVISIONS, revision)
       .pipe(
         concatMap(revisionCreated => {
-          return this.createReplacementsUsedByRevisionReference(revisionCreated.reference);
+          return this.createReplacementsUsedByRevisionReference(revisionCreated.reference)
+            .pipe(
+              concatMap(value => {
+                return this.printPdf(revisionCreated.reference);
+              })
+            );
         })
       );
   }
