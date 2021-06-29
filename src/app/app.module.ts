@@ -13,7 +13,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {SharedModule} from '@shared/shared.module';
 import {HomeComponent} from './home/home.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {IntranetComponent} from './intranet/intranet.component';
 import {WorkshopComponent} from './workshop/workshop.component';
 import {WorkshopModule} from './workshop/workshop.module';
 import {NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule} from '@angular-material-components/datetime-picker';
@@ -42,7 +41,6 @@ import {MAT_DATE_LOCALE} from '@angular/material/core';
     AppComponent,
     CustomerComponent,
     HomeComponent,
-    IntranetComponent,
     WorkshopComponent,
   ],
   bootstrap: [AppComponent],

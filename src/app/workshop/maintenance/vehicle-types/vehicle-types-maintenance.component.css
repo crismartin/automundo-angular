@@ -1,6 +1,7 @@
-.create-replacement-button-container {
-  position: fixed !important;
-  right: 75px;
+.create-vehicle-type-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin: 50px;
 }
 
 .filter-card {

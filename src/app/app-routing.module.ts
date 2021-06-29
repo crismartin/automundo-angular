@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {IntranetComponent} from './intranet/intranet.component';
 import {WorkshopComponent} from './workshop/workshop.component';
 import {FinderVehiclesComponent} from './workshop/finder-vehicles/finder-vehicles.component';
 import {CustomerComponent} from './workshop/customers/customer.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
       {path: 'vehicle/:id', component: VehicleComponent}
     ]
     },
-  {path: 'intranet', component: IntranetComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'taller'},
 ];
 
