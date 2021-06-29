@@ -119,7 +119,8 @@ export class RevisionDialogComponent {
   }
 
   isFinished(): boolean {
-    return this.revisionForm.get('status').value === 'FINALIZADO';
+    return this.revisionForm.get('status').value === 'FINALIZADO' ||
+      this.revisionForm.get('status').value === 'NEGADO';
   }
 
   create(revision: Revision): void {

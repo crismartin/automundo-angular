@@ -20,6 +20,10 @@ export class ReplacementsService {
     this.revisionReference = revisionReference;
   }
 
+  getRevisionReference(): string {
+    return this.revisionReference;
+  }
+
   getDataFromTable(): ReplacementUsed[] {
     return this.replacementUsedItems;
   }

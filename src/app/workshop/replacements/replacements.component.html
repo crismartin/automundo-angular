@@ -52,6 +52,11 @@
         fxLayout="column wrap"
         fxLayoutAlign="" fxLayoutGap="10px">
     <div>
+      <div>
+        <mat-form-field  *ngIf="false">
+          <input matInput #revisionReference type="text" formControlName="revisionReference" maxlength="10">
+        </mat-form-field>
+      </div>
       <mat-form-field>
         <mat-label>Cantidad</mat-label>
         <input matInput #quantity type="text" pattern="[0-9]+" formControlName="quantity" maxlength="3" (change)="setFinalPriceReplacement()">

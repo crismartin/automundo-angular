@@ -23,7 +23,7 @@ export class ReplacementsComponent {
   replacements: ReplacementUsed[];
   replacementModel: ReplacementUsed;
   showForm = false;
-  displayedColumns: string[] = ['quantity', 'replacement.name', 'own', 'price', 'actions'];
+  displayedColumns: string[] = ['quantity', 'replacement.name', 'price', 'actions'];
   dataSource: MatTableDataSource<ReplacementUsed>;
   nameReplacementSelectForm = '';
   replacementsOptions: Replacement[];
@@ -39,7 +39,8 @@ export class ReplacementsComponent {
         reference: '',
         name: null
       },
-      price: null
+      price: null,
+      revisionReference: replacementsService.getRevisionReference()
     };
 
     this.replacementUsedForm = templateForm(this.replacementModel);
@@ -72,7 +73,7 @@ export class ReplacementsComponent {
         name: null
       },
       price: null,
-
+      revisionReference: this.replacementsService.getRevisionReference()
     };
 
     this.replacementUsedForm = templateForm(replacementUsed);
