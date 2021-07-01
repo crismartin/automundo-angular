@@ -7,6 +7,7 @@ import {RevisionService} from '../revision.service';
 import {ReplacementsService} from '../../replacements/replacements-service';
 import {Technician} from '../../shared/services/models/technician';
 import {SharedTechnicianService} from '../../shared/services/shared.technician.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-revision-dialog',
@@ -142,13 +143,15 @@ function templateForm(revision: Revision): FormGroup {
   return new FormGroup({
     referenceId: new FormControl({value: revision.reference, disabled: true}),
     diagnostic: new FormControl(revision.diagnostic, [Validators.required, Validators.maxLength(50)]),
-    registerDate: new FormControl(revision.registerDate, [Validators.required, Validators.maxLength(16)]),
+    registerDate: new FormControl(moment(revision.registerDate, 'YYYY-MM-DD HH:mm').toDate(),
+      [Validators.required, Validators.maxLength(16)]),
     initialKilometers: new FormControl(revision.initialKilometers, [Validators.maxLength(6), Validators.pattern('[0-9]+')]),
     technician: new FormControl(revision.technician.identificationId, [Validators.required]),
     workedHours: new FormControl(revision.workedHours, [Validators.maxLength(5), Validators.pattern('[0-9]+')]),
-    departureDate: new FormControl(revision.departureDate, [Validators.maxLength(16)]),
+    departureDate: new FormControl( moment(revision.departureDate, 'YYYY-MM-DD HH:mm').toDate() ),
     departureKilometers: new FormControl(revision.departureKilometers, [Validators.maxLength(6), Validators.pattern('[0-9]+')]),
     workDescription: new FormControl(revision.workDescription, [Validators.maxLength(500)]),
     status: new FormControl(String(revision.status), [Validators.required])
   });
 }
+
