@@ -78,9 +78,8 @@ export class VehicleService {
   }
 
   search(vehicleSearch: VehicleSearch): Observable<Vehicle[]> {
-    /*return this.httpService
+    return this.httpService
       .paramsFrom(vehicleSearch)
-      .get(EndPoints.VEHICLES + VehicleService.SEARCH);*/
-    return of(this.vehicles);
+      .get(EndPoints.VEHICLES + VehicleService.SEARCH);
   }
 }

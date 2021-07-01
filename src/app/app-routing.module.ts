@@ -31,7 +31,7 @@ const routes: Routes = [
           {path: 'tecnicos', component: TechnicianMaintenanceComponent},
         ]},
       {path: 'cliente/:id', component: CustomerComponent},
-      {path: 'vehicle/:id', component: VehicleComponent}
+      {path: 'vehiculo/:id', component: VehicleComponent}
     ]
     },
   {path: '**', pathMatch: 'full', redirectTo: 'taller'},
