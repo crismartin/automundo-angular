@@ -9,6 +9,7 @@ import {EndPoints} from '@shared/end-points';
 import {HttpService} from '@core/http.service';
 import {concatMap} from 'rxjs/operators';
 import {ReplacementsService} from '../replacements/replacements-service';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -107,6 +108,7 @@ export class RevisionService {
   }
 
   create(revision: Revision): Observable<void> {
+    revision.registerDate = normalizeDate(revision.registerDate);
     return this.httpService
       .post(EndPoints.REVISIONS, revision)
       .pipe(
@@ -134,6 +136,8 @@ export class RevisionService {
   }
 
   update(revision: Revision): Observable<void> {
+    revision.registerDate = normalizeDate(revision.registerDate);
+    revision.departureDate = normalizeDate(revision.departureDate);
     return this.httpService
       .put(EndPoints.REVISIONS, revision);
   }
@@ -149,6 +153,7 @@ export class RevisionService {
       .paramsFrom({reference})
       .get(EndPoints.REVISIONS + '/print');
   }
+
 }
 
 function getIdGenerate(): string {
@@ -165,4 +170,9 @@ function toRevisionItem(revision: Revision): RevisionItem {
     statusName: revision.status.description
   };
   return revisionItem;
+}
+
+function normalizeDate(dateParam: Date): any {
+  const nulables: any = [undefined, null, ''];
+  return nulables.indexOf(dateParam) < 0 ? moment(dateParam).add(2, 'hour') : undefined;
 }
