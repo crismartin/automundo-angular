@@ -3,6 +3,8 @@ import {VehicleSearch } from './vehicle-search.model';
 import {Vehicle} from '../shared/services/models/vehicle.model';
 import {VehicleService} from './vehicle.service';
 import {of} from 'rxjs';
+import {Customer} from '../shared/services/models/customer.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-finder-vehicles',
@@ -15,7 +17,7 @@ export class FinderVehiclesComponent implements OnInit {
   vehicles = of([]);
   title = 'Buscador de vehículos';
 
-  constructor(private vehicleService: VehicleService) {
+  constructor(private vehicleService: VehicleService, private router: Router) {
     this.resetSearch();
   }
 
@@ -26,16 +28,12 @@ export class FinderVehiclesComponent implements OnInit {
     this.vehicles = this.vehicleService.search(this.vehicleSearch);
   }
 
-  resetSearch() {
+  resetSearch(): void {
     this.vehicleSearch = {};
   }
 
+
   read(vehicle: Vehicle): void {
-    /*this.dialog.open(ReadDetailDialogComponent, {
-      data: {
-        title: 'Article Details',
-        object: this.articleService.read(article.barcode)
-      }
-    });*/
+    this.router.navigate(['/taller/vehiculo', vehicle.reference]);
   }
 }
